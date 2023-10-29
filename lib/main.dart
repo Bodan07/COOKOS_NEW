@@ -16,6 +16,8 @@ import 'package:flutter_dev/screen/test.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_dev/firebase_options.dart';
+import 'package:provider/provider.dart';
+import './model/Profile.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,28 +34,29 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        // get material app
-        debugShowCheckedModeBanner: false,
-        title: 'COOKOS',
-        theme: ThemeData(fontFamily: 'Poppins'),
-        //initialRoute: LoginPage.routeName,
-        home: RatingPage(),
-        routes: {
-          // '/': (context) => const SplashScreenPage(),
-          // '/login': (context) => const LoginPage(),
+    return MultiProvider(
+        providers: [ChangeNotifierProvider(create: (context) => Profile())],
+        child: MaterialApp(
+          // get material app
+          debugShowCheckedModeBanner: false,
+          title: 'COOKOS',
+          theme: ThemeData(fontFamily: 'Poppins'),
+          //initialRoute: LoginPage.routeName,
+          home: RatingPage(),
+          // routes: {
+          //   '/': (context) => const SplashScreenPage(),
+          //   '/login': (context) => const LoginPage(),
           //   '/registrasi': (context) => const Registrasi(),
-          // '/edit_profile': (context) => const EditProfile(),
-          // '/Melihat_profile': (context) => const seeProfile(),
-          // '/filter_resep' :(context) => const filterResep(),
-
-          // '/rating_review': (context) => const RatingPage(),
-        }
-        // getPages: [
-        //   GetPage(name: LoginPage.routeName, page: () => const LoginPage()),
-        //   GetPage(name: Registrasi.routeName, page: () => const Registrasi()),
-        // ],
-        );
+          //   '/edit_profile': (context) => const EditProfile(),
+          //   '/Melihat_profile': (context) => const seeProfile(),
+          //   '/filter_resep': (context) => const filterResep(),
+          //   '/rating_review': (context) => const RatingPage(),
+          // }
+          // getPages: [
+          //   GetPage(name: LoginPage.routeName, page: () => const LoginPage()),
+          //   GetPage(name: Registrasi.routeName, page: () => const Registrasi()),
+          // ],
+        ));
   }
 }
 

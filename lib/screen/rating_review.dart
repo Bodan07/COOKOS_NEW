@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_dev/model/ratinguser.dart';
+import 'package:flutter_dev/model/RatingUser.dart';
 import 'package:flutter_dev/widget/toggleButton.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_dev/widget/ShowRatingStars.dart';
@@ -412,7 +412,7 @@ class _RatingPageState extends State<RatingPage> {
 }
 
 class ratingWidget extends StatelessWidget {
-  final ratinguser inirating;
+  final RatingUser inirating;
   const ratingWidget({
     Key? key,
     required this.inirating,

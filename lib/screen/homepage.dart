@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dev/model/resephome.dart';
+import 'package:flutter_dev/model/Resep.dart';
 import 'package:flutter_dev/widget/thumbnail_resep.dart';
 
 class homepage extends StatefulWidget {

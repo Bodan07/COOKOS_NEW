@@ -1,6 +1,8 @@
 //import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_dev/model/Profile.dart';
 
 class seeProfile extends StatefulWidget {
   const seeProfile({Key? key}) : super(key: key);
@@ -54,7 +56,8 @@ class _seeProfile extends State<seeProfile> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: const Color(0xffe5737d),
-                      borderRadius: BorderRadius.vertical(bottom: Radius.circular(14)),
+                      borderRadius:
+                          BorderRadius.vertical(bottom: Radius.circular(14)),
                     ),
                     child: (Column(
                       children: [
@@ -74,8 +77,8 @@ class _seeProfile extends State<seeProfile> {
               ),
               Container(
                 margin: const EdgeInsets.only(top: 40),
-                child: const Text(
-                  'Rinrin Marinka',
+                child: Text(
+                  context.watch<Profile>().nama,
                   style: TextStyle(
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w700,
