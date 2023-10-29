@@ -8,7 +8,19 @@ class ratinguser {
 }
 
 List<ratinguser> ratingusers = [
+  ratinguser(bintang: 5, komentar: "komentar", nama: "W**y"),
   ratinguser(bintang: 4, komentar: "komentar", nama: "W**y"),
+  ratinguser(bintang: 3, komentar: "komentar", nama: "W**y"),
   ratinguser(bintang: 4, komentar: "komentar", nama: "W**y"),
+  ratinguser(bintang: 2, komentar: "komentar", nama: "W**y"),
   ratinguser(bintang: 4, komentar: "komentar", nama: "W**y"),
+  ratinguser(bintang: 5, komentar: "komentar", nama: "W**y"),
+  ratinguser(bintang: 5, komentar: "komentar", nama: "W**y"),
+  ratinguser(bintang: 1, komentar: "komentar", nama: "W**y"),
+  ratinguser(bintang: 2, komentar: "komentar", nama: "W**y"),
+  ratinguser(bintang: 4, komentar: "komentar", nama: "W**y"),
+  ratinguser(bintang: 5, komentar: "komentar", nama: "W**y"),
+  ratinguser(bintang: 2, komentar: "komentar", nama: "W**y"),
+  ratinguser(bintang: 3, komentar: "komentar", nama: "W**y"),
+  ratinguser(bintang: 2, komentar: "komentar", nama: "W**y"),
 ];
