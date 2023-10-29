@@ -6,6 +6,10 @@ class Resep {
   int Budget;
   String image;
   bool Verifikasi;
+  double bintang;
+  int enak;
+  int praktis;
+  int murah;
 
   Resep(
       {required this.id,
@@ -14,7 +18,11 @@ class Resep {
       required this.Cara_Membuat,
       required this.Deskripsi_Masakan,
       required this.image,
-      required this.Verifikasi});
+      required this.Verifikasi,
+      required this.bintang,
+      required this.enak,
+      required this.murah,
+      required this.praktis});
 }
 
 var listr = [
@@ -25,7 +33,11 @@ var listr = [
       Cara_Membuat: "cara",
       Deskripsi_Masakan: "Deskripsi_Masakan",
       image: "assets/images/test1.png",
-      Verifikasi: true),
+      Verifikasi: true,
+      bintang: 4.7,
+      murah: 2,
+      enak: 4,
+      praktis: 2),
   Resep(
       id: "1",
       Nama_Masakan: "Nasi Goreng",
@@ -33,7 +45,11 @@ var listr = [
       Cara_Membuat: "hmmm",
       Deskripsi_Masakan: "Deskripsi_Masakan",
       image: "assets/images/test1.png",
-      Verifikasi: true),
+      Verifikasi: true,
+      bintang: 4.7,
+      murah: 2,
+      enak: 4,
+      praktis: 2),
   Resep(
       id: "1",
       Nama_Masakan: "Ayam goreng",
@@ -41,5 +57,9 @@ var listr = [
       Cara_Membuat: "Cara_Membuat",
       Deskripsi_Masakan: "Deskripsi_Masakan",
       image: "assets/images/test1.png",
-      Verifikasi: false)
+      Verifikasi: false,
+      bintang: 4.7,
+      murah: 2,
+      enak: 4,
+      praktis: 2)
 ];
