@@ -61,7 +61,7 @@ class _filterResepState extends State<filterResep> {
             color: Color.fromARGB(255, 255, 255, 255),
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.popAndPushNamed(context, "/filter_resep");
+              Navigator.popAndPushNamed(context, "/homepage");
             },
           ),
           backgroundColor: Color(0xffe5737d),
@@ -479,18 +479,6 @@ class _filterResepState extends State<filterResep> {
               ],
             )
           ),
-                Container(
-                  height: 186,
-                  width: double.infinity,
-                  margin: EdgeInsets.only(top: 180),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [Color.fromARGB(229, 115, 125, 100), const Color.fromARGB(229, 115, 125, 100)],
-              ),
-            ),
-          )
         ],
       ),
     ));

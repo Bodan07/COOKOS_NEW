@@ -13,6 +13,14 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
   void toggleBookmark() {
     setState(() {
       isBookmarked = !isBookmarked;
+      if (isBookmarked){
+        ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Resep berhasil di verificate"),
+          behavior : SnackBarBehavior.floating,
+        )
+        );
+      }
     });
   }
 
@@ -78,7 +86,7 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20),
                                   ),
-                                  minimumSize: Size(120, 40),
+                                  minimumSize: Size(100, 40),
                                 ),
                               ),
                             ),

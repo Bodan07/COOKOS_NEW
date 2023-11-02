@@ -92,8 +92,19 @@ class _RegistrasiPageState extends State<Registrasi> {
                     Container(
                       alignment: Alignment.center,
                       child: ElevatedButton(
-                        onPressed: _register,
-                        child: Text('Register'),
+                        onPressed: (){
+                          if (emailController.text == "" && usernameController.text == "" && passwordController.text == ""){
+                            ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text("Masukkan Username, Email dan Passowrd dengan benar"),
+                              behavior : SnackBarBehavior.floating,
+                            )
+                            );
+                          } else {
+                            _register();
+                          }
+                        },
+                        child: Text('Sign Up'),
                         style: ElevatedButton.styleFrom(
                           primary: const Color.fromARGB(
                               255, 255, 255, 255), // Ubah warna latar belakang
@@ -113,13 +124,18 @@ class _RegistrasiPageState extends State<Registrasi> {
             ),
           ),
           // Tambahkan teks di bawah layar
-          Text(
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, "/login");
+            },
+            child: Text(
             "Sudah memiliki akun? Login",
             style: TextStyle(
               color: Colors.black, // Ubah warna teks
               fontSize: 16, // Sesuaikan ukuran teks
             ),
           ),
+          )
         ],
       ),
     );

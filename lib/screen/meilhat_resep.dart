@@ -17,6 +17,14 @@ class _melihatResepState extends State<melihatResep> {
   void toggleBookmark() {
     setState(() {
       isBookmarked = !isBookmarked;
+      if (isBookmarked){
+        ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Resep berhasil di tambahkan ke bookmark"),
+          behavior : SnackBarBehavior.floating,
+        )
+        );
+      }
     });
   }
 

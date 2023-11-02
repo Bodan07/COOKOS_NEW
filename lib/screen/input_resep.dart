@@ -30,7 +30,7 @@ class _inputPageState extends State<inputPage> {
               color: Colors.white,
               icon: Icon(Icons.arrow_back),
               onPressed: () {
-                // navigator.popAndPushNamed(context, '/home_page');
+                Navigator.popAndPushNamed(context, '/homepage');
               },
             ),
             backgroundColor: Color(0xffe5737d),

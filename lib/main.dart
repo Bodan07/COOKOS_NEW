@@ -12,12 +12,9 @@ import 'package:flutter_dev/screen/meilhat_resep_senior.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dev/screen/registrasi.dart';
-import 'package:flutter_dev/screen/test.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_dev/firebase_options.dart';
-import 'package:provider/provider.dart';
-import './model/Profile.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,39 +28,27 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-        providers: [ChangeNotifierProvider(create: (context) => Profile())],
-        child: MaterialApp(
-          // get material app
-          debugShowCheckedModeBanner: false,
-          title: 'COOKOS',
-          theme: ThemeData(fontFamily: 'Poppins'),
-          //initialRoute: LoginPage.routeName,
-          home: RatingPage(),
-          // routes: {
-          //   '/': (context) => const SplashScreenPage(),
-          //   '/login': (context) => const LoginPage(),
-          //   '/registrasi': (context) => const Registrasi(),
-          //   '/edit_profile': (context) => const EditProfile(),
-          //   '/Melihat_profile': (context) => const seeProfile(),
-          //   '/filter_resep': (context) => const filterResep(),
-          //   '/rating_review': (context) => const RatingPage(),
-          // }
-          // getPages: [
-          //   GetPage(name: LoginPage.routeName, page: () => const LoginPage()),
-          //   GetPage(name: Registrasi.routeName, page: () => const Registrasi()),
-          // ],
-        ));
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'COOKOS',
+        theme: ThemeData(fontFamily: 'Poppins'),
+        //home: LoginPage(),
+        routes: {
+          '/': (context) => const SplashScreenPage(),
+          '/login': (context) => const LoginPage(),
+          '/logout': (context) => const logout(),
+          '/homepage': (context) => const homepage(),
+          '/registrasi': (context) => const Registrasi(),
+          '/inputresep': (context) => const inputPage(),
+          '/edit_profile': (context) => const EditProfile(),
+          '/Melihat_profile': (context) => const seeProfile(),
+          '/filter_resep' :(context) => const filterResep(),
+          '/rating_review': (context) => const RatingPage(),
+          '/meilhat_resep': (context) => const melihatResep(),
+          '/meilhat_resep_senior': (context) => const melihatResepSenior(),
+        }
+        );
   }
 }
-
-//  void main() {
-//   runApp(const MaterialApp(
-//     home: Center(
-//       child: Text('Hello, World!'), // Add your "Hello, World!" message here
-//     ),
-//   ));
-// }
