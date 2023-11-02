@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'COOKOS',
         theme: ThemeData(fontFamily: 'Poppins'),
-        //home: LoginPage(),
+        // home: homepage(),
         routes: {
           '/': (context) => const SplashScreenPage(),
           '/login': (context) => const LoginPage(),
@@ -44,11 +44,10 @@ class MyApp extends StatelessWidget {
           '/inputresep': (context) => const inputPage(),
           '/edit_profile': (context) => const EditProfile(),
           '/Melihat_profile': (context) => const seeProfile(),
-          '/filter_resep' :(context) => const filterResep(),
+          '/filter_resep': (context) => const filterResep(),
           '/rating_review': (context) => const RatingPage(),
-          '/meilhat_resep': (context) => const melihatResep(),
+          // '/meilhat_resep': (context) => const melihatResep(),
           '/meilhat_resep_senior': (context) => const melihatResepSenior(),
-        }
-        );
+        });
   }
 }

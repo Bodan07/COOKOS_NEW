@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dev/model/Resep.dart';
+import 'package:flutter_dev/screen/meilhat_resep.dart';
 import 'package:flutter_dev/widget/thumbnail_resep.dart';
 
 class homepage extends StatefulWidget {
@@ -80,8 +81,7 @@ class _homepageState extends State<homepage> {
                       margin: EdgeInsets.only(right: 30),
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.popAndPushNamed(
-                              context, "/Melihat_profile");
+                          Navigator.pushNamed(context, "/Melihat_profile");
                         },
                         child: Image.asset(
                           "assets/images/people.png",
@@ -116,8 +116,6 @@ class _homepageState extends State<homepage> {
                       return tampilanfood(iniresep: iniresep);
                     }
                   }),
-
-              //   //=====================================================food2================================================
             ),
           ],
         ),
@@ -148,7 +146,7 @@ class _homepageState extends State<homepage> {
                   color: Color(0xFFE5737D),
                 ),
                 onPressed: () {
-                  Navigator.popAndPushNamed(context, "/inputresep");
+                  Navigator.popAndPushNamed(context, "/input_resep");
                 }),
             Container(
               decoration: BoxDecoration(
@@ -162,7 +160,7 @@ class _homepageState extends State<homepage> {
                     color: Color.fromARGB(255, 255, 255, 255),
                   ),
                   onPressed: () {
-                    Navigator.popAndPushNamed(context, "/filter_resep");
+                    //Navigator.popAndPushNamed(context, "/search_resep");
                   }),
             ),
             IconButton(
@@ -190,95 +188,101 @@ class tampilanfood extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 20, right: 20, left: 20),
-      width: 350,
-      height: 174,
-      decoration: BoxDecoration(
-        //color: Colors.black,
-        image: DecorationImage(
-          image: AssetImage(iniresep.image),
-          fit: BoxFit.cover,
-        ),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Stack(
-        children: [
-          Container(
-            //margin: EdgeInsets.only(top: 110, left: 40),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(left: 20),
-                  width: 200,
-                  child: Text(
-                    iniresep.Nama_Masakan,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: "Popins",
-                      fontSize: 19.78,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 20, bottom: 20),
-                  child: Text(
-                    iniresep.Deskripsi_Masakan,
-                    style: TextStyle(
-                      color: const Color(0xFFA9A9A9),
-                      fontFamily: "Popins",
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                ),
-              ],
+    return GestureDetector(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return melihatResep(iniresep: iniresep);
+          }));
+        },
+        child: Container(
+          margin: EdgeInsets.only(top: 20, right: 20, left: 20),
+          width: 350,
+          height: 174,
+          decoration: BoxDecoration(
+            //color: Colors.black,
+            image: DecorationImage(
+              image: AssetImage(iniresep.image),
+              fit: BoxFit.cover,
             ),
+            borderRadius: BorderRadius.circular(20),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Stack(
             children: [
-              SizedBox(
-                width: 10,
-              ),
               Container(
-                margin: EdgeInsets.only(top: 20, right: 20),
-                width: 68,
-                height: 28,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18.39),
-                  color: Color.fromARGB(255, 255, 255, 255),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                //margin: EdgeInsets.only(top: 110, left: 40),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(right: 8),
-                      child: Icon(
-                        Icons.star,
-                        color: Colors.amber,
-                        size: 20,
+                      margin: EdgeInsets.only(left: 20),
+                      width: 200,
+                      child: Text(
+                        iniresep.Nama_Masakan,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: "Popins",
+                          fontSize: 19.78,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
-                    Text(
-                      "4.0",
-                      style: TextStyle(
-                          fontFamily: "Poppins",
-                          fontSize: 14.38,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600),
+                    Container(
+                      margin: EdgeInsets.only(left: 20, bottom: 20),
+                      child: Text(
+                        iniresep.Deskripsi_Masakan,
+                        style: TextStyle(
+                          color: const Color(0xFFA9A9A9),
+                          fontFamily: "Popins",
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
                     ),
                   ],
                 ),
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top: 20, right: 20),
+                    width: 68,
+                    height: 28,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(18.39),
+                      color: Color.fromARGB(255, 255, 255, 255),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(right: 8),
+                          child: Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                            size: 20,
+                          ),
+                        ),
+                        Text(
+                          iniresep.bintang.toString(),
+                          style: TextStyle(
+                              fontFamily: "Poppins",
+                              fontSize: 14.38,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              )
             ],
-          )
-        ],
-      ),
-    );
+          ),
+        ));
   }
 }

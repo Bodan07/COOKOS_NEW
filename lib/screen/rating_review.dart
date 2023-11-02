@@ -5,6 +5,7 @@ import 'package:flutter_dev/widget/toggleButton.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_dev/widget/ShowRatingStars.dart';
 import 'package:flutter_dev/widget/RatingStars.dart';
+import 'package:get/get.dart';
 
 class RatingPage extends StatefulWidget {
   const RatingPage({super.key});
