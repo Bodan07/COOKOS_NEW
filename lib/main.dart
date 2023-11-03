@@ -40,6 +40,7 @@ class MyApp extends StatelessWidget {
             title: 'COOKOS',
             theme: ThemeData(fontFamily: 'Poppins'),
             //initialRoute: LoginPage.routeName,
+<<<<<<< HEAD
             home: EditProfile(),
             routes: {
               // '/': (context) => const SplashScreenPage(),
@@ -54,6 +55,22 @@ class MyApp extends StatelessWidget {
               // '/rating_review': (context) => const RatingPage(),
               // // '/meilhat_resep': (context) => const melihatResep(),
               // '/meilhat_resep_senior': (context) => const melihatResepSenior(),
+=======
+            //home: homepage(),
+            routes: {
+              '/': (context) => const SplashScreenPage(),
+              '/login': (context) => const LoginPage(),
+              '/logout': (context) => const logout(),
+              '/homepage': (context) => const homepage(),
+              '/registrasi': (context) => const Registrasi(),
+              '/inputresep': (context) => const inputPage(),
+              '/edit_profile': (context) => const EditProfile(),
+              '/Melihat_profile': (context) => const seeProfile(),
+              '/filter_resep': (context) => const filterResep(),
+              '/rating_review': (context) => const RatingPage(),
+              // '/meilhat_resep': (context) => const melihatResep(),
+              '/meilhat_resep_senior': (context) => const melihatResepSenior(),
+>>>>>>> 5d5d67fff01c86f5552be3c1f4f43a23735bc5b2
             }));
   }
 }
