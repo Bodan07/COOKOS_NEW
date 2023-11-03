@@ -55,7 +55,9 @@ class _RatingPageState extends State<RatingPage> {
         backgroundColor: Color(0xffe5737d),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         centerTitle: true,
         title: Text(

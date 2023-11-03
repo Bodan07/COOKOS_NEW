@@ -146,7 +146,7 @@ class _homepageState extends State<homepage> {
                   color: Color(0xFFE5737D),
                 ),
                 onPressed: () {
-                  Navigator.popAndPushNamed(context, "/input_resep");
+                  Navigator.pushNamed(context, "/input_resep");
                 }),
             Container(
               decoration: BoxDecoration(
@@ -160,7 +160,7 @@ class _homepageState extends State<homepage> {
                     color: Color.fromARGB(255, 255, 255, 255),
                   ),
                   onPressed: () {
-                    //Navigator.popAndPushNamed(context, "/search_resep");
+                    Navigator.pushNamed(context, "/filter_resep");
                   }),
             ),
             IconButton(

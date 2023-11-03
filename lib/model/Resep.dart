@@ -42,7 +42,7 @@ var listr = [
       enak: 4,
       praktis: 2),
   Resep(
-      id: "1",
+      id: "2",
       Nama_Masakan: "Nasi Goreng",
       Budget: 7000,
       Cara_Membuat: "hmmm",
@@ -55,7 +55,7 @@ var listr = [
       enak: 4,
       praktis: 2),
   Resep(
-      id: "1",
+      id: "2",
       Nama_Masakan: "Ayam goreng",
       Budget: 5000,
       Cara_Membuat: "Cara_Membuat",

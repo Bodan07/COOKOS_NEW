@@ -32,7 +32,7 @@ class _seeProfile extends State<seeProfile> {
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.popAndPushNamed(context, "/Melihat_profile");
+              Navigator.pop(context);
             },
           ),
           backgroundColor: Color(0xffe5737d),

@@ -1,6 +1,10 @@
 //import 'dart:html';
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import '../model/Profile.dart';
 
@@ -17,6 +21,30 @@ class _EditProfile extends State<EditProfile> {
   TextEditingController usiaController = TextEditingController();
   TextEditingController jeniskelaminController = TextEditingController();
   TextEditingController tanggallahirController = TextEditingController();
+  File? image;
+  DateTime _dateTime = DateTime.now();
+
+  void _showDatePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: _dateTime,
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2025),
+      initialDatePickerMode: DatePickerMode.day,
+    ).then((value) {
+      setState(() {
+        _dateTime = value!;
+      });
+    });
+  }
+
+  Future getImage() async {
+    final ImagePicker _picker = ImagePicker();
+    final XFile? imagePicked =
+        await _picker.pickImage(source: ImageSource.gallery);
+    image = File(imagePicked!.path);
+    setState(() {});
+  }
 
   void _Update() {
     String nama = nameController.text;
@@ -61,15 +89,34 @@ class _EditProfile extends State<EditProfile> {
                       ),
                       child: (Column(
                         children: [
-                          Container(
-                            margin: EdgeInsets.only(top: 50),
-                            width: 150,
-                            height: 150,
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.white,
-                            ),
-                          )
+                          image != null
+                              ? Container(
+                                  margin: EdgeInsets.only(top: 50),
+                                  child: ClipOval(
+                                    child: Image.file(
+                                      image!,
+                                      width: 150,
+                                      height: 150,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                )
+                              : Container(
+                                  margin: EdgeInsets.only(top: 50),
+                                  width: 150,
+                                  height: 150,
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.white,
+                                  ),
+                                  child: IconButton(
+                                    icon: Icon(Icons.file_upload_rounded),
+                                    color: Color(0xffe5737d),
+                                    iconSize: 90,
+                                    onPressed: () async {
+                                      await getImage();
+                                    },
+                                  ))
                         ],
                       )),
                     ),
@@ -87,13 +134,47 @@ class _EditProfile extends State<EditProfile> {
                 ),
                 customTextField(
                   controller: jeniskelaminController,
-                  title: "Jenis_Kelamin",
+                  title: "Jenis Kelamin",
                   hintText: "Masukkan Jenis Kelamin",
                 ),
-                customTextField(
-                  controller: tanggallahirController,
-                  title: "Tanggal Lahir",
-                  hintText: "Masukkan Tanggal Lahir",
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 29),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'Tanggal Lahir',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      GestureDetector(
+                          onTap: _showDatePicker,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 7),
+                            margin: EdgeInsets.only(top: 5),
+                            height: 35,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: Color.fromRGBO(0, 0, 0, 0.6)),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text(
+                              "Choose date : " +
+                                  _dateTime.toString().split(' ')[0],
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Color.fromRGBO(0, 0, 0, 0.6)),
+                            ),
+                          ))
+                    ],
+                  ),
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 40),
