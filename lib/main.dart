@@ -15,6 +15,8 @@ import 'package:flutter_dev/screen/registrasi.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_dev/firebase_options.dart';
+import 'package:provider/provider.dart';
+import './model/Profile.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,24 +32,28 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'COOKOS',
-        theme: ThemeData(fontFamily: 'Poppins'),
-        // home: homepage(),
-        routes: {
-          '/': (context) => const SplashScreenPage(),
-          '/login': (context) => const LoginPage(),
-          '/logout': (context) => const logout(),
-          '/homepage': (context) => const homepage(),
-          '/registrasi': (context) => const Registrasi(),
-          '/inputresep': (context) => const inputPage(),
-          '/edit_profile': (context) => const EditProfile(),
-          '/Melihat_profile': (context) => const seeProfile(),
-          '/filter_resep': (context) => const filterResep(),
-          '/rating_review': (context) => const RatingPage(),
-          // '/meilhat_resep': (context) => const melihatResep(),
-          '/meilhat_resep_senior': (context) => const melihatResepSenior(),
-        });
+    return MultiProvider(
+        providers: [ChangeNotifierProvider(create: (context) => Profile())],
+        child: MaterialApp(
+            // get material app
+            debugShowCheckedModeBanner: false,
+            title: 'COOKOS',
+            theme: ThemeData(fontFamily: 'Poppins'),
+            //initialRoute: LoginPage.routeName,
+            //home: homepage(),
+            routes: {
+              '/': (context) => const SplashScreenPage(),
+              '/login': (context) => const LoginPage(),
+              '/logout': (context) => const logout(),
+              '/homepage': (context) => const homepage(),
+              '/registrasi': (context) => const Registrasi(),
+              '/inputresep': (context) => const inputPage(),
+              '/edit_profile': (context) => const EditProfile(),
+              '/Melihat_profile': (context) => const seeProfile(),
+              '/filter_resep': (context) => const filterResep(),
+              '/rating_review': (context) => const RatingPage(),
+              // '/meilhat_resep': (context) => const melihatResep(),
+              '/meilhat_resep_senior': (context) => const melihatResepSenior(),
+            }));
   }
 }
