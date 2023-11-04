@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import '../model/Profile.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_dev/model/Profile.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({Key? key}) : super(key: key);
@@ -50,7 +52,7 @@ class _EditProfile extends State<EditProfile> {
     String nama = nameController.text;
     int usia = int.parse(usiaController.text);
     String jeniskelamin = jeniskelaminController.text;
-    String tanggallahir = tanggallahirController.text;
+    String tanggallahir = _dateTime.toString().split(' ')[0];
     context
         .read<Profile>()
         .changeProfile(n: nama, u: usia, jk: jeniskelamin, tl: tanggallahir);
@@ -125,17 +127,23 @@ class _EditProfile extends State<EditProfile> {
                 customTextField(
                   controller: nameController,
                   title: "Nama",
-                  hintText: "Masukkan nama",
+                  hintText: context.watch<Profile>().nama != ""
+                      ? context.watch<Profile>().nama
+                      : "masukan nama",
                 ),
                 customTextField(
                   controller: usiaController,
                   title: "Usia",
-                  hintText: "Masukkan Usia",
+                  hintText: context.watch<Profile>().usia != 0
+                      ? context.watch<Profile>().usia.toString()
+                      : "masukan usia",
                 ),
                 customTextField(
                   controller: jeniskelaminController,
                   title: "Jenis Kelamin",
-                  hintText: "Masukkan Jenis Kelamin",
+                  hintText: context.watch<Profile>().jenis_Kelamin != ""
+                      ? context.watch<Profile>().jenis_Kelamin
+                      : "masukan jenis kelamin",
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 29),
@@ -155,24 +163,21 @@ class _EditProfile extends State<EditProfile> {
                       GestureDetector(
                           onTap: _showDatePicker,
                           child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 7),
-                            margin: EdgeInsets.only(top: 5),
-                            height: 35,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: Color.fromRGBO(0, 0, 0, 0.6)),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Text(
-                              "Choose date : " +
-                                  _dateTime.toString().split(' ')[0],
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: Color.fromRGBO(0, 0, 0, 0.6)),
-                            ),
-                          ))
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 7),
+                              margin: EdgeInsets.only(top: 5),
+                              height: 35,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Color.fromRGBO(0, 0, 0, 0.6)),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                context.watch<Profile>().tanggal_lahir != ""
+                                    ? context.watch<Profile>().tanggal_lahir
+                                    : "Choose Date",
+                              )))
                     ],
                   ),
                 ),
