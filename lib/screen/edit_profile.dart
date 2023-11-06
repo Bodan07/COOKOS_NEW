@@ -66,7 +66,7 @@ class _EditProfile extends State<EditProfile> {
       child: Scaffold(
           appBar: AppBar(
             title: Text(
-              "Edit Profil",
+              "Edit Profile",
               style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'Rubik',
@@ -89,11 +89,11 @@ class _EditProfile extends State<EditProfile> {
                         borderRadius:
                             BorderRadius.vertical(bottom: Radius.circular(14)),
                       ),
-                      child: (Column(
+                      child: Stack(
                         children: [
                           image != null
-                              ? Container(
-                                  margin: EdgeInsets.only(top: 50),
+                              ? Container( //tindakan 1
+                                  margin: EdgeInsets.only(top: 50,left: 130),
                                   child: ClipOval(
                                     child: Image.file(
                                       image!,
@@ -103,24 +103,35 @@ class _EditProfile extends State<EditProfile> {
                                     ),
                                   ),
                                 )
-                              : Container(
-                                  margin: EdgeInsets.only(top: 50),
+                              : Container( //tindakan 2
+                                  margin: EdgeInsets.only(top: 50,left: 130),
                                   width: 150,
                                   height: 150,
                                   decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: Colors.white,
                                   ),
-                                  child: IconButton(
-                                    icon: Icon(Icons.file_upload_rounded),
-                                    color: Color(0xffe5737d),
-                                    iconSize: 90,
-                                    onPressed: () async {
-                                      await getImage();
-                                    },
-                                  ))
+                                ),
+                          Positioned(
+                              bottom: 50,
+                              right: 140,
+                              child: Container(
+                              //margin: EdgeInsets.only(top: 170, left: 220),
+                              width: 35,
+                              height: 35,
+                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(100), color: Colors.white),
+                              child: IconButton(
+                                icon: Icon(Icons.photo_camera),
+                                color: Color(0xffe5737d),
+                                iconSize: 20,
+                                onPressed: () async {
+                                  await getImage();
+                                },
+                              )
+                            )
+                            )
                         ],
-                      )),
+                      ),
                     ),
                   ],
                 ),

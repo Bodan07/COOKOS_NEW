@@ -40,20 +40,22 @@ class MyApp extends StatelessWidget {
             title: 'COOKOS',
             theme: ThemeData(fontFamily: 'Poppins'),
             //initialRoute: LoginPage.routeName,
-            //home: homepage(),
-            routes: {
-              '/': (context) => const SplashScreenPage(),
-              '/login': (context) => const LoginPage(),
-              '/logout': (context) => const logout(),
-              '/homepage': (context) => const homepage(),
-              '/registrasi': (context) => const Registrasi(),
-              '/input_resep': (context) => const inputPage(),
-              '/edit_profile': (context) => const EditProfile(),
-              '/Melihat_profile': (context) => const seeProfile(),
-              '/filter_resep': (context) => const filterResep(),
-              '/rating_review': (context) => const RatingPage(),
-              // '/meilhat_resep': (context) => const melihatResep(),
-              '/meilhat_resep_senior': (context) => const melihatResepSenior(),
-            }));
+            home: EditProfile(),
+            // routes: {
+            //   '/': (context) => const SplashScreenPage(),
+            //   '/login': (context) => const LoginPage(),
+            //   '/logout': (context) => const logout(),
+            //   '/homepage': (context) => const homepage(),
+            //   '/registrasi': (context) => const Registrasi(),
+            //   '/input_resep': (context) => const inputPage(),
+            //   '/edit_profile': (context) => const EditProfile(),
+            //   '/Melihat_profile': (context) => const seeProfile(),
+            //   '/filter_resep': (context) => const filterResep(),
+            //   '/rating_review': (context) => const RatingPage(),
+            //   // '/meilhat_resep': (context) => const melihatResep(),
+            //   '/meilhat_resep_senior': (context) => const melihatResepSenior(),
+            // }
+          )
+        );
   }
 }
