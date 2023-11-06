@@ -73,15 +73,25 @@ class _LoginPageState extends State<LoginPage> {
               child: Container(
                 margin: EdgeInsets.all(15),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start, // Ubah ini menjadi 'start'
+                  crossAxisAlignment:
+                      CrossAxisAlignment.start, // Ubah ini menjadi 'start'
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      child: customTextField(controller: emailController, title: "Email Address",hintText: "Masukkan Email Address", isPassword: false),
+                      child: customTextField(
+                          controller: emailController,
+                          title: "Email Address",
+                          hintText: "Masukkan Email Address",
+                          isPassword: false),
                     ),
 
                     Container(
-                      child : customTextField(controller: passwordController, title: "Password", hintText: "Masukkan Password", isPassword: true,),
+                      child: customTextField(
+                        controller: passwordController,
+                        title: "Password",
+                        hintText: "Masukkan Password",
+                        isPassword: true,
+                      ),
                     ),
                     SizedBox(height: 20),
                     //container button
@@ -89,21 +99,23 @@ class _LoginPageState extends State<LoginPage> {
                       alignment: Alignment.center,
                       child: ElevatedButton(
                         child: Text('Login'),
-                        onPressed: (){
-                          if (emailController.text == "" && passwordController.text == ""){
-                            ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text("Masukkan Email dan Password dengan benar"),
-                              behavior : SnackBarBehavior.floating,
-                            )
-                            );
+                        onPressed: () {
+                          if (emailController.text == "" &&
+                              passwordController.text == "") {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(
+                                  "Masukkan Email dan Password dengan benar"),
+                              behavior: SnackBarBehavior.floating,
+                            ));
                           } else {
                             _login();
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: const Color.fromARGB(255, 255, 255, 255), // Ubah warna latar belakang
-                          onPrimary: const Color.fromARGB(255, 0, 0, 0), // Ubah warna teks
+                          primary: const Color.fromARGB(
+                              255, 255, 255, 255), // Ubah warna latar belakang
+                          onPrimary: const Color.fromARGB(
+                              255, 0, 0, 0), // Ubah warna teks
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5),
                           ),
@@ -119,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           // Tambahkan teks di bawah layar
           GestureDetector(
-            onTap: (){
+            onTap: () {
               Navigator.pushNamed(context, '/registrasi');
             },
             child: Text(

@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,6 +16,15 @@ class _inputPageState extends State<inputPage> {
   TextEditingController hargaController = TextEditingController();
   TextEditingController bahantroller = TextEditingController();
   TextEditingController caraController = TextEditingController();
+  File? image;
+
+  Future getImage() async {
+    final ImagePicker _picker = ImagePicker();
+    final XFile? imagePicked =
+        await _picker.pickImage(source: ImageSource.gallery);
+    image = File(imagePicked!.path);
+    setState(() {});
+  }
 
   void _unggah() {
     String judul = judulController.text;
@@ -69,24 +80,38 @@ class _inputPageState extends State<inputPage> {
                                     fontFamily: 'Nuito Sans',
                                     fontWeight: FontWeight.bold),
                               )),
-                          Container(
-                            height: 110,
-                            width: 120,
-                            child: IconButton(
-                              icon: Icon(
-                                Icons.image_outlined,
-                                color: Color(0xffe5737d),
-                              ),
-                              onPressed: () {},
-                              iconSize: 90,
-                            ),
-                            decoration: BoxDecoration(
-                                color: Color.fromARGB(10, 0, 0, 0),
-                                border: Border.all(
-                                    color: Color.fromARGB(15, 0, 0, 0),
-                                    width: 2.0),
-                                borderRadius: BorderRadius.circular(15)),
-                          )
+                          image != null
+                              ? Container(
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(15),
+                                    child: Image.file(
+                                      image!,
+                                      width: 120,
+                                      height: 110,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                )
+                              : Container(
+                                  height: 110,
+                                  width: 120,
+                                  child: IconButton(
+                                    icon: Icon(
+                                      Icons.image_outlined,
+                                      color: Color(0xffe5737d),
+                                    ),
+                                    onPressed: () async {
+                                      await getImage();
+                                    },
+                                    iconSize: 90,
+                                  ),
+                                  decoration: BoxDecoration(
+                                      color: Color.fromARGB(10, 0, 0, 0),
+                                      border: Border.all(
+                                          color: Color.fromARGB(15, 0, 0, 0),
+                                          width: 2.0),
+                                      borderRadius: BorderRadius.circular(15)),
+                                )
                         ],
                       ),
                     ),

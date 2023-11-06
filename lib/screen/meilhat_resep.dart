@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dev/model/Resep.dart';
 
 class melihatResep extends StatefulWidget {
-  const melihatResep({super.key});
+  final Resep iniresep;
+  const melihatResep({Key? key, required this.iniresep}) : super(key: key);
 
   @override
   State<melihatResep> createState() => _melihatResepState();
@@ -17,13 +19,11 @@ class _melihatResepState extends State<melihatResep> {
   void toggleBookmark() {
     setState(() {
       isBookmarked = !isBookmarked;
-      if (isBookmarked){
-        ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+      if (isBookmarked) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text("Resep berhasil di tambahkan ke bookmark"),
-          behavior : SnackBarBehavior.floating,
-        )
-        );
+          behavior: SnackBarBehavior.floating,
+        ));
       }
     });
   }
@@ -54,7 +54,8 @@ class _melihatResepState extends State<melihatResep> {
                                 Container(
                                     margin: EdgeInsets.only(left: 20),
                                     child: Text(
-                                      "Udang Goreng Asam", //diisi nama resep
+                                      widget.iniresep
+                                          .Nama_Masakan, //diisi nama resep
                                       style: TextStyle(
                                           fontFamily: 'Poppins',
                                           fontWeight: FontWeight.bold,
@@ -85,7 +86,7 @@ class _melihatResepState extends State<melihatResep> {
                                           color: Colors.amber,
                                         ),
                                         Text(
-                                          "4.7",
+                                          widget.iniresep.bintang.toString(),
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold),
                                         ),
@@ -140,7 +141,7 @@ class _melihatResepState extends State<melihatResep> {
                   Container(
                       height: 260,
                       child: Image.asset(
-                        'assets/images/udang.png',
+                        widget.iniresep.image,
                         fit: BoxFit.cover,
                       ) //Diisi gambar resep database
                       ),
@@ -153,7 +154,9 @@ class _melihatResepState extends State<melihatResep> {
                         Icons.arrow_back_ios,
                         color: Colors.white,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/homepage');
+                      },
                       iconSize: 30,
                     ),
                   ),
@@ -185,7 +188,9 @@ class _melihatResepState extends State<melihatResep> {
                                     color: Color.fromARGB(50, 0, 0, 0),
                                     width: 2))),
                       ),
-                      Container(child: Text('isi')) //isi dari database
+                      Container(
+                          child:
+                              Text(widget.iniresep.Bahan)) //isi dari database
                     ],
                   ),
                   decoration: BoxDecoration(
@@ -217,7 +222,9 @@ class _melihatResepState extends State<melihatResep> {
                                     color: Color.fromARGB(50, 0, 0, 0),
                                     width: 2))),
                       ),
-                      Container(child: Text('isi')) //isi dari database
+                      Container(
+                          child: Text(
+                              widget.iniresep.Cara_Membuat)) //isi dari database
                     ],
                   ),
                   decoration: BoxDecoration(
