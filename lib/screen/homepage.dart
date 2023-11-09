@@ -23,6 +23,7 @@ class _homepageState extends State<homepage> {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         flexibleSpace: Column(
           children: [
             Container(
