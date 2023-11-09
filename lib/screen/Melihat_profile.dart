@@ -62,14 +62,17 @@ class _seeProfile extends State<seeProfile> {
                     child: (Column(
                       children: [
                         Container(
-                          margin: EdgeInsets.only(top: 50),
-                          width: 150,
-                          height: 150,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.white,
-                          ),
-                        )
+                            margin: EdgeInsets.only(top: 50),
+                            width: 150,
+                            height: 150,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white,
+                              image: DecorationImage(
+                                  image: NetworkImage(
+                                      context.watch<Profile>().image),
+                                  fit: BoxFit.cover),
+                            ))
                       ],
                     )),
                   ),

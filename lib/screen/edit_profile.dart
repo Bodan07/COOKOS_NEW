@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../model/Profile.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dev/model/Profile.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({Key? key}) : super(key: key);
@@ -24,6 +25,8 @@ class _EditProfile extends State<EditProfile> {
   TextEditingController jeniskelaminController = TextEditingController();
   TextEditingController tanggallahirController = TextEditingController();
   File? image;
+  XFile? img;
+  String imageurl = '';
   DateTime _dateTime = DateTime.now();
 
   void _showDatePicker() {
@@ -45,7 +48,21 @@ class _EditProfile extends State<EditProfile> {
     final XFile? imagePicked =
         await _picker.pickImage(source: ImageSource.gallery);
     image = File(imagePicked!.path);
+    img = imagePicked;
     setState(() {});
+  }
+
+  void UpDatabase(XFile? file) async {
+    Reference referenceRoot = FirebaseStorage.instance.ref();
+    Reference referenceDirImg = referenceRoot.child('image');
+    Reference uploadimg = referenceDirImg.child('test');
+    try {
+      await uploadimg.putFile(File(file!.path));
+      print("berhasil");
+      imageurl = await uploadimg.getDownloadURL();
+      print("berhasil2");
+      _Update();
+    } catch (error) {}
   }
 
   void _Update() {
@@ -53,9 +70,8 @@ class _EditProfile extends State<EditProfile> {
     int usia = int.parse(usiaController.text);
     String jeniskelamin = jeniskelaminController.text;
     String tanggallahir = _dateTime.toString().split(' ')[0];
-    context
-        .read<Profile>()
-        .changeProfile(n: nama, u: usia, jk: jeniskelamin, tl: tanggallahir);
+    context.read<Profile>().changeProfile(
+        n: nama, u: usia, jk: jeniskelamin, tl: tanggallahir, img: imageurl);
 
     Navigator.pushNamed(context, "/Melihat_profile");
   }
@@ -92,8 +108,9 @@ class _EditProfile extends State<EditProfile> {
                       child: Stack(
                         children: [
                           image != null
-                              ? Container( //tindakan 1
-                                  margin: EdgeInsets.only(top: 50,left: 130),
+                              ? Container(
+                                  //tindakan 1
+                                  margin: EdgeInsets.only(top: 50, left: 130),
                                   child: ClipOval(
                                     child: Image.file(
                                       image!,
@@ -103,8 +120,9 @@ class _EditProfile extends State<EditProfile> {
                                     ),
                                   ),
                                 )
-                              : Container( //tindakan 2
-                                  margin: EdgeInsets.only(top: 50,left: 130),
+                              : Container(
+                                  //tindakan 2
+                                  margin: EdgeInsets.only(top: 50, left: 130),
                                   width: 150,
                                   height: 150,
                                   decoration: const BoxDecoration(
@@ -116,20 +134,20 @@ class _EditProfile extends State<EditProfile> {
                               bottom: 50,
                               right: 140,
                               child: Container(
-                              //margin: EdgeInsets.only(top: 170, left: 220),
-                              width: 35,
-                              height: 35,
-                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(100), color: Colors.white),
-                              child: IconButton(
-                                icon: Icon(Icons.photo_camera),
-                                color: Color(0xffe5737d),
-                                iconSize: 20,
-                                onPressed: () async {
-                                  await getImage();
-                                },
-                              )
-                            )
-                            )
+                                  //margin: EdgeInsets.only(top: 170, left: 220),
+                                  width: 35,
+                                  height: 35,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(100),
+                                      color: Colors.white),
+                                  child: IconButton(
+                                    icon: Icon(Icons.photo_camera),
+                                    color: Color(0xffe5737d),
+                                    iconSize: 20,
+                                    onPressed: () async {
+                                      await getImage();
+                                    },
+                                  )))
                         ],
                       ),
                     ),
@@ -196,7 +214,9 @@ class _EditProfile extends State<EditProfile> {
                   margin: EdgeInsets.only(top: 40),
                   alignment: Alignment.center,
                   child: ElevatedButton(
-                    onPressed: _Update,
+                    onPressed: () {
+                      UpDatabase(img);
+                    },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Color.fromARGB(255, 255, 255, 255),
                       backgroundColor:
