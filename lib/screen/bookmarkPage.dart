@@ -52,27 +52,18 @@ class _bookmarkPage extends State<bookmarkPage> {
                     ),
                     child: (Column(
                       children: [
-                        image != null
-                            ? Container(
-                                margin: EdgeInsets.only(top: 50),
-                                child: ClipOval(
-                                  child: Image.file(
-                                    image!,
-                                    width: 150,
-                                    height: 150,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              )
-                            : Container(
-                                margin: EdgeInsets.only(top: 50),
-                                width: 150,
-                                height: 150,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.white,
-                                ),
-                              )
+                        Container(
+                            margin: EdgeInsets.only(top: 50),
+                            width: 150,
+                            height: 150,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.white,
+                              image: DecorationImage(
+                                  image: NetworkImage(
+                                      context.watch<Profile>().image),
+                                  fit: BoxFit.cover),
+                            ))
                       ],
                     )),
                   ),
