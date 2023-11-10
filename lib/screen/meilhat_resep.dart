@@ -155,7 +155,7 @@ class _melihatResepState extends State<melihatResep> {
                         color: Colors.white,
                       ),
                       onPressed: () {
-                        Navigator.pushNamed(context, '/homepage');
+                        Navigator.pop(context);
                       },
                       iconSize: 30,
                     ),
