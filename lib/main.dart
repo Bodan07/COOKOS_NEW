@@ -42,21 +42,21 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(fontFamily: 'Poppins'),
             //initialRoute: LoginPage.routeName,
             // home: martin(),
-            routes: {
-              '/': (context) => const SplashScreenPage(),
-              '/login': (context) => const LoginPage(),
-              '/logout': (context) => const logout(),
-              '/homepage': (context) => const homepage(),
-              '/registrasi': (context) => const Registrasi(),
-              '/input_resep': (context) => const inputPage(),
-              '/edit_profile': (context) => const EditProfile(),
-              '/Melihat_profile': (context) => const seeProfile(),
-              '/filter_resep': (context) => const filterResep(),
-              '/rating_review': (context) => const RatingPage(),
-              //'/meilhat_resep': (context) => const melihatResep(iniresep: context),
-              '/meilhat_resep_senior': (context) => const melihatResepSenior(),
-              '/bookmarkpage': (context) => const bookmarkPage(),
-            }
+            // routes: {
+            //   '/': (context) => const SplashScreenPage(),
+            //   '/login': (context) => const LoginPage(),
+            //   '/logout': (context) => const logout(),
+            //   '/homepage': (context) => const homepage(),
+            //   '/registrasi': (context) => const Registrasi(),
+            //   '/input_resep': (context) => const inputPage(),
+            //   '/edit_profile': (context) => const EditProfile(),
+            //   '/Melihat_profile': (context) => const seeProfile(),
+            //   '/filter_resep': (context) => const filterResep(),
+            //   '/rating_review': (context) => const RatingPage(),
+            //   //'/meilhat_resep': (context) => const melihatResep(iniresep: context),
+            //   '/meilhat_resep_senior': (context) => const melihatResepSenior(),
+            //   '/bookmarkpage': (context) => const bookmarkPage(),
+            // }
           )
         );
   }
