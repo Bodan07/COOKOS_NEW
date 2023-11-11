@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
             title: 'COOKOS',
             theme: ThemeData(fontFamily: 'Poppins'),
             //initialRoute: LoginPage.routeName,
-            //home: EditProfile(),
+            // home: martin(),
             routes: {
               '/': (context) => const SplashScreenPage(),
               '/login': (context) => const LoginPage(),
@@ -53,9 +53,11 @@ class MyApp extends StatelessWidget {
               '/Melihat_profile': (context) => const seeProfile(),
               '/filter_resep': (context) => const filterResep(),
               '/rating_review': (context) => const RatingPage(),
-              '/bookmarkPage': (context) => const bookmarkPage(),
-              // '/meilhat_resep': (context) => const melihatResep(),
+              //'/meilhat_resep': (context) => const melihatResep(iniresep: context),
               '/meilhat_resep_senior': (context) => const melihatResepSenior(),
-            }));
+              '/bookmarkpage': (context) => const bookmarkPage(),
+            }
+          )
+        );
   }
 }
