@@ -16,6 +16,7 @@ class MainPage extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               context.read<Profile>().setid(snapshot.data!.uid);
+              context.read<Profile>().fetchprofile();
               return homepage();
             } else {
               return LoginPage();
