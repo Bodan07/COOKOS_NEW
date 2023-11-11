@@ -1,6 +1,7 @@
 //import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_dev/screen/edit_profile.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dev/model/Profile.dart';
 
@@ -17,7 +18,8 @@ class _seeProfile extends State<seeProfile> {
 
   void _edit() {
     String edit = editController.text;
-    Navigator.pushNamed(context, "/edit_profile");
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => EditProfile()));
   }
 
   void _bookmark() {

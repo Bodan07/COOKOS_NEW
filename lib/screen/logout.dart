@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dev/screen/Main_Page.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class logout extends StatefulWidget {
@@ -101,7 +103,9 @@ class _logoutState extends State<logout> {
               margin: EdgeInsets.only(bottom: 20),
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/login');
+                  FirebaseAuth.instance.signOut();
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MainPage()));
                 },
                 child: Text('OK'),
                 style: ElevatedButton.styleFrom(

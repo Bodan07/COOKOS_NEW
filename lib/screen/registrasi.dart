@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_dev/model/Profile.dart';
+import 'package:flutter_dev/screen/login.dart';
+import 'package:provider/provider.dart';
 
 class Registrasi extends StatefulWidget {
   const Registrasi({Key? key}) : super(key: key);
@@ -13,21 +19,30 @@ class _RegistrasiPageState extends State<Registrasi> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  void _register() {
-    String username = usernameController.text;
-    String email = emailController.text;
-    String password = passwordController.text;
-    Navigator.pushNamed(context, "/login");
+  void _register() async {
+    final docuser = FirebaseFirestore.instance.collection('/user');
 
-    // Add your login logic here
-    // You can check the entered username and password against your database or any other authentication method.
-    // Example:
-    if (username == 'your_username' && password == 'your_password') {
-      // Successful login
-      // Navigate to the next screen or perform some action
-    } else {
-      // Failed login
-      // Show an error message to the user
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: emailController.text, password: passwordController.text);
+      FirebaseAuth auth = FirebaseAuth.instance;
+      String uid = auth.currentUser!.uid;
+      print(uid);
+      final data = {
+        'username': usernameController.text,
+        'email': emailController.text,
+      };
+      await docuser.doc(uid).set(data);
+      context.read<Profile>().createprofile(uid);
+      FirebaseAuth.instance.signOut();
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => LoginPage()));
+    } on FirebaseAuthException catch (err) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(err.toString()),
+        behavior: SnackBarBehavior.floating,
+      ));
     }
   }
 
@@ -85,21 +100,37 @@ class _RegistrasiPageState extends State<Registrasi> {
                         textAlign: TextAlign.start,
                       ),
                     ),
-                    customTextField(controller: usernameController, title: "Username", hintText: "Masukkan username", isPassword: false,),
-                    customTextField(controller: emailController, title: "Email Address", hintText: "Masukkan email address", isPassword: false,),
-                    customTextField(controller: passwordController, title: "Password", hintText: "Masukkan password", isPassword: true,),
+                    customTextField(
+                      controller: usernameController,
+                      title: "Username",
+                      hintText: "Masukkan username",
+                      isPassword: false,
+                    ),
+                    customTextField(
+                      controller: emailController,
+                      title: "Email Address",
+                      hintText: "Masukkan email address",
+                      isPassword: false,
+                    ),
+                    customTextField(
+                      controller: passwordController,
+                      title: "Password",
+                      hintText: "Masukkan password",
+                      isPassword: true,
+                    ),
                     SizedBox(height: 20),
                     Container(
                       alignment: Alignment.center,
                       child: ElevatedButton(
-                        onPressed: (){
-                          if (emailController.text == "" && usernameController.text == "" && passwordController.text == ""){
-                            ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text("Masukkan Username, Email dan Passowrd dengan benar"),
-                              behavior : SnackBarBehavior.floating,
-                            )
-                            );
+                        onPressed: () {
+                          if (emailController.text == "" &&
+                              usernameController.text == "" &&
+                              passwordController.text == "") {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(
+                                  "Masukkan Username, Email dan Passowrd dengan benar"),
+                              behavior: SnackBarBehavior.floating,
+                            ));
                           } else {
                             _register();
                           }
@@ -126,15 +157,16 @@ class _RegistrasiPageState extends State<Registrasi> {
           // Tambahkan teks di bawah layar
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, "/login");
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => LoginPage()));
             },
             child: Text(
-            "Sudah memiliki akun? Login",
-            style: TextStyle(
-              color: Colors.black, // Ubah warna teks
-              fontSize: 16, // Sesuaikan ukuran teks
+              "Sudah memiliki akun? Login",
+              style: TextStyle(
+                color: Colors.black, // Ubah warna teks
+                fontSize: 16, // Sesuaikan ukuran teks
+              ),
             ),
-          ),
           )
         ],
       ),
@@ -149,9 +181,11 @@ class customTextField extends StatelessWidget {
   final TextEditingController controller;
   const customTextField({
     super.key,
-    required this.controller, required this.title, required this.hintText, required this.isPassword,
+    required this.controller,
+    required this.title,
+    required this.hintText,
+    required this.isPassword,
   });
-
 
   @override
   Widget build(BuildContext context) {
@@ -161,35 +195,34 @@ class customTextField extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-          title,
-          style: TextStyle(
-            color: Colors.black, // Ubah warna teks
-            height: 3,
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
+            title,
+            style: TextStyle(
+              color: Colors.black, // Ubah warna teks
+              height: 3,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
           ),
-        ),
-      Container(
-        height: 35,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: TextFormField(
-          textAlignVertical: TextAlignVertical.bottom,
-          controller: controller,
-          decoration: InputDecoration(
-              fillColor: Colors.white,
-              filled: true,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(
-                  color: Color(0xffA9A9A9),
-                )
-              ),
-              hintText: hintText ),
-          obscureText: isPassword,
-        ),
-      ),
+          Container(
+            height: 35,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: TextFormField(
+              textAlignVertical: TextAlignVertical.bottom,
+              controller: controller,
+              decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  filled: true,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide(
+                        color: Color(0xffA9A9A9),
+                      )),
+                  hintText: hintText),
+              obscureText: isPassword,
+            ),
+          ),
         ],
       ),
     );

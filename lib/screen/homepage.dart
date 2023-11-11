@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dev/model/Resep.dart';
+import 'package:flutter_dev/screen/Melihat_profile.dart';
+import 'package:flutter_dev/screen/filter_resep.dart';
+import 'package:flutter_dev/screen/input_resep.dart';
+import 'package:flutter_dev/screen/logout.dart';
 import 'package:flutter_dev/screen/meilhat_resep.dart';
 import 'package:flutter_dev/widget/thumbnail_resep.dart';
 
@@ -15,7 +19,8 @@ class _homepageState extends State<homepage> {
 
   void _profile() {
     String profile = profileController.text;
-    Navigator.pushNamed(context, "/Melihat_profile");
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => seeProfile()));
   }
 
   @override
@@ -82,7 +87,10 @@ class _homepageState extends State<homepage> {
                       margin: EdgeInsets.only(right: 30),
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.pushNamed(context, "/Melihat_profile");
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: ((context) => seeProfile())));
                         },
                         child: Image.asset(
                           "assets/images/people.png",
@@ -147,7 +155,8 @@ class _homepageState extends State<homepage> {
                   color: Color(0xFFE5737D),
                 ),
                 onPressed: () {
-                  Navigator.pushNamed(context, "/input_resep");
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => inputPage()));
                 }),
             Container(
               decoration: BoxDecoration(
@@ -161,7 +170,8 @@ class _homepageState extends State<homepage> {
                     color: Color.fromARGB(255, 255, 255, 255),
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, "/filter_resep");
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => filterResep()));
                   }),
             ),
             IconButton(
@@ -171,7 +181,8 @@ class _homepageState extends State<homepage> {
                   color: Color(0xFFE5737D),
                 ),
                 onPressed: () {
-                  Navigator.popAndPushNamed(context, "/logout");
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => logout()));
                 })
           ],
         ),

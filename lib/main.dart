@@ -1,3 +1,4 @@
+import 'package:flutter_dev/screen/Main_Page.dart';
 import 'package:flutter_dev/screen/edit_profile.dart';
 import 'package:flutter_dev/screen/input_resep.dart';
 import 'package:flutter_dev/screen/logout.dart';
@@ -24,6 +25,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   runApp(const MyApp());
 }
 
@@ -35,25 +37,26 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
         providers: [ChangeNotifierProvider(create: (context) => Profile())],
         child: MaterialApp(
-            // get material app
-            debugShowCheckedModeBanner: false,
-            title: 'COOKOS',
-            theme: ThemeData(fontFamily: 'Poppins'),
-            //initialRoute: LoginPage.routeName,
-            //home: EditProfile(),
-            routes: {
-              '/': (context) => const SplashScreenPage(),
-              '/login': (context) => const LoginPage(),
-              '/logout': (context) => const logout(),
-              '/homepage': (context) => const homepage(),
-              '/registrasi': (context) => const Registrasi(),
-              '/input_resep': (context) => const inputPage(),
-              '/edit_profile': (context) => const EditProfile(),
-              '/Melihat_profile': (context) => const seeProfile(),
-              '/filter_resep': (context) => const filterResep(),
-              '/rating_review': (context) => const RatingPage(),
-              // '/meilhat_resep': (context) => const melihatResep(),
-              '/meilhat_resep_senior': (context) => const melihatResepSenior(),
-            }));
+          // get material app
+          debugShowCheckedModeBanner: false,
+          title: 'COOKOS',
+          theme: ThemeData(fontFamily: 'Poppins'),
+          //initialRoute: LoginPage.routeName,
+          home: MainPage(),
+          // routes: {
+          //   '/': (context) => const SplashScreenPage(),
+          //   '/login': (context) => const LoginPage(),
+          //   '/logout': (context) => const logout(),
+          //   '/homepage': (context) => const homepage(),
+          //   '/registrasi': (context) => const Registrasi(),
+          //   '/input_resep': (context) => const inputPage(),
+          //   '/edit_profile': (context) => const EditProfile(),
+          //   '/Melihat_profile': (context) => const seeProfile(),
+          //   '/filter_resep': (context) => const filterResep(),
+          //   '/rating_review': (context) => const RatingPage(),
+          //   // '/meilhat_resep': (context) => const melihatResep(),
+          //   '/meilhat_resep_senior': (context) => const melihatResepSenior(),
+          // }
+        ));
   }
 }

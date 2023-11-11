@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_dev/screen/Melihat_profile.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -10,6 +11,7 @@ import '../model/Profile.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dev/model/Profile.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({Key? key}) : super(key: key);
@@ -28,6 +30,8 @@ class _EditProfile extends State<EditProfile> {
   XFile? img;
   String imageurl = '';
   DateTime _dateTime = DateTime.now();
+  FirebaseAuth auth = FirebaseAuth.instance;
+  String uid = "";
 
   void _showDatePicker() {
     showDatePicker(
@@ -54,8 +58,9 @@ class _EditProfile extends State<EditProfile> {
 
   void UpDatabase(XFile? file) async {
     Reference referenceRoot = FirebaseStorage.instance.ref();
+    uid = auth.currentUser!.uid;
     Reference referenceDirImg = referenceRoot.child('image');
-    Reference uploadimg = referenceDirImg.child('test');
+    Reference uploadimg = referenceDirImg.child(uid);
     try {
       await uploadimg.putFile(File(file!.path));
       print("berhasil");
@@ -73,7 +78,8 @@ class _EditProfile extends State<EditProfile> {
     context.read<Profile>().changeProfile(
         n: nama, u: usia, jk: jeniskelamin, tl: tanggallahir, img: imageurl);
 
-    Navigator.pushNamed(context, "/Melihat_profile");
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => seeProfile()));
   }
 
   @override

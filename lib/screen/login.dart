@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dev/screen/homepage.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter_dev/screen/registrasi.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_dev/model/Profile.dart';
 
 class LoginPage extends StatefulWidget {
   static String routeName = '/login';
@@ -13,21 +17,27 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  String uid = "";
 
-  void _login() {
+  void _login() async {
     String email = emailController.text;
     String password = passwordController.text;
-    Navigator.pushNamed(context, "/homepage");
+    FirebaseAuth auth = FirebaseAuth.instance;
 
-    // Add your login logic here
-    // You can check the entered username and password against your database or any other authentication method.
-    // Example:
-    if (email == 'your_email' && password == 'your_password') {
-      // Successful login
-      // Navigate to the next screen or perform some action
-    } else {
-      // Failed login
-      // Show an error message to the user
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: emailController.text, password: passwordController.text);
+      uid = auth.currentUser!.uid;
+      context.read<Profile>().setuser(uid);
+      context.read<Profile>().fetchprofile();
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => homepage()));
+    } on FirebaseAuthException catch (err) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(err.toString()),
+        behavior: SnackBarBehavior.floating,
+      ));
     }
   }
 
@@ -132,7 +142,8 @@ class _LoginPageState extends State<LoginPage> {
           // Tambahkan teks di bawah layar
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, '/registrasi');
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Registrasi()));
             },
             child: Text(
               "Belum memiliki akun ? Registrasi",
