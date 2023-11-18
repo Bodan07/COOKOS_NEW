@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_dev/screen/Main_Page.dart';
 
 class SplashScreenPage extends StatefulWidget {
   const SplashScreenPage({Key? key}) : super(key: key);
@@ -14,7 +15,8 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   void initState() {
     // TODO: implement initState
     Timer(Duration(seconds: 3), () {
-      Navigator.pushNamed(context, '/MainPage');
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => MainPage()));
     });
     super.initState();
   }

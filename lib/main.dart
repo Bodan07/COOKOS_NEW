@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
           title: 'COOKOS',
           theme: ThemeData(fontFamily: 'Poppins'),
           //initialRoute: LoginPage.routeName,
-          home: MainPage(),
+          home: SplashScreenPage(),
           // routes: {
           //   '/': (context) => const SplashScreenPage(),
           //   '/login': (context) => const LoginPage(),
