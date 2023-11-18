@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dev/model/Resep.dart';
 import 'package:flutter_dev/screen/Melihat_profile.dart';
@@ -16,6 +18,19 @@ class homepage extends StatefulWidget {
 
 class _homepageState extends State<homepage> {
   TextEditingController profileController = TextEditingController();
+  List<Resep> listresep = [];
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    fetchresep();
+  }
+
+  Future fetchresep() async {
+    var data = await FirebaseFirestore.instance.collection('resep').get();
+    setState(() {
+      listresep = List.from(data.docs.map((doc) => Resep.fromSnapshot(doc)));
+    });
+  }
 
   void _profile() {
     String profile = profileController.text;
@@ -118,10 +133,10 @@ class _homepageState extends State<homepage> {
             //=====================================================food1================================================
             Expanded(
               child: ListView.builder(
-                  itemCount: listr.length,
+                  itemCount: listresep.length,
                   itemBuilder: (context, index) {
-                    if (index <= listr.length) {
-                      final iniresep = listr[index];
+                    if (index <= listresep.length) {
+                      final iniresep = listresep[index];
                       return tampilanfood(iniresep: iniresep);
                     }
                   }),
@@ -213,7 +228,7 @@ class tampilanfood extends StatelessWidget {
           decoration: BoxDecoration(
             //color: Colors.black,
             image: DecorationImage(
-              image: AssetImage(iniresep.image),
+              image: NetworkImage(iniresep.image),
               fit: BoxFit.cover,
             ),
             borderRadius: BorderRadius.circular(20),

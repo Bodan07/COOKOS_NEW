@@ -140,7 +140,7 @@ class _melihatResepState extends State<melihatResep> {
                   ),
                   Container(
                       height: 260,
-                      child: Image.asset(
+                      child: Image.network(
                         widget.iniresep.image,
                         fit: BoxFit.cover,
                       ) //Diisi gambar resep database

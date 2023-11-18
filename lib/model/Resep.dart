@@ -36,6 +36,34 @@ class Resep extends ChangeNotifier {
       this.enak = 0,
       this.murah = 0,
       this.praktis = 0});
+
+  Map<String, dynamic> toJson() => {
+        'bahan': Bahan,
+        'bintang': bintang,
+        'cara_membuat': Cara_Membuat,
+        'enak': enak,
+        'harga': Budget,
+        'image': image,
+        'judul': Nama_Masakan,
+        'murah': murah,
+        'pembuat': Deskripsi_Masakan,
+        'praktis': praktis,
+        'verifikasi': Verifikasi
+      };
+  Resep.fromSnapshot(snapshot)
+      : id = "",
+        Nama_Masakan = snapshot.data()['judul'],
+        Budget = snapshot.data()['harga'],
+        Cara_Membuat = snapshot.data()['cara_membuat'],
+        Deskripsi_Masakan = snapshot.data()['pembuat'],
+        Bahan = snapshot.data()['bahan'],
+        image = snapshot.data()['image'],
+        Verifikasi = snapshot.data()['verifikasi'],
+        bintang = snapshot.data()['bintang'].toDouble(),
+        enak = snapshot.data()['enak'],
+        murah = snapshot.data()['murah'],
+        praktis = snapshot.data()['praktis'];
+
   Future uploadResep(
       {required String judul,
       required int harga,
