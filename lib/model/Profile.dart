@@ -17,7 +17,7 @@ class Profile extends ChangeNotifier {
   String image;
 
   void setid(String uid) {
-    this.id_user = id_user;
+    this.id_user = uid;
   }
 
   Profile(

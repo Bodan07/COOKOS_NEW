@@ -1,4 +1,15 @@
-class Resep {
+import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'User.dart';
+import 'package:provider/provider.dart';
+
+class Resep extends ChangeNotifier {
   String id;
   String Nama_Masakan;
   String Deskripsi_Masakan;
@@ -13,18 +24,47 @@ class Resep {
   int murah;
 
   Resep(
-      {required this.id,
-      required this.Nama_Masakan,
-      required this.Budget,
-      required this.Cara_Membuat,
-      required this.Deskripsi_Masakan,
-      required this.Bahan,
-      required this.image,
-      required this.Verifikasi,
-      required this.bintang,
-      required this.enak,
-      required this.murah,
-      required this.praktis});
+      {this.id = "",
+      this.Nama_Masakan = "",
+      this.Budget = 0,
+      this.Cara_Membuat = "",
+      this.Deskripsi_Masakan = "",
+      this.Bahan = "",
+      this.image = "",
+      this.Verifikasi = false,
+      this.bintang = 0,
+      this.enak = 0,
+      this.murah = 0,
+      this.praktis = 0});
+  Future uploadResep(
+      {required String judul,
+      required int harga,
+      required String bahan,
+      required String cara,
+      required String uid,
+      required String image}) async {
+    try {
+      final docprofile = FirebaseFirestore.instance.collection('resep');
+      final data = {
+        'bahan': bahan,
+        'harga': harga,
+        'cara_membuat': cara,
+        'pembuat': uid,
+        'judul': judul,
+        'verifikasi': false,
+        'bintang': 0.0,
+        'enak': 0,
+        'murah': 0,
+        'praktis': 0,
+        'image': image
+      };
+      await docprofile.add(data);
+      notifyListeners();
+      return "Resep Berhasil Ditambahkan, Tunggu Sampai Diverifikasi";
+    } on FirebaseException catch (error) {
+      return error.toString();
+    }
+  }
 }
 
 var listr = [

@@ -56,10 +56,10 @@ class _EditProfile extends State<EditProfile> {
     setState(() {});
   }
 
-  void UpDatabase(XFile? file) async {
+  void UpDatabase(File? file) async {
     Reference referenceRoot = FirebaseStorage.instance.ref();
     uid = auth.currentUser!.uid;
-    Reference referenceDirImg = referenceRoot.child('image');
+    Reference referenceDirImg = referenceRoot.child('profile');
     Reference uploadimg = referenceDirImg.child(uid);
     try {
       await uploadimg.putFile(File(file!.path));
@@ -221,7 +221,7 @@ class _EditProfile extends State<EditProfile> {
                   alignment: Alignment.center,
                   child: ElevatedButton(
                     onPressed: () {
-                      UpDatabase(img);
+                      UpDatabase(image);
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Color.fromARGB(255, 255, 255, 255),
