@@ -128,7 +128,7 @@ class _RegistrasiPageState extends State<Registrasi> {
                               passwordController.text == "") {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text(
-                                  "Masukkan Username, Email dan Passowrd dengan benar"),
+                                  "Username, Email dan Passowrd tidak boleh kosong"),
                               behavior: SnackBarBehavior.floating,
                             ));
                           } else {

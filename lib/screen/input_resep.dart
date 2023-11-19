@@ -27,11 +27,15 @@ class _inputPageState extends State<inputPage> {
   File? image;
 
   Future getImage() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? imagePicked =
-        await _picker.pickImage(source: ImageSource.gallery);
-    image = File(imagePicked!.path);
-    setState(() {});
+    try {
+      final ImagePicker _picker = ImagePicker();
+      final XFile? imagePicked =
+          await _picker.pickImage(source: ImageSource.gallery);
+      image = File(imagePicked!.path);
+      setState(() {});
+    } catch (e) {
+      print(e);
+    }
   }
 
   void _unggah(File? file) async {

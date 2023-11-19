@@ -57,29 +57,37 @@ class Profile extends ChangeNotifier {
   }
 
   void fetchprofile() async {
-    final docprofile = FirebaseFirestore.instance.collection('profile');
-    var doc = await docprofile.doc(id_user).get();
+    try {
+      final docprofile = FirebaseFirestore.instance.collection('profile');
+      var doc = await docprofile.doc(id_user).get();
 
-    if (doc.exists) {
-      Map<String, dynamic> data = doc.data()!;
-      this.nama = data['nama'];
-      this.usia = data['usia'];
-      this.jenis_Kelamin = data['jenis_Kelamin'];
-      this.tanggal_lahir = data['tanggal_lahir'];
-      this.image = data['image'];
-      notifyListeners();
+      if (doc.exists) {
+        Map<String, dynamic> data = doc.data()!;
+        this.nama = data['nama'];
+        this.usia = data['usia'];
+        this.jenis_Kelamin = data['jenis_Kelamin'];
+        this.tanggal_lahir = data['tanggal_lahir'];
+        this.image = data['image'];
+        notifyListeners();
+      }
+    } on FirebaseException catch (error) {
+      print(error);
     }
   }
 
   void createprofile(String uid) async {
-    final docprofile = FirebaseFirestore.instance.collection('profile');
-    final data = {
-      'nama': this.nama,
-      'usia': this.usia,
-      'jenis_Kelamin': this.jenis_Kelamin,
-      'tanggal_lahir': this.tanggal_lahir,
-      'image': this.image,
-    };
-    await docprofile.doc(uid).set(data);
+    try {
+      final docprofile = FirebaseFirestore.instance.collection('profile');
+      final data = {
+        'nama': this.nama,
+        'usia': this.usia,
+        'jenis_Kelamin': this.jenis_Kelamin,
+        'tanggal_lahir': this.tanggal_lahir,
+        'image': this.image,
+      };
+      await docprofile.doc(uid).set(data);
+    } on FirebaseException catch (error) {
+      print(error);
+    }
   }
 }
