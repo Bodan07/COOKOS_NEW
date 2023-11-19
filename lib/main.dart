@@ -1,3 +1,4 @@
+import 'package:flutter_dev/model/Resep.dart';
 import 'package:flutter_dev/screen/Main_Page.dart';
 import 'package:flutter_dev/screen/bookmarkPage.dart';
 import 'package:flutter_dev/screen/edit_profile.dart';
@@ -36,14 +37,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [ChangeNotifierProvider(create: (context) => Profile())],
+        providers: [
+          ChangeNotifierProvider(create: (context) => Profile()),
+          ChangeNotifierProvider(create: (context) => Resep())
+        ],
         child: MaterialApp(
           // get material app
           debugShowCheckedModeBanner: false,
           title: 'COOKOS',
           theme: ThemeData(fontFamily: 'Poppins'),
           //initialRoute: LoginPage.routeName,
-          home: MainPage(),
+          home: SplashScreenPage(),
           // routes: {
           //   '/': (context) => const SplashScreenPage(),
           //   '/login': (context) => const LoginPage(),

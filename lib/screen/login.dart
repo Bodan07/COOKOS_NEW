@@ -113,8 +113,8 @@ class _LoginPageState extends State<LoginPage> {
                           if (emailController.text == "" &&
                               passwordController.text == "") {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text(
-                                  "Masukkan Email dan Password dengan benar"),
+                              content:
+                                  Text("Email dan password tidak boleh kosong"),
                               behavior: SnackBarBehavior.floating,
                             ));
                           } else {

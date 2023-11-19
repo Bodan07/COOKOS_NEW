@@ -26,7 +26,7 @@ class _seeProfile extends State<seeProfile> {
 
   void _bookmark() {
     String bookmark = bookmarkController.text;
-    Navigator.push(context, MaterialPageRoute(builder: (context) => bookmarkPage()));
+    Navigator.pushNamed(context, "/bookmarkPage");
   }
 
   @override

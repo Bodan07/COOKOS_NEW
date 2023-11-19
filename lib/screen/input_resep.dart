@@ -1,8 +1,13 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_dev/screen/homepage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_dev/model/Resep.dart';
+import 'package:provider/provider.dart';
 
 class inputPage extends StatefulWidget {
   const inputPage({super.key});
@@ -14,23 +19,49 @@ class inputPage extends StatefulWidget {
 class _inputPageState extends State<inputPage> {
   TextEditingController judulController = TextEditingController();
   TextEditingController hargaController = TextEditingController();
-  TextEditingController bahantroller = TextEditingController();
+  TextEditingController bahanController = TextEditingController();
   TextEditingController caraController = TextEditingController();
+  String uid = FirebaseAuth.instance.currentUser!.uid;
+  String imageurl = '';
+
   File? image;
 
   Future getImage() async {
-    final ImagePicker _picker = ImagePicker();
-    final XFile? imagePicked =
-        await _picker.pickImage(source: ImageSource.gallery);
-    image = File(imagePicked!.path);
-    setState(() {});
+    try {
+      final ImagePicker _picker = ImagePicker();
+      final XFile? imagePicked =
+          await _picker.pickImage(source: ImageSource.gallery);
+      image = File(imagePicked!.path);
+      setState(() {});
+    } catch (e) {
+      print(e);
+    }
   }
 
-  void _unggah() {
+  void _unggah(File? file) async {
     String judul = judulController.text;
-    String harga = hargaController.text;
-    String bahan = bahantroller.text;
+    int harga = int.parse(hargaController.text);
+    String bahan = bahanController.text;
     String cara = caraController.text;
+
+    Reference referenceRoot = FirebaseStorage.instance.ref();
+    Reference referenceDirImg = referenceRoot.child('resep');
+    Reference uploadimg = referenceDirImg.child(judul);
+    try {
+      await uploadimg.putFile(File(file!.path));
+      print("berhasil");
+      imageurl = await uploadimg.getDownloadURL();
+      print("berhasil2");
+    } catch (error) {}
+    context.read<Resep>().uploadResep(
+        judul: judul,
+        harga: harga,
+        bahan: bahan,
+        cara: cara,
+        uid: uid,
+        image: imageurl);
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => homepage()));
   }
 
   @override
@@ -169,7 +200,7 @@ class _inputPageState extends State<inputPage> {
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(15)),
                 child: TextField(
-                  controller: bahantroller,
+                  controller: bahanController,
                   maxLines: 10,
                   decoration: InputDecoration(
                       fillColor: Color.fromARGB(20, 0, 0, 0),
@@ -195,7 +226,7 @@ class _inputPageState extends State<inputPage> {
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(15)),
                 child: TextField(
-                  controller: bahantroller,
+                  controller: caraController,
                   maxLines: 10,
                   decoration: InputDecoration(
                       fillColor: Color.fromARGB(20, 0, 0, 0),
@@ -209,7 +240,9 @@ class _inputPageState extends State<inputPage> {
                 margin: EdgeInsets.only(top: 10),
                 width: 90,
                 child: ElevatedButton(
-                  onPressed: _unggah,
+                  onPressed: () {
+                    _unggah(image);
+                  },
                   child: Container(
                     child: Text('Unggah'),
                   ),
