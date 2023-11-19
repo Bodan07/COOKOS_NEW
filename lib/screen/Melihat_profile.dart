@@ -1,7 +1,9 @@
 //import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_dev/screen/bookmarkPage.dart';
 import 'package:flutter_dev/screen/edit_profile.dart';
+import 'package:flutter_dev/screen/homepage.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dev/model/Profile.dart';
 
@@ -24,7 +26,7 @@ class _seeProfile extends State<seeProfile> {
 
   void _bookmark() {
     String bookmark = bookmarkController.text;
-    Navigator.pushNamed(context, "/rating_review");
+    Navigator.push(context, MaterialPageRoute(builder: (context) => bookmarkPage()));
   }
 
   @override
@@ -34,7 +36,7 @@ class _seeProfile extends State<seeProfile> {
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.push(context,MaterialPageRoute(builder: (context) => homepage()));
             },
           ),
           backgroundColor: Color(0xffe5737d),

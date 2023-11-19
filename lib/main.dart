@@ -1,4 +1,5 @@
 import 'package:flutter_dev/screen/Main_Page.dart';
+import 'package:flutter_dev/screen/bookmarkPage.dart';
 import 'package:flutter_dev/screen/edit_profile.dart';
 import 'package:flutter_dev/screen/input_resep.dart';
 import 'package:flutter_dev/screen/logout.dart';
@@ -53,6 +54,7 @@ class MyApp extends StatelessWidget {
           //   '/edit_profile': (context) => const EditProfile(),
           //   '/Melihat_profile': (context) => const seeProfile(),
           //   '/filter_resep': (context) => const filterResep(),
+          //   //'/bookmarkPage': (context) => const bookmarkPage(),
           //   '/rating_review': (context) => const RatingPage(),
           //   // '/meilhat_resep': (context) => const melihatResep(),
           //   '/meilhat_resep_senior': (context) => const melihatResepSenior(),

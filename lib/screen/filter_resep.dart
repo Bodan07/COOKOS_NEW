@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dev/model/filter_resep.dart';
 import 'package:flutter_dev/screen/edit_profile.dart';
+import 'package:flutter_dev/screen/homepage.dart';
 
 class filterResep extends StatefulWidget {
   const filterResep({super.key});
@@ -79,7 +80,7 @@ class _filterResepState extends State<filterResep> {
             color: Color.fromARGB(255, 255, 255, 255),
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              Navigator.popAndPushNamed(context, "/homepage");
+              Navigator.push(context, MaterialPageRoute(builder: (context) => homepage()));
             },
           ),
           backgroundColor: Color(0xffe5737d),
