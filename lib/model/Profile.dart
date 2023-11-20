@@ -53,7 +53,11 @@ class Profile extends ChangeNotifier {
   }
 
   void setuser(String uid) {
-    this.id_user = uid;
+    id_user = uid;
+  }
+
+  String getnama() {
+    return nama;
   }
 
   void fetchprofile() async {
@@ -70,7 +74,7 @@ class Profile extends ChangeNotifier {
         this.image = data['image'];
         notifyListeners();
       }
-    } on FirebaseException catch (error) {
+    } catch (error) {
       print(error);
     }
   }

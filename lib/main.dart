@@ -1,4 +1,5 @@
 import 'package:flutter_dev/model/Resep.dart';
+import 'package:flutter_dev/model/ratinguser.dart';
 import 'package:flutter_dev/screen/Main_Page.dart';
 import 'package:flutter_dev/screen/bookmarkPage.dart';
 import 'package:flutter_dev/screen/edit_profile.dart';
@@ -39,7 +40,8 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (context) => Profile()),
-          ChangeNotifierProvider(create: (context) => Resep())
+          ChangeNotifierProvider(create: (context) => Resep()),
+          ChangeNotifierProvider(create: (context) => RatingUser())
         ],
         child: MaterialApp(
           // get material app

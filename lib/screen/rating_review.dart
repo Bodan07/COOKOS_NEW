@@ -1,14 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dev/model/Profile.dart';
 import 'package:flutter_dev/model/RatingUser.dart';
+import 'package:flutter_dev/model/Resep.dart';
+import 'package:flutter_dev/screen/meilhat_resep.dart';
 import 'package:flutter_dev/widget/toggleButton.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_dev/widget/ShowRatingStars.dart';
 import 'package:flutter_dev/widget/RatingStars.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 class RatingPage extends StatefulWidget {
-  const RatingPage({super.key});
+  Resep iniresep;
+  RatingPage({Key? key, required this.iniresep}) : super(key: key);
 
   @override
   State<RatingPage> createState() => _RatingPageState();
@@ -21,6 +27,28 @@ class _RatingPageState extends State<RatingPage> {
   int enak = 0;
   int murah = 0;
   int praktis = 0;
+  List<RatingUser> listrating = [];
+
+  @override
+  void initState() {
+    super.initState();
+    widget.iniresep.fetchresep();
+    fetchrating();
+  }
+
+  void fetchrating() async {
+    widget.iniresep.fetchresep();
+    final ratingreviewcollection =
+        FirebaseFirestore.instance.collection('ratingreview');
+    var data = await ratingreviewcollection
+        .where("id_resep", isEqualTo: widget.iniresep.id)
+        .get();
+    setState(() {
+      listrating =
+          List.from(data.docs.map((doc) => RatingUser.fromSnapshot(doc)));
+    });
+    print(data);
+  }
 
   void handleRatingChange(int newRating) {
     setState(() {
@@ -40,12 +68,30 @@ class _RatingPageState extends State<RatingPage> {
     praktis = tiga;
   }
 
-  void _kirim() {
+  void _kirim() async {
     String review = reviewController.text;
     print(ratingFromRatingStars); // kirim ke database;
     print(enak); //kirim database
     print(murah); //kirim database
     print(praktis); //kirim database
+
+    try {
+      final docrating = FirebaseFirestore.instance.collection('ratingreview');
+      final data = {
+        'id_resep': widget.iniresep.id,
+        'bintang': ratingFromRatingStars,
+        'nama': context.read<Profile>().nama,
+        'komentar': review
+      };
+      await docrating.add(data);
+
+      context.read<Resep>().updaterating(
+          widget.iniresep.id, ratingFromRatingStars, enak, praktis, murah);
+      Navigator.pop(context);
+      Navigator.push(context, MaterialPageRoute(builder: (context) {
+        return RatingPage(iniresep: widget.iniresep);
+      }));
+    } catch (error) {}
   }
 
   @override
@@ -56,7 +102,11 @@ class _RatingPageState extends State<RatingPage> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        melihatResep(iniresep: widget.iniresep)));
           },
         ),
         centerTitle: true,
@@ -102,7 +152,10 @@ class _RatingPageState extends State<RatingPage> {
                           child: Column(
                             children: [
                               Text(
-                                '4.7',
+                                ((widget.iniresep.bintang /
+                                            listrating.length.toDouble())
+                                        .toStringAsFixed(1))
+                                    .toString(),
                                 style: TextStyle(
                                   fontFamily: 'Nuito Sans',
                                   fontWeight: FontWeight.bold,
@@ -110,7 +163,8 @@ class _RatingPageState extends State<RatingPage> {
                                 ),
                               ),
                               Container(
-                                child: Text('87 rating'),
+                                child: Text(
+                                    listrating.length.toString() + ' rating'),
                               )
                             ],
                           ),
@@ -119,7 +173,9 @@ class _RatingPageState extends State<RatingPage> {
                         Container(
                           margin: EdgeInsets.only(right: 20),
                           child: ShowRatingStars(
-                              rating: 4.7), //angka diubah dari database
+                              rating: widget.iniresep.bintang /
+                                  listrating.length
+                                      .toDouble()), //angka diubah dari database
                         ),
                       ],
                     ),
@@ -151,7 +207,8 @@ class _RatingPageState extends State<RatingPage> {
                                       fontFamily: 'Nuito Sans',
                                       fontWeight: FontWeight.bold),
                                 ),
-                                Text('53 rating') // diisi dari databasse
+                                Text(widget.iniresep.enak.toString() +
+                                    ' rating') // diisi dari databasse
                               ]),
                           decoration: BoxDecoration(
                               color: Color.fromRGBO(239, 110, 17, 83),
@@ -182,7 +239,8 @@ class _RatingPageState extends State<RatingPage> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              Text('42 rating'), //diisi database
+                              Text(widget.iniresep.murah.toString() +
+                                  ' rating'), //diisi database
                             ],
                           ),
                           decoration: BoxDecoration(
@@ -213,7 +271,8 @@ class _RatingPageState extends State<RatingPage> {
                                     fontFamily: 'Nuito Sans',
                                     fontWeight: FontWeight.bold),
                               ),
-                              Text('17 rating'), //diisi database
+                              Text(widget.iniresep.praktis.toString() +
+                                  ' rating'), //diisi database
                             ],
                           ),
                           decoration: BoxDecoration(
@@ -382,7 +441,7 @@ class _RatingPageState extends State<RatingPage> {
                   Container(
                     margin: EdgeInsets.only(top: 20, bottom: 20),
                     child: Text(
-                      "Ulasan Pengguna " + "(87)",
+                      "Ulasan Pengguna " + listrating.length.toString(),
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   )
@@ -394,10 +453,10 @@ class _RatingPageState extends State<RatingPage> {
                   shrinkWrap: true,
                   primary: false,
                   physics: NeverScrollableScrollPhysics(),
-                  itemCount: ratingusers.length,
+                  itemCount: listrating.length,
                   itemBuilder: (context, index) {
-                    if (index <= ratingusers.length) {
-                      final iniratings = ratingusers[index];
+                    if (index <= listrating.length) {
+                      final iniratings = listrating[index];
                       return ratingWidget(inirating: iniratings);
                     }
                   }),
@@ -462,7 +521,7 @@ class ratingWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              ShowRatingStars(rating: inirating.bintang)
+              ShowRatingStars(rating: inirating.bintang.toDouble())
             ],
           ),
         ),

@@ -67,7 +67,9 @@ class _EditProfile extends State<EditProfile> {
       imageurl = await uploadimg.getDownloadURL();
       print("berhasil2");
       _Update();
-    } catch (error) {}
+    } on FirebaseException catch (error) {
+      print(error);
+    }
   }
 
   void _Update() {

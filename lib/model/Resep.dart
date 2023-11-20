@@ -51,7 +51,7 @@ class Resep extends ChangeNotifier {
         'verifikasi': Verifikasi
       };
   Resep.fromSnapshot(snapshot)
-      : id = "",
+      : id = snapshot.id,
         Nama_Masakan = snapshot.data()['judul'],
         Budget = snapshot.data()['harga'],
         Cara_Membuat = snapshot.data()['cara_membuat'],
@@ -73,40 +73,82 @@ class Resep extends ChangeNotifier {
       required String image}) async {
     try {
       final docresep = FirebaseFirestore.instance.collection('resep');
-      final docprofile = FirebaseFirestore.instance.collection('profile');
-      var doc = await docprofile.doc(uid).get();
-      if (doc.exists) {
-        Map<String, dynamic> datanama = doc.data()!;
 
-        final data = {
-          'bahan': bahan,
-          'harga': harga,
-          'cara_membuat': cara,
-          'pembuat': datanama['nama'],
-          'judul': judul,
-          'verifikasi': false,
-          'bintang': 0.0,
-          'enak': 0,
-          'murah': 0,
-          'praktis': 0,
-          'image': image
-        };
+      final data = {
+        'bahan': bahan,
+        'harga': harga,
+        'cara_membuat': cara,
+        'pembuat': uid,
+        'judul': judul,
+        'verifikasi': false,
+        'bintang': 0.0,
+        'enak': 0,
+        'murah': 0,
+        'praktis': 0,
+        'image': image
+      };
 
-        await docresep.add(data);
-        notifyListeners();
-        return "Resep Berhasil Ditambahkan, Tunggu Sampai Diverifikasi";
-      }
+      await docresep.add(data);
+      notifyListeners();
+      return "Resep Berhasil Ditambahkan, Tunggu Sampai Diverifikasi";
     } on FirebaseException catch (error) {
       return error.toString();
     }
   }
 
-  void getpembuat() async {
-    final docprofile = FirebaseFirestore.instance.collection('profile');
-    var doc = await docprofile.doc(Deskripsi_Masakan).get();
+  void updaterating(
+      String id_resep, int bintang, int enak, int praktis, int murah) async {
+    final collectionresep = FirebaseFirestore.instance.collection('resep');
+    double dbbintang;
+    int dbenak;
+    int dbmurah;
+    int dbpraktis;
+
+    var doc = await collectionresep.doc(id_resep).get();
+
     if (doc.exists) {
       Map<String, dynamic> data = doc.data()!;
-      this.Deskripsi_Masakan = data['nama'];
+      dbbintang = data['bintang'].toDouble();
+      dbenak = data['enak'];
+      dbmurah = data['murah'];
+      dbpraktis = data['praktis'];
+
+      final updata = {
+        'bintang': bintang.toDouble() + dbbintang,
+        'enak': enak + dbenak,
+        'praktis': praktis + dbpraktis,
+        'murah': murah + dbmurah,
+      };
+      await collectionresep.doc(id_resep).update(updata);
+      this.bintang = bintang.toDouble() + dbbintang;
+      this.enak = enak + dbenak;
+      this.praktis = praktis + dbpraktis;
+      this.murah = murah + dbmurah;
+      notifyListeners();
+    }
+  }
+
+  void fetchresep() async {
+    try {
+      final docprofile = FirebaseFirestore.instance.collection('resep');
+      var doc = await docprofile.doc(id).get();
+
+      if (doc.exists) {
+        Map<String, dynamic> data = doc.data()!;
+        this.Nama_Masakan = data['judul'];
+        this.Cara_Membuat = data['cara_membuat'];
+        this.Deskripsi_Masakan = data['pembuat'];
+        this.Bahan = data['bahan'];
+        this.image = data['image'];
+        this.Verifikasi = data['verifikasi'];
+        this.bintang = data['bintang'].toDouble();
+        this.enak = data['enak'];
+        this.murah = data['murah'];
+        this.praktis = data['praktis'];
+        notifyListeners();
+      }
+    } catch (error) {
+      print(error);
     }
   }
 }

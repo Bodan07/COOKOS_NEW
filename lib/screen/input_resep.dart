@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_dev/model/Profile.dart';
 import 'package:flutter_dev/screen/homepage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/foundation.dart';
@@ -58,7 +59,7 @@ class _inputPageState extends State<inputPage> {
         harga: harga,
         bahan: bahan,
         cara: cara,
-        uid: uid,
+        uid: context.read<Profile>().getnama(),
         image: imageurl);
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => homepage()));

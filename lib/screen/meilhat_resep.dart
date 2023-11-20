@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dev/model/Resep.dart';
+import 'package:flutter_dev/model/RatingUser.dart';
+import 'package:flutter_dev/screen/rating_review.dart';
+import 'package:provider/provider.dart';
 
 class melihatResep extends StatefulWidget {
-  final Resep iniresep;
-  const melihatResep({Key? key, required this.iniresep}) : super(key: key);
+  Resep iniresep;
+  melihatResep({Key? key, required this.iniresep}) : super(key: key);
 
   @override
   State<melihatResep> createState() => _melihatResepState();
@@ -12,8 +15,22 @@ class melihatResep extends StatefulWidget {
 class _melihatResepState extends State<melihatResep> {
   bool isBookmarked = false;
 
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      widget.iniresep.fetchresep();
+    });
+  }
+
   void menujuRating() {
-    Navigator.pushNamed(context, '/rating_review');
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return RatingPage(iniresep: widget.iniresep);
+    }));
+  }
+
+  void getdocref() {
+    print(widget.iniresep.id);
   }
 
   void toggleBookmark() {

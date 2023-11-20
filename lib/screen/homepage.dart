@@ -20,15 +20,17 @@ class _homepageState extends State<homepage> {
   TextEditingController profileController = TextEditingController();
   List<Resep> listresep = [];
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void initState() {
+    super.initState();
     fetchresep();
   }
 
   Future fetchresep() async {
-    var data = await FirebaseFirestore.instance.collection('resep').get();
+    final collectionresep = FirebaseFirestore.instance.collection('resep');
+    var data = await collectionresep.where("verifikasi", isEqualTo: true).get();
     setState(() {
       listresep = List.from(data.docs.map((doc) => Resep.fromSnapshot(doc)));
+      print(listresep);
     });
   }
 
