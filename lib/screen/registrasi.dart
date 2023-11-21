@@ -148,10 +148,54 @@ class _RegistrasiPageState extends State<Registrasi> {
                         ),
                       ),
                     ),
-<<<<<<< HEAD
-                    SizedBox(height: 0),
-=======
-                    SizedBox(height: 20),
+                    SizedBox(height: 10),
+                    Container(
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'or register with',
+                        style: TextStyle(
+                            color: Colors.white,
+                            letterSpacing: 1,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Container(
+                      alignment: Alignment.center,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        child: Container(
+                          width: 140,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                "assets/images/Google_Logo.png",
+                                width: 20,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text("Google")
+                            ],
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          primary: const Color.fromARGB(
+                              255, 255, 255, 255), // Ubah warna latar belakang
+                          onPrimary: const Color.fromARGB(
+                              255, 0, 0, 0), // Ubah warna teks
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          minimumSize: Size(170, 40),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
