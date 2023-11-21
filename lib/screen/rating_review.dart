@@ -102,11 +102,7 @@ class _RatingPageState extends State<RatingPage> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        melihatResep(iniresep: widget.iniresep)));
+            Navigator.pop(context);
           },
         ),
         centerTitle: true,

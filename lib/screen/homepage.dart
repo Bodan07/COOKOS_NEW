@@ -8,6 +8,7 @@ import 'package:flutter_dev/screen/input_resep.dart';
 import 'package:flutter_dev/screen/logout.dart';
 import 'package:flutter_dev/screen/meilhat_resep.dart';
 import 'package:flutter_dev/widget/thumbnail_resep.dart';
+import 'package:flutter_dev/screen/alertLogout.dart';
 
 class homepage extends StatefulWidget {
   const homepage({super.key});
@@ -198,8 +199,11 @@ class _homepageState extends State<homepage> {
                   color: Color(0xFFE5737D),
                 ),
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => logout()));
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const alertLogout();
+                      });
                 })
           ],
         ),
