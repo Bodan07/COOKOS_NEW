@@ -6,6 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_dev/model/Profile.dart';
 import 'package:flutter_dev/screen/login.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_dev/widget/loginForm.dart';
+import 'package:flutter_dev/widget/passwordForm.dart';
 
 class Registrasi extends StatefulWidget {
   const Registrasi({Key? key}) : super(key: key);
@@ -49,6 +51,7 @@ class _RegistrasiPageState extends State<Registrasi> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           SizedBox(
@@ -92,32 +95,44 @@ class _RegistrasiPageState extends State<Registrasi> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(left: 29),
-                      child: Text(
-                        "Buat Akun",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.start,
+                      alignment: Alignment.centerLeft,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Let's get",
+                            style: TextStyle(
+                                fontSize: 45,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700),
+                          ),
+                          Text(
+                            "Started",
+                            style: TextStyle(
+                                fontSize: 45,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ],
                       ),
                     ),
-                    customTextField(
-                      controller: usernameController,
-                      title: "Username",
-                      hintText: "Masukkan username",
-                      isPassword: false,
+                    SizedBox(
+                      height: 20,
                     ),
-                    customTextField(
-                      controller: emailController,
-                      title: "Email Address",
-                      hintText: "Masukkan email address",
-                      isPassword: false,
+                    Container(
+                      margin: EdgeInsets.only(left: 29),
                     ),
-                    customTextField(
-                      controller: passwordController,
-                      title: "Password",
-                      hintText: "Masukkan password",
-                      isPassword: true,
+                    loginForm(
+                        hintText: "Username", controller: usernameController),
+                    SizedBox(
+                      height: 20,
                     ),
+                    loginForm(hintText: "Email", controller: emailController),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    passwordForm(
+                        hintText: "Passsword", controller: passwordController),
                     SizedBox(height: 20),
                     Container(
                       alignment: Alignment.center,
@@ -142,32 +157,96 @@ class _RegistrasiPageState extends State<Registrasi> {
                           onPrimary: const Color.fromARGB(
                               255, 0, 0, 0), // Ubah warna teks
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
+                            borderRadius: BorderRadius.circular(30),
                           ),
-                          minimumSize: Size(150, 40),
+                          minimumSize: Size(170, 40),
                         ),
                       ),
                     ),
-                    SizedBox(height: 0),
+                    SizedBox(height: 10),
+                    Container(
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                      child: const Text(
+                        'or register with',
+                        style: TextStyle(
+                            color: Colors.white,
+                            letterSpacing: 1,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Container(
+                      alignment: Alignment.center,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        child: Container(
+                          width: 140,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                "assets/images/Google_Logo.png",
+                                width: 20,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text("Google")
+                            ],
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          primary: const Color.fromARGB(
+                              255, 255, 255, 255), // Ubah warna latar belakang
+                          onPrimary: const Color.fromARGB(
+                              255, 0, 0, 0), // Ubah warna teks
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          minimumSize: Size(170, 40),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Already have an account?",
+                          style: TextStyle(
+                              color: Colors.white,
+                              letterSpacing: 1,
+                              fontWeight: FontWeight.w700),
+                        ),
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        InkWell(
+                          child: const Text(
+                            'Login',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 0.5),
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage()));
+                          },
+                        )
+                      ],
+                    ),
                   ],
                 ),
               ),
             ),
           ),
+
           // Tambahkan teks di bawah layar
-          GestureDetector(
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LoginPage()));
-            },
-            child: Text(
-              "Sudah memiliki akun? Login",
-              style: TextStyle(
-                color: Colors.black, // Ubah warna teks
-                fontSize: 16, // Sesuaikan ukuran teks
-              ),
-            ),
-          )
         ],
       ),
     );

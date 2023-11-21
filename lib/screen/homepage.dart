@@ -8,6 +8,7 @@ import 'package:flutter_dev/screen/input_resep.dart';
 import 'package:flutter_dev/screen/logout.dart';
 import 'package:flutter_dev/screen/meilhat_resep.dart';
 import 'package:flutter_dev/widget/thumbnail_resep.dart';
+import 'package:flutter_dev/screen/alertLogout.dart';
 
 class homepage extends StatefulWidget {
   const homepage({super.key});
@@ -198,8 +199,11 @@ class _homepageState extends State<homepage> {
                   color: Color(0xFFE5737D),
                 ),
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => logout()));
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const alertLogout();
+                      });
                 })
           ],
         ),
@@ -230,9 +234,10 @@ class tampilanfood extends StatelessWidget {
           decoration: BoxDecoration(
             //color: Colors.black,
             image: DecorationImage(
-              image: NetworkImage(iniresep.image),
-              fit: BoxFit.cover,
-            ),
+                image: NetworkImage(iniresep.image),
+                fit: BoxFit.cover,
+                colorFilter: ColorFilter.mode(
+                    Colors.black.withOpacity(0.5), BlendMode.multiply)),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Stack(
@@ -264,7 +269,7 @@ class tampilanfood extends StatelessWidget {
                           color: const Color(0xFFA9A9A9),
                           fontFamily: "Popins",
                           fontSize: 14,
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
                     ),

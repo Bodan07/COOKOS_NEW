@@ -31,9 +31,10 @@ class _thumbnailResepState extends State<thumbnailResep> {
             decoration: BoxDecoration(
               //color: Colors.black,
               image: DecorationImage(
-                image: AssetImage(widget.iniresep.image),
-                fit: BoxFit.cover,
-              ),
+                  image: AssetImage(widget.iniresep.image),
+                  fit: BoxFit.cover,
+                  colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.5), BlendMode.multiply)),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Stack(
