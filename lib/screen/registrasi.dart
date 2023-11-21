@@ -186,7 +186,7 @@ class _RegistrasiPageState extends State<Registrasi> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Image.asset(
-                                "assets/images/Google_Logo.png",
+                                "assets/images/google_logo.png",
                                 width: 20,
                               ),
                               SizedBox(
