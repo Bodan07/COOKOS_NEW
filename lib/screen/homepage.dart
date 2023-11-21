@@ -234,9 +234,10 @@ class tampilanfood extends StatelessWidget {
           decoration: BoxDecoration(
             //color: Colors.black,
             image: DecorationImage(
-              image: NetworkImage(iniresep.image),
-              fit: BoxFit.cover,
-            ),
+                image: NetworkImage(iniresep.image),
+                fit: BoxFit.cover,
+                colorFilter: ColorFilter.mode(
+                    Colors.black.withOpacity(0.5), BlendMode.multiply)),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Stack(
@@ -268,7 +269,7 @@ class tampilanfood extends StatelessWidget {
                           color: const Color(0xFFA9A9A9),
                           fontFamily: "Popins",
                           fontSize: 14,
-                          fontWeight: FontWeight.w400,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
                     ),
