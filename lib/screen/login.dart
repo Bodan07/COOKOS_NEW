@@ -84,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                 margin: EdgeInsets.all(15),
                 child: Column(
                   crossAxisAlignment:
-                      CrossAxisAlignment.start, // Ubah ini menjadi 'start'
+                      CrossAxisAlignment.center, // Ubah ini menjadi 'start'
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
@@ -134,25 +134,29 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     SizedBox(height: 20),
+                    Container(
+                      child :
+                          GestureDetector(
+                        onTap: () {
+                        Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Registrasi()));
+                    },
+                    child: Text(
+                    "Belum memiliki akun ? Registrasi",
+                    style: TextStyle(
+                      color: Colors.black, // Ubah warna teks
+                      fontSize: 16, // Sesuaikan ukuran teks
+                    ),
+                    ),
+                    ),
+                    ),
+                    SizedBox(height: 20),
                   ],
                 ),
               ),
             ),
           ),
           // Tambahkan teks di bawah layar
-          GestureDetector(
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Registrasi()));
-            },
-            child: Text(
-              "Belum memiliki akun ? Registrasi",
-              style: TextStyle(
-                color: Colors.black, // Ubah warna teks
-                fontSize: 16, // Sesuaikan ukuran teks
-              ),
-            ),
-          ),
         ],
       ),
     );
