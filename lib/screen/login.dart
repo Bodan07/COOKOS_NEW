@@ -7,6 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_dev/model/Profile.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_dev/widget/loginForm.dart';
+import 'package:flutter_dev/widget/passwordForm.dart';
 
 class LoginPage extends StatefulWidget {
   static String routeName = '/login';
@@ -105,52 +107,22 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     SizedBox(height: 20),
-                    Container(
-                      width: 500,
-                      child: TextFormField(
-                        controller: emailController,
-                        decoration: InputDecoration( // Use 'filled: true' instead of 'filled = true'
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),// Specify the color here
-                          ),
-                          labelText: 'Email',
-                          labelStyle: TextStyle(color: const Color.fromARGB(255, 2, 2, 2)), // Set the desired label color
-                          prefixIcon: Icon(Icons.email, color: const Color.fromARGB(255, 14, 14, 14)),
-                        ),
-                      ),
+                    SizedBox(
+                      height: 20,
                     ),
-
+                    Container(
+                      margin: EdgeInsets.only(left: 29),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    loginForm(hintText: "Email", controller: emailController),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    passwordForm(
+                        hintText: "Passsword", controller: passwordController),
                     SizedBox(height: 20),
-                    Container(
-                      width: 500, // Set the desired width
-                      child: TextFormField(
-                        controller: passwordController,
-                        obscureText: !passToogle,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),// Specify the color here
-                          ),
-                          labelText: 'Password',
-                          labelStyle: TextStyle(color: const Color.fromARGB(255, 2, 2, 2)), // Set the desired label color
-                          prefixIcon: Icon(Icons.password, color: const Color.fromARGB(255, 14, 14, 14)),
-                          suffixIcon: InkWell(
-                            onTap: () {
-                              setState(() {
-                                // ignore: unnecessary_statements
-                                passToogle = !passToogle;
-                              });
-                            },
-                            child: Icon(
-                              passToogle ? Icons.visibility : Icons.visibility_off),
-                          ),
-                          suffixIconColor:const Color.fromARGB(255, 2, 2, 2),
-                        ),
-                      ),
-                    ),
                     SizedBox(height: 50),
                     //container button
                     Container(

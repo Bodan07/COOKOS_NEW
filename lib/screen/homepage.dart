@@ -9,6 +9,7 @@ import 'package:flutter_dev/screen/logout.dart';
 import 'package:flutter_dev/screen/meilhat_resep.dart';
 import 'package:flutter_dev/widget/thumbnail_resep.dart';
 import 'package:flutter_dev/screen/alertLogout.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class homepage extends StatefulWidget {
   const homepage({super.key});
@@ -199,6 +200,7 @@ class _homepageState extends State<homepage> {
                   color: Color(0xFFE5737D),
                 ),
                 onPressed: () {
+                  FirebaseAuth.instance.signOut;
                   showDialog(
                       context: context,
                       builder: (context) {
