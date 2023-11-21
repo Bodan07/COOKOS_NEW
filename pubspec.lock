@@ -97,6 +97,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.6"
+  curved_nav_bar:
+    dependency: "direct main"
+    description:
+      name: curved_nav_bar
+      sha256: "9df4c0f976280dc5bb1f2e1a7a2047a2f404554aade080e68919755be19dea5e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
+  curved_navigation_bar:
+    dependency: "direct main"
+    description:
+      name: curved_navigation_bar
+      sha256: ea6412d00c5d83501bbf1cf9d1ac2ff11a20fbaf910c103c95ace7de82910334
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3"
   equatable:
     dependency: "direct dev"
     description:
@@ -305,7 +321,7 @@ packages:
     source: hosted
     version: "4.0.2"
   iconsax:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: iconsax
       sha256: fb0144c61f41f3f8a385fadc27783ea9f5359670be885ed7f35cef32565d5228
@@ -556,10 +572,10 @@ packages:
     dependency: transitive
     description:
       name: shared_preferences_web
-      sha256: d762709c2bbe80626ecc819143013cc820fa49ca5e363620ee20a8b15a3e3daf
+      sha256: "7b15ffb9387ea3e237bb7a66b8a23d2147663d391cafc5c8f37b2e7b4bde5d21"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.1"
+    version: "2.2.2"
   shared_preferences_windows:
     dependency: transitive
     description:
@@ -662,5 +678,5 @@ packages:
     source: hosted
     version: "1.0.3"
 sdks:
-  dart: ">=3.2.0-194.0.dev <4.0.0"
-  flutter: ">=3.13.0"
+  dart: ">=3.2.0 <4.0.0"
+  flutter: ">=3.16.0"

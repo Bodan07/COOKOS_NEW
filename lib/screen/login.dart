@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter_dev/screen/registrasi.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_dev/model/Profile.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   static String routeName = '/login';
@@ -18,6 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   String uid = "";
+  bool passToogle = true;
 
   void _login() async {
     String email = emailController.text;
@@ -43,6 +46,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    double padding = 16.0; // Example padding value
+    double devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
     return Scaffold(
       body: Column(
         children: [
@@ -88,27 +93,77 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      child: customTextField(
-                          controller: emailController,
-                          title: "Email Address",
-                          hintText: "Masukkan Email Address",
-                          isPassword: false),
-                    ),
-
-                    Container(
-                      child: customTextField(
-                        controller: passwordController,
-                        title: "Password",
-                        hintText: "Masukkan Password",
-                        isPassword: true,
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "Welcome Back",
+                        style: TextStyle(
+                          color: const Color.fromARGB(255, 255, 255, 255), // Ubah warna teks
+                          fontSize: 60,
+                          fontWeight: FontWeight.bold
+                           // Sesuaikan ukuran teks
+                        ),
                       ),
                     ),
                     SizedBox(height: 20),
+                    Container(
+                      width: 500,
+                      child: TextFormField(
+                        controller: emailController,
+                        decoration: InputDecoration( // Use 'filled: true' instead of 'filled = true'
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0),// Specify the color here
+                          ),
+                          labelText: 'Email',
+                          labelStyle: TextStyle(color: const Color.fromARGB(255, 2, 2, 2)), // Set the desired label color
+                          prefixIcon: Icon(Icons.email, color: const Color.fromARGB(255, 14, 14, 14)),
+                        ),
+                      ),
+                    ),
+
+                    SizedBox(height: 20),
+                    Container(
+                      width: 500, // Set the desired width
+                      child: TextFormField(
+                        controller: passwordController,
+                        obscureText: !passToogle,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15.0),// Specify the color here
+                          ),
+                          labelText: 'Password',
+                          labelStyle: TextStyle(color: const Color.fromARGB(255, 2, 2, 2)), // Set the desired label color
+                          prefixIcon: Icon(Icons.password, color: const Color.fromARGB(255, 14, 14, 14)),
+                          suffixIcon: InkWell(
+                            onTap: () {
+                              setState(() {
+                                // ignore: unnecessary_statements
+                                passToogle = !passToogle;
+                              });
+                            },
+                            child: Icon(
+                              passToogle ? Icons.visibility : Icons.visibility_off),
+                          ),
+                          suffixIconColor:const Color.fromARGB(255, 2, 2, 2),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 50),
                     //container button
                     Container(
                       alignment: Alignment.center,
                       child: ElevatedButton(
-                        child: Text('Login'),
+                        child: Text(
+                          'Sign In',
+                          style: TextStyle(
+                            color: Colors.black, // Ubah warna teks
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700, // Sesuaikan ukuran teks
+                          ),
+                        ),
                         onPressed: () {
                           if (emailController.text == "" &&
                               passwordController.text == "") {
@@ -127,30 +182,41 @@ class _LoginPageState extends State<LoginPage> {
                           onPrimary: const Color.fromARGB(
                               255, 0, 0, 0), // Ubah warna teks
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
+                            borderRadius: BorderRadius.circular(16),
                           ),
-                          minimumSize: Size(150, 40),
+                          minimumSize: Size(300, 50),
                         ),
                       ),
                     ),
                     SizedBox(height: 20),
                     Container(
-                      child :
-                          GestureDetector(
-                        onTap: () {
-                        Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Registrasi()));
-                    },
-                    child: Text(
-                    "Belum memiliki akun ? Registrasi",
-                    style: TextStyle(
-                      color: Colors.black, // Ubah warna teks
-                      fontSize: 16, // Sesuaikan ukuran teks
+                      alignment: Alignment.center,
+                      child: ElevatedButton(
+                        child: Text(
+                          'Create Account',
+                          style: TextStyle(
+                            color: Colors.black, // Ubah warna teks
+                            fontSize: 17,
+                            fontWeight: FontWeight.w700, // Sesuaikan ukuran teks
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context, MaterialPageRoute(builder: (context) => Registrasi()));
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: const Color.fromARGB(
+                              255, 255, 255, 255), // Ubah warna latar belakang
+                          onPrimary: const Color.fromARGB(
+                              255, 0, 0, 0), // Ubah warna teks
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          minimumSize: Size(300, 50),
+                        ),
+                      ),
                     ),
-                    ),
-                    ),
-                    ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 30),
                   ],
                 ),
               ),
