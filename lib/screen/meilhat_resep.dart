@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dev/model/Resep.dart';
-<<<<<<< Updated upstream
 import 'package:flutter_dev/model/RatingUser.dart';
 import 'package:flutter_dev/screen/rating_review.dart';
 import 'package:provider/provider.dart';
-=======
-import 'package:flutter_dev/screen/rating_review.dart';
->>>>>>> Stashed changes
 
 class melihatResep extends StatefulWidget {
   Resep iniresep;
@@ -28,7 +24,13 @@ class _melihatResepState extends State<melihatResep> {
   }
 
   void menujuRating() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => RatingPage()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return RatingPage(iniresep: widget.iniresep);
+    }));
+  }
+
+  void getdocref() {
+    print(widget.iniresep.id);
   }
 
   void toggleBookmark() {
