@@ -83,7 +83,8 @@ class _melihatResepState extends State<melihatResep> {
                                   margin: EdgeInsets.only(
                                       left: 20, top: 5, bottom: 5),
                                   child: Text(
-                                    'Rinrin Marinka', //disi nama uploader
+                                    widget.iniresep
+                                        .Deskripsi_Masakan, //disi nama uploader
                                     style: TextStyle(
                                         fontFamily: 'Poppins',
                                         fontSize: 15,
@@ -187,6 +188,7 @@ class _melihatResepState extends State<melihatResep> {
                   constraints: BoxConstraints(maxHeight: double.infinity),
                   margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                         height: 40,
@@ -206,6 +208,7 @@ class _melihatResepState extends State<melihatResep> {
                                     width: 2))),
                       ),
                       Container(
+                          padding: EdgeInsets.all(15),
                           child:
                               Text(widget.iniresep.Bahan)) //isi dari database
                     ],
@@ -221,6 +224,7 @@ class _melihatResepState extends State<melihatResep> {
                   constraints: BoxConstraints(maxHeight: double.infinity),
                   margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                         height: 40,
@@ -240,6 +244,7 @@ class _melihatResepState extends State<melihatResep> {
                                     width: 2))),
                       ),
                       Container(
+                          padding: EdgeInsets.all(15),
                           child: Text(
                               widget.iniresep.Cara_Membuat)) //isi dari database
                     ],
