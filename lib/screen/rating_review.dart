@@ -361,7 +361,7 @@ class _RatingPageState extends State<RatingPage> {
                                           text2: "Harga",
                                           onSavedValueChanged: murahChange)),
                                   Container(
-                                      width: 100,
+                                      width: 110,
                                       margin:
                                           EdgeInsets.symmetric(horizontal: 5),
                                       child: ToggleButtonExample(

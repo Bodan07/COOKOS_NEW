@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dev/screen/Main_Page.dart';
 import 'package:flutter_dev/screen/login.dart';
 
 class alertLogout extends StatelessWidget {
@@ -26,9 +28,10 @@ class alertLogout extends StatelessWidget {
             )),
         TextButton(
             onPressed: () {
+              FirebaseAuth.instance.signOut();
               Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (context) => LoginPage()),
+                MaterialPageRoute(builder: (context) => MainPage()),
                 (route) => false,
               );
               ScaffoldMessenger.of(context).showSnackBar(

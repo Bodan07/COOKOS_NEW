@@ -200,7 +200,6 @@ class _homepageState extends State<homepage> {
                   color: Color(0xFFE5737D),
                 ),
                 onPressed: () {
-                  FirebaseAuth.instance.signOut;
                   showDialog(
                       context: context,
                       builder: (context) {
