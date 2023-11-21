@@ -148,7 +148,40 @@ class _RegistrasiPageState extends State<Registrasi> {
                         ),
                       ),
                     ),
+<<<<<<< HEAD
                     SizedBox(height: 0),
+=======
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Already have an account?",
+                          style: TextStyle(
+                              color: Colors.white,
+                              letterSpacing: 1,
+                              fontWeight: FontWeight.w700),
+                        ),
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        InkWell(
+                          child: const Text(
+                            'Login',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 0.5),
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage()));
+                          },
+                        )
+                      ],
+                    ),
+>>>>>>> parent of 485d731 (update)
                   ],
                 ),
               ),
