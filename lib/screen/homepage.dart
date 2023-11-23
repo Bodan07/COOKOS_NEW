@@ -30,7 +30,7 @@ class _homepageState extends State<homepage> {
     fetchresep();
   }
 
-  Future fetchresep() async {
+  void fetchresep() async {
     final collectionresep = FirebaseFirestore.instance.collection('resep');
     if (context.read<user>().tipe_user == "Cooker") {
       var data =
@@ -185,6 +185,7 @@ class _homepageState extends State<homepage> {
                   color: Color(0xFFE5737D),
                 ),
                 onPressed: () {
+                  print(context.read<user>().tipe_user);
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => inputPage()));
                 }),

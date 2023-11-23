@@ -80,7 +80,7 @@ class Resep extends ChangeNotifier {
         'harga': harga,
         'cara_membuat': cara,
         'pembuat': uid,
-        'judul': judul,
+        'judul': judul.toUpperCase(),
         'verifikasi': false,
         'bintang': 0.0,
         'enak': 0,

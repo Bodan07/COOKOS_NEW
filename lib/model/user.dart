@@ -86,7 +86,7 @@ class user extends ChangeNotifier {
         this.id_user = id;
         this.username = data['username'];
         this.email = data['email'];
-        this.tipe_user = data['tipe_user'];
+        final tipe_user = data['tipe_user'];
         notifyListeners();
       }
     } catch (error) {

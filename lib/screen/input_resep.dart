@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_dev/model/Profile.dart';
+import 'package:flutter_dev/model/user.dart';
 import 'package:flutter_dev/screen/homepage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/foundation.dart';
@@ -22,7 +23,6 @@ class _inputPageState extends State<inputPage> {
   TextEditingController hargaController = TextEditingController();
   TextEditingController bahanController = TextEditingController();
   TextEditingController caraController = TextEditingController();
-  String uid = FirebaseAuth.instance.currentUser!.uid;
   String imageurl = '';
   File? image;
 
@@ -64,8 +64,10 @@ class _inputPageState extends State<inputPage> {
         harga: harga,
         bahan: bahan,
         cara: cara,
-        uid: context.read<Profile>().getnama(),
+        uid: context.read<Profile>().nama,
         image: imageurl);
+
+    print(context.read<user>().tipe_user);
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => homepage()));
   }
