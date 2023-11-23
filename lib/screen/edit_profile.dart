@@ -49,11 +49,28 @@ class _EditProfile extends State<EditProfile> {
 
   Future getImage() async {
     final ImagePicker _picker = ImagePicker();
-    final XFile? imagePicked =
-        await _picker.pickImage(source: ImageSource.gallery);
-    image = File(imagePicked!.path);
-    img = imagePicked;
-    setState(() {});
+    try {
+      final XFile? imagePicked =
+          await _picker.pickImage(source: ImageSource.gallery);
+
+      if (imagePicked != null) {
+        image = File(imagePicked.path);
+        img = imagePicked;
+        setState(() {});
+      } else {
+        // Handle the case where the user canceled the image picking.
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Image Picking canceled"),
+          behavior: SnackBarBehavior.floating,
+        ));
+      }
+    } catch (e) {
+      // Handle any potential errors that might occur during image picking.
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("Error picking image: $e"),
+        behavior: SnackBarBehavior.floating,
+      ));
+    }
   }
 
   void UpDatabase(File? file) async {
