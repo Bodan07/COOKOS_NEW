@@ -79,26 +79,54 @@ class _EditProfile extends State<EditProfile> {
     Reference referenceDirImg = referenceRoot.child('profile');
     Reference uploadimg = referenceDirImg.child(uid);
     try {
-      await uploadimg.putFile(File(file!.path));
-      print("berhasil");
-      imageurl = await uploadimg.getDownloadURL();
-      print("berhasil2");
+      if (file != null) {
+        await uploadimg.putFile(File(file.path));
+        print("Upload successful");
+
+        imageurl = await uploadimg.getDownloadURL();
+        print("Image URL retrieval successful");
+      } else {
+        print("File is null. Skipping upload process.");
+      }
       _Update();
     } on FirebaseException catch (error) {
-      print(error);
+      print("FirebaseException: $error");
     }
   }
 
   void _Update() {
-    String nama = nameController.text;
-    int usia = int.parse(usiaController.text);
-    String jeniskelamin = jeniskelaminController.text;
-    String tanggallahir = _dateTime.toString().split(' ')[0];
-    context.read<Profile>().changeProfile(
-        n: nama, u: usia, jk: jeniskelamin, tl: tanggallahir, img: imageurl);
-
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => seeProfile()));
+    try {
+      String nama = nameController.text;
+      int usia = int.parse(usiaController.text);
+      String jeniskelamin = jeniskelaminController.text;
+      String tanggallahir = _dateTime.toString().split(' ')[0];
+      // Check for null or empty values and handle them as needed
+      if (nama.isEmpty || jeniskelamin.isEmpty || tanggallahir.isEmpty) {
+        // Handle the case where any of the required fields is empty
+        throw Exception('Required fields cannot be empty');
+      }
+      context.read<Profile>().changeProfile(
+            n: nama,
+            u: usia,
+            jk: jeniskelamin,
+            tl: tanggallahir,
+            img: imageurl,
+          );
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => seeProfile()),
+      );
+    } catch (e) {
+      // Handle the exception
+      print('Error updating profile: $e');
+      // You can show a SnackBar or display an error message to the user
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Required fields cannot be empty'),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
   }
 
   @override
