@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dev/model/user.dart';
 import 'package:flutter_dev/screen/homepage.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dev/screen/registrasi.dart';
@@ -34,8 +35,9 @@ class _LoginPageState extends State<LoginPage> {
           .signInWithEmailAndPassword(
               email: emailController.text, password: passwordController.text);
       uid = auth.currentUser!.uid;
-      context.read<Profile>().setuser(uid);
-      context.read<Profile>().fetchprofile();
+      //context.read<Profile>().setuser(uid);
+      context.read<Profile>().fetchprofile(uid);
+      context.read<user>().fetchuser(uid);
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => homepage()));
     } on FirebaseAuthException catch (err) {
@@ -99,11 +101,12 @@ class _LoginPageState extends State<LoginPage> {
                       child: Text(
                         "Welcome Back",
                         style: TextStyle(
-                          color: const Color.fromARGB(255, 255, 255, 255), // Ubah warna teks
-                          fontSize: 60,
-                          fontWeight: FontWeight.bold
-                           // Sesuaikan ukuran teks
-                        ),
+                            color: const Color.fromARGB(
+                                255, 255, 255, 255), // Ubah warna teks
+                            fontSize: 60,
+                            fontWeight: FontWeight.bold
+                            // Sesuaikan ukuran teks
+                            ),
                       ),
                     ),
                     SizedBox(height: 20),
@@ -133,7 +136,8 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextStyle(
                             color: Colors.black, // Ubah warna teks
                             fontSize: 17,
-                            fontWeight: FontWeight.w700, // Sesuaikan ukuran teks
+                            fontWeight:
+                                FontWeight.w700, // Sesuaikan ukuran teks
                           ),
                         ),
                         onPressed: () {
@@ -169,12 +173,15 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextStyle(
                             color: Colors.black, // Ubah warna teks
                             fontSize: 17,
-                            fontWeight: FontWeight.w700, // Sesuaikan ukuran teks
+                            fontWeight:
+                                FontWeight.w700, // Sesuaikan ukuran teks
                           ),
                         ),
                         onPressed: () {
                           Navigator.push(
-                            context, MaterialPageRoute(builder: (context) => Registrasi()));
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Registrasi()));
                         },
                         style: ElevatedButton.styleFrom(
                           primary: const Color.fromARGB(

@@ -1,11 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dev/model/Resep.dart';
 import 'package:flutter_dev/model/RatingUser.dart';
+import 'package:flutter_dev/model/user.dart';
 import 'package:flutter_dev/screen/rating_review.dart';
 import 'package:provider/provider.dart';
 
 class melihatResep extends StatefulWidget {
   Resep iniresep;
+
   melihatResep({Key? key, required this.iniresep}) : super(key: key);
 
   @override
@@ -14,13 +18,24 @@ class melihatResep extends StatefulWidget {
 
 class _melihatResepState extends State<melihatResep> {
   bool isBookmarked = false;
+  List<Resep> bookmark = [];
 
   @override
   void initState() {
     super.initState();
+    context.read<user>().fetchbookmark(context.read<user>().id_user);
     setState(() {
-      widget.iniresep.fetchresep();
+      bookmark = context
+          .read<user>()
+          .bookmark
+          .where((resep) => resep.id.contains(widget.iniresep.id))
+          .toList();
+      isBookmarked = cekbookmark(bookmark);
     });
+  }
+
+  bool cekbookmark(List<Resep> book) {
+    return book.isNotEmpty;
   }
 
   void menujuRating() {
@@ -29,16 +44,22 @@ class _melihatResepState extends State<melihatResep> {
     }));
   }
 
-  void getdocref() {
-    print(widget.iniresep.id);
-  }
-
   void toggleBookmark() {
     setState(() {
       isBookmarked = !isBookmarked;
+
       if (isBookmarked) {
+        context.read<user>().addbookmark(widget.iniresep);
+
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text("Resep berhasil di tambahkan ke bookmark"),
+          behavior: SnackBarBehavior.floating,
+        ));
+      } else {
+        context.read<user>().removebookmark(widget.iniresep);
+
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Resep berhasil di hapus dari bookmark"),
           behavior: SnackBarBehavior.floating,
         ));
       }
@@ -173,7 +194,7 @@ class _melihatResepState extends State<melihatResep> {
                         color: Colors.white,
                       ),
                       onPressed: () {
-                        Navigator.pop(context);
+                        Navigator.pop(context, "bookmark");
                       },
                       iconSize: 30,
                     ),

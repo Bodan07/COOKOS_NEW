@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dev/model/Resep.dart';
 
 class melihatResepSenior extends StatefulWidget {
-  const melihatResepSenior({super.key});
+  Resep iniresep;
+  melihatResepSenior({Key? key, required this.iniresep}) : super(key: key);
 
   @override
   State<melihatResepSenior> createState() => _melihatResepSeniorState();
@@ -13,13 +15,11 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
   void toggleBookmark() {
     setState(() {
       isBookmarked = !isBookmarked;
-      if (isBookmarked){
-        ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+      if (isBookmarked) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text("Resep berhasil di verificate"),
-          behavior : SnackBarBehavior.floating,
-        )
-        );
+          behavior: SnackBarBehavior.floating,
+        ));
       }
     });
   }

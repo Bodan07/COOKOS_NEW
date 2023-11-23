@@ -1,5 +1,6 @@
 import 'package:flutter_dev/model/Resep.dart';
 import 'package:flutter_dev/model/ratinguser.dart';
+import 'package:flutter_dev/model/user.dart';
 import 'package:flutter_dev/screen/Main_Page.dart';
 import 'package:flutter_dev/screen/bookmarkPage.dart';
 import 'package:flutter_dev/screen/edit_profile.dart';
@@ -41,7 +42,8 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (context) => Profile()),
           ChangeNotifierProvider(create: (context) => Resep()),
-          ChangeNotifierProvider(create: (context) => RatingUser())
+          ChangeNotifierProvider(create: (context) => RatingUser()),
+          ChangeNotifierProvider(create: (context) => user())
         ],
         child: MaterialApp(
           // get material app
