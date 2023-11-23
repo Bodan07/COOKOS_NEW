@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter_dev/model/Profile.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_dev/model/Profile.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({Key? key}) : super(key: key);
@@ -32,6 +33,12 @@ class _EditProfile extends State<EditProfile> {
   DateTime _dateTime = DateTime.now();
   FirebaseAuth auth = FirebaseAuth.instance;
   String uid = "";
+
+  @override
+  void initState() {
+    super.initState();
+    imageurl = context.read<Profile>().image;
+  }
 
   void _showDatePicker() {
     showDatePicker(
@@ -174,15 +181,17 @@ class _EditProfile extends State<EditProfile> {
                                   ),
                                 )
                               : Container(
-                                  //tindakan 2
                                   margin: EdgeInsets.only(top: 50, left: 130),
                                   width: 150,
                                   height: 150,
-                                  decoration: const BoxDecoration(
+                                  decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: Colors.white,
-                                  ),
-                                ),
+                                    image: DecorationImage(
+                                        image: NetworkImage(
+                                            context.watch<Profile>().image),
+                                        fit: BoxFit.cover),
+                                  )),
                           Positioned(
                               bottom: 50,
                               right: 140,
