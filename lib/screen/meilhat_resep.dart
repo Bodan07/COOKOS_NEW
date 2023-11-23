@@ -303,7 +303,7 @@ class _melihatResepState extends State<melihatResep> {
                       Container(
                           margin: EdgeInsets.only(right: 20),
                           child: Text(
-                            'Rp 60.000,-',
+                            'Rp ' + widget.iniresep.Budget.toString() + ',-',
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ))
                     ],
