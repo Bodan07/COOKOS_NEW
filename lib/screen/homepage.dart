@@ -2,14 +2,17 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dev/model/Resep.dart';
+import 'package:flutter_dev/model/user.dart';
 import 'package:flutter_dev/screen/Melihat_profile.dart';
 import 'package:flutter_dev/screen/filter_resep.dart';
 import 'package:flutter_dev/screen/input_resep.dart';
 import 'package:flutter_dev/screen/logout.dart';
 import 'package:flutter_dev/screen/meilhat_resep.dart';
+import 'package:flutter_dev/screen/meilhat_resep_senior.dart';
 import 'package:flutter_dev/widget/thumbnail_resep.dart';
 import 'package:flutter_dev/screen/alertLogout.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
 class homepage extends StatefulWidget {
   const homepage({super.key});
@@ -224,9 +227,16 @@ class tampilanfood extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return melihatResep(iniresep: iniresep);
-          }));
+          print(context.read<user>().tipe_user);
+          if (context.read<user>().tipe_user == "Cooker") {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return melihatResep(iniresep: iniresep);
+            }));
+          } else {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return melihatResepSenior(iniresep: iniresep);
+            }));
+          }
         },
         child: Container(
           margin: EdgeInsets.only(top: 20, right: 20, left: 20),

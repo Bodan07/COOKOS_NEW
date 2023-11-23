@@ -1,7 +1,10 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dev/model/Resep.dart';
+import 'package:flutter_dev/model/user.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dev/model/Profile.dart';
 import 'package:flutter_dev/widget/thumbnail_resep.dart';
@@ -14,7 +17,43 @@ class bookmarkPage extends StatefulWidget {
 }
 
 class _bookmarkPage extends State<bookmarkPage> {
+  List<Resep> listbookmark = [];
   File? image;
+
+  void initState() {
+    super.initState();
+    setState(() {
+      //getbookmark();
+    });
+  }
+
+  void getbookmark() async {
+    List<dynamic> bookmarktemp = [];
+    final usercollection = FirebaseFirestore.instance.collection('user');
+    var doc = await usercollection.doc(context.read<user>().id_user).get();
+    if (doc.exists) {
+      Map<String, dynamic> data = doc.data()!;
+      bookmarktemp = data['bookmark'];
+      print(bookmarktemp);
+
+      if (bookmarktemp.isEmpty) {
+        setState(() {
+          listbookmark = [];
+          print(listbookmark);
+        });
+      } else {
+        final resepcollection = FirebaseFirestore.instance.collection('resep');
+        QuerySnapshot resepsnapshot = await resepcollection
+            .where(FieldPath.documentId, whereIn: bookmarktemp)
+            .get();
+        setState(() {
+          listbookmark = List.from(
+              resepsnapshot.docs.map((doc) => Resep.fromSnapshot(doc)));
+          print(listbookmark);
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,10 +111,11 @@ class _bookmarkPage extends State<bookmarkPage> {
               Container(
                 child: Expanded(
                   child: ListView.builder(
-                      itemCount: listr.length,
+                      itemCount: context.watch<user>().bookmark.length,
                       itemBuilder: (context, index) {
-                        if (index <= listr.length) {
-                          final iniresep = listr[index];
+                        if (index <= context.watch<user>().bookmark.length) {
+                          final iniresep =
+                              context.watch<user>().bookmark[index];
                           return thumbnailResep(
                             iniresep: iniresep,
                           );

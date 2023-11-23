@@ -2,7 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dev/model/Resep.dart';
+import 'package:flutter_dev/model/user.dart';
 import 'package:flutter_dev/screen/meilhat_resep.dart';
+import 'package:provider/provider.dart';
 
 class thumbnailResep extends StatefulWidget {
   final Resep iniresep;
@@ -19,10 +21,14 @@ class _thumbnailResepState extends State<thumbnailResep> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
+        onTap: () async {
+          String status = await Navigator.push(context,
+              MaterialPageRoute(builder: (context) {
             return melihatResep(iniresep: widget.iniresep);
           }));
+          if (status == "bookmark") {
+            context.read<user>().fetchbookmark(context.read<user>().id_user);
+          }
         },
         child: Container(
             margin: EdgeInsets.only(top: 20, right: 20, left: 20),
@@ -31,7 +37,7 @@ class _thumbnailResepState extends State<thumbnailResep> {
             decoration: BoxDecoration(
               //color: Colors.black,
               image: DecorationImage(
-                  image: AssetImage(widget.iniresep.image),
+                  image: NetworkImage(widget.iniresep.image),
                   fit: BoxFit.cover,
                   colorFilter: ColorFilter.mode(
                       Colors.black.withOpacity(0.5), BlendMode.multiply)),

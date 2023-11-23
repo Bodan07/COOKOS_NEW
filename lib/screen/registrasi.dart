@@ -34,6 +34,8 @@ class _RegistrasiPageState extends State<Registrasi> {
       final data = {
         'username': usernameController.text,
         'email': emailController.text,
+        'tipe_user': "Cooker",
+        'bookmark': []
       };
       await docuser.doc(uid).set(data);
       context.read<Profile>().createprofile(uid);

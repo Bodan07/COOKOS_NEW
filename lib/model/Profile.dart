@@ -5,7 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'User.dart';
+import 'user.dart';
 import 'package:provider/provider.dart';
 
 class Profile extends ChangeNotifier {
@@ -60,13 +60,14 @@ class Profile extends ChangeNotifier {
     return nama;
   }
 
-  void fetchprofile() async {
+  void fetchprofile(String id) async {
     try {
       final docprofile = FirebaseFirestore.instance.collection('profile');
-      var doc = await docprofile.doc(id_user).get();
+      var doc = await docprofile.doc(id).get();
 
       if (doc.exists) {
         Map<String, dynamic> data = doc.data()!;
+        this.id_user = id;
         this.nama = data['nama'];
         this.usia = data['usia'];
         this.jenis_Kelamin = data['jenis_Kelamin'];
