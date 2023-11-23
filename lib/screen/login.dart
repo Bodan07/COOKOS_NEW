@@ -51,10 +51,11 @@ class _LoginPageState extends State<LoginPage> {
     double padding = 16.0; // Example padding value
     double devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           SizedBox(
-            height: 63,
+            height: 50,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -78,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
             ],
           ),
           SizedBox(
-            height: 42,
+            height: 20,
           ),
           Expanded(
             child: Container(
@@ -96,20 +97,31 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Container(
                       alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Welcome Back",
-                        style: TextStyle(
-                          color: const Color.fromARGB(255, 255, 255, 255), // Ubah warna teks
-                          fontSize: 60,
-                          fontWeight: FontWeight.bold
-                           // Sesuaikan ukuran teks
-                        ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Welcome",
+                            style: TextStyle(
+                              color: const Color.fromARGB(255, 255, 255, 255), // Ubah warna teks
+                              fontSize: 60,
+                              fontWeight: FontWeight.bold
+                               // Sesuaikan ukuran teks
+                            ),
+                          ),
+                          Text(
+                            "Back",
+                            style: TextStyle(
+                              color: const Color.fromARGB(255, 255, 255, 255), // Ubah warna teks
+                              fontSize: 60,
+                              fontWeight: FontWeight.bold
+                               // Sesuaikan ukuran teks
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     SizedBox(height: 20),
-                    SizedBox(
-                      height: 20,
-                    ),
                     Container(
                       margin: EdgeInsets.only(left: 29),
                     ),
@@ -122,7 +134,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     passwordForm(
                         hintText: "Passsword", controller: passwordController),
-                    SizedBox(height: 20),
                     SizedBox(height: 50),
                     //container button
                     Container(
@@ -133,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextStyle(
                             color: Colors.black, // Ubah warna teks
                             fontSize: 17,
-                            fontWeight: FontWeight.w700, // Sesuaikan ukuran teks
+                            //fontWeight: FontWeight.w700, // Sesuaikan ukuran teks
                           ),
                         ),
                         onPressed: () {
@@ -156,11 +167,11 @@ class _LoginPageState extends State<LoginPage> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
                           ),
-                          minimumSize: Size(300, 50),
+                          minimumSize: Size(170, 40),
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 10),
                     Container(
                       alignment: Alignment.center,
                       child: ElevatedButton(
@@ -169,7 +180,7 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextStyle(
                             color: Colors.black, // Ubah warna teks
                             fontSize: 17,
-                            fontWeight: FontWeight.w700, // Sesuaikan ukuran teks
+                            //fontWeight: FontWeight.w700, // Sesuaikan ukuran teks
                           ),
                         ),
                         onPressed: () {
@@ -184,11 +195,11 @@ class _LoginPageState extends State<LoginPage> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
                           ),
-                          minimumSize: Size(300, 50),
+                          minimumSize: Size(170, 40),
                         ),
                       ),
                     ),
-                    SizedBox(height: 30),
+                    SizedBox(height: 20),
                   ],
                 ),
               ),
