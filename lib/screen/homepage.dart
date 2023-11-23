@@ -32,11 +32,19 @@ class _homepageState extends State<homepage> {
 
   Future fetchresep() async {
     final collectionresep = FirebaseFirestore.instance.collection('resep');
-    var data = await collectionresep.where("verifikasi", isEqualTo: true).get();
-    setState(() {
-      listresep = List.from(data.docs.map((doc) => Resep.fromSnapshot(doc)));
-      print(listresep);
-    });
+    if (context.read<user>().tipe_user == "Cooker") {
+      var data =
+          await collectionresep.where("verifikasi", isEqualTo: true).get();
+      setState(() {
+        listresep = List.from(data.docs.map((doc) => Resep.fromSnapshot(doc)));
+      });
+    } else {
+      var data =
+          await collectionresep.where("verifikasi", isEqualTo: false).get();
+      setState(() {
+        listresep = List.from(data.docs.map((doc) => Resep.fromSnapshot(doc)));
+      });
+    }
   }
 
   void _profile() {

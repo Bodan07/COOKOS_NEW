@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dev/model/Resep.dart';
 
@@ -11,6 +12,13 @@ class melihatResepSenior extends StatefulWidget {
 
 class _melihatResepSeniorState extends State<melihatResepSenior> {
   bool isBookmarked = false;
+
+  void _verificate() async {
+    final ResepCollection =
+        FirebaseFirestore.instance.collection('resep').doc(widget.iniresep.id);
+    ResepCollection.update({'verifikasi': true});
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +75,7 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
                                   'Verificate',
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
-                                onPressed: () {},
+                                onPressed: _verificate,
                                 style: ElevatedButton.styleFrom(
                                   primary: const Color.fromARGB(255, 255, 255,
                                       255), // Ubah warna latar belakang
