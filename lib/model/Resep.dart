@@ -128,10 +128,10 @@ class Resep extends ChangeNotifier {
     }
   }
 
-  void fetchresep() async {
+  void fetchresep(String id_resep) async {
     try {
       final docprofile = FirebaseFirestore.instance.collection('resep');
-      var doc = await docprofile.doc(id).get();
+      var doc = await docprofile.doc(id_resep).get();
 
       if (doc.exists) {
         Map<String, dynamic> data = doc.data()!;
