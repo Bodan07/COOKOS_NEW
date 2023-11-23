@@ -30,7 +30,8 @@ class Resep extends ChangeNotifier {
       this.Cara_Membuat = "",
       this.Deskripsi_Masakan = "",
       this.Bahan = "",
-      this.image = "",
+      this.image =
+          "https://firebasestorage.googleapis.com/v0/b/cookos.appspot.com/o/resep%2Fdefault-resep.jpg?alt=media&token=be1c1d9b-c96a-4614-8809-9b42ea9d38cd",
       this.Verifikasi = false,
       this.bintang = 0,
       this.enak = 0,

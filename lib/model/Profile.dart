@@ -27,7 +27,7 @@ class Profile extends ChangeNotifier {
       this.jenis_Kelamin = "",
       this.tanggal_lahir = "",
       this.image =
-          "https://firebasestorage.googleapis.com/v0/b/cookos.appspot.com/o/image%2F1659338800000.jpg?alt=media&token=14112183-de2a-4048-b7bc-760561de3c79"});
+          "https://firebasestorage.googleapis.com/v0/b/cookos.appspot.com/o/profile%2Fprofile-default.jpg?alt=media&token=38acbbcf-98f5-4530-af90-3a16d1be875e"});
 
   void changeProfile(
       {required String n,

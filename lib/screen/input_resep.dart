@@ -24,8 +24,13 @@ class _inputPageState extends State<inputPage> {
   TextEditingController caraController = TextEditingController();
   String uid = FirebaseAuth.instance.currentUser!.uid;
   String imageurl = '';
-
   File? image;
+
+  @override
+  void initState() {
+    super.initState();
+    imageurl = context.read<Resep>().image;
+  }
 
   Future getImage() async {
     try {
