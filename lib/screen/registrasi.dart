@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_dev/model/Profile.dart';
+import 'package:flutter_dev/screen/Main_Page.dart';
 import 'package:flutter_dev/screen/login.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dev/widget/loginForm.dart';
@@ -30,7 +31,6 @@ class _RegistrasiPageState extends State<Registrasi> {
               email: emailController.text, password: passwordController.text);
       FirebaseAuth auth = FirebaseAuth.instance;
       String uid = auth.currentUser!.uid;
-      print(uid);
       final data = {
         'username': usernameController.text,
         'email': emailController.text,
@@ -41,7 +41,7 @@ class _RegistrasiPageState extends State<Registrasi> {
       context.read<Profile>().createprofile(uid);
       FirebaseAuth.instance.signOut();
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => LoginPage()));
+          context, MaterialPageRoute(builder: (context) => MainPage()));
     } on FirebaseAuthException catch (err) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(err.toString()),

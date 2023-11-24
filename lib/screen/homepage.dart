@@ -29,6 +29,7 @@ class _homepageState extends State<homepage> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     fetchresep();
+    print(context.watch<user>().tipe_user);
   }
 
   void fetchresep() async {
@@ -37,15 +38,21 @@ class _homepageState extends State<homepage> {
     if (context.watch<user>().tipe_user == "Cooker") {
       var data =
           await collectionresep.where("verifikasi", isEqualTo: true).get();
-      setState(() {
-        listresep = List.from(data.docs.map((doc) => Resep.fromSnapshot(doc)));
-      });
+      if (mounted) {
+        setState(() {
+          listresep =
+              List.from(data.docs.map((doc) => Resep.fromSnapshot(doc)));
+        });
+      }
     } else {
       var data =
           await collectionresep.where("verifikasi", isEqualTo: false).get();
-      setState(() {
-        listresep = List.from(data.docs.map((doc) => Resep.fromSnapshot(doc)));
-      });
+      if (mounted) {
+        setState(() {
+          listresep =
+              List.from(data.docs.map((doc) => Resep.fromSnapshot(doc)));
+        });
+      }
     }
   }
 
