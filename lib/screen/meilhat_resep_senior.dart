@@ -126,7 +126,7 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
                         color: Colors.white,
                       ),
                       onPressed: () {
-                        Navigator.pop(context);
+                        Navigator.pop(context, "");
                       },
                       iconSize: 30,
                     ),
