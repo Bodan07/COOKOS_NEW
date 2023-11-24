@@ -2,8 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dev/model/Resep.dart';
 import 'package:flutter_dev/model/filter_resep.dart';
+import 'package:flutter_dev/model/user.dart';
 import 'package:flutter_dev/screen/edit_profile.dart';
 import 'package:flutter_dev/screen/homepage.dart';
+import 'package:flutter_dev/screen/meilhat_resep.dart';
+import 'package:flutter_dev/screen/meilhat_resep_senior.dart';
+import 'package:provider/provider.dart';
 
 class filterResep extends StatefulWidget {
   const filterResep({super.key});
@@ -25,16 +29,38 @@ class _filterResepState extends State<filterResep> {
   TextEditingController harga7Controller = TextEditingController();
   TextEditingController harga8Controller = TextEditingController();
 
-  void search(String value) async {
-    var data = await FirebaseFirestore.instance.collection('resep').get();
-    setState(() {
-      List<Resep> resep =
-          List.from(data.docs.map((doc) => Resep.fromSnapshot(doc)));
-      result = resep
-          .where((element) =>
-              element.Nama_Masakan!.toLowerCase().contains(value.toLowerCase()))
-          .toList();
-    });
+  void search(String value, String tipe) async {
+    if (tipe == "Cooker") {
+      var data = await FirebaseFirestore.instance
+          .collection('resep')
+          .where('verifikasi', isEqualTo: true)
+          .get();
+
+      setState(() {
+        List<Resep> resep =
+            List.from(data.docs.map((doc) => Resep.fromSnapshot(doc)));
+        result = resep
+            .where((element) => element.Nama_Masakan!
+                .toLowerCase()
+                .contains(value.toLowerCase()))
+            .toList();
+      });
+    } else {
+      var data = await FirebaseFirestore.instance
+          .collection('resep')
+          .where('verifikasi', isEqualTo: false)
+          .get();
+
+      setState(() {
+        List<Resep> resep =
+            List.from(data.docs.map((doc) => Resep.fromSnapshot(doc)));
+        result = resep
+            .where((element) => element.Nama_Masakan!
+                .toLowerCase()
+                .contains(value.toLowerCase()))
+            .toList();
+      });
+    }
   }
 
   void _harga1() {
@@ -121,7 +147,8 @@ class _filterResepState extends State<filterResep> {
                             width: 250,
                             height: 50,
                             child: TextFormField(
-                              onChanged: (value) => search(value),
+                              onChanged: (value) =>
+                                  search(value, context.read<user>().tipe_user),
                               decoration: InputDecoration(
                                 hintText: 'eg : Baso Ikan',
                                 hintStyle: TextStyle(
@@ -611,7 +638,20 @@ class _filterResepState extends State<filterResep> {
                     itemCount: result.length,
                     itemBuilder: (context, index) => InkWell(
                           onTap: () {
-                            Navigator.pop(context);
+                            if (index <= result.length) {
+                              final iniresep = result[index];
+                              if (context.read<user>().tipe_user == "Cooker") {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return melihatResep(iniresep: iniresep);
+                                }));
+                              } else {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return melihatResepSenior(iniresep: iniresep);
+                                }));
+                              }
+                            }
                           },
                           child: ListTile(
                             contentPadding: EdgeInsets.only(top: 3.0, left: 10),

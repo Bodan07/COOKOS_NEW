@@ -243,14 +243,13 @@ class tampilanfood extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () async {
+        onTap: () {
           if (context.read<user>().tipe_user == "Cooker") {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return melihatResep(iniresep: iniresep);
             }));
           } else {
-            String status = await Navigator.push(context,
-                MaterialPageRoute(builder: (context) {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
               return melihatResepSenior(iniresep: iniresep);
             }));
           }
