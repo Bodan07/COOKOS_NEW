@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dev/model/Resep.dart';
+import 'package:flutter_dev/screen/homepage.dart';
 
 class melihatResepSenior extends StatefulWidget {
   Resep iniresep;
@@ -17,7 +18,8 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
     final ResepCollection =
         FirebaseFirestore.instance.collection('resep').doc(widget.iniresep.id);
     ResepCollection.update({'verifikasi': true});
-    Navigator.pop(context);
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => homepage()));
   }
 
   @override

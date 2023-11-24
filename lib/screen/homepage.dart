@@ -24,15 +24,17 @@ class homepage extends StatefulWidget {
 class _homepageState extends State<homepage> {
   TextEditingController profileController = TextEditingController();
   List<Resep> listresep = [];
+  String tipe = "";
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     fetchresep();
   }
 
   void fetchresep() async {
     final collectionresep = FirebaseFirestore.instance.collection('resep');
-    if (context.read<user>().tipe_user == "Cooker") {
+    //tipe = await context.read<user>().getTipe();
+    if (context.watch<user>().tipe_user == "Cooker") {
       var data =
           await collectionresep.where("verifikasi", isEqualTo: true).get();
       setState(() {
@@ -101,7 +103,7 @@ class _homepageState extends State<homepage> {
                         Container(
                           margin: EdgeInsets.only(left: 24),
                           child: Text(
-                            "Welcome Ririn",
+                            "Welcome " + context.watch<user>().username,
                             style: TextStyle(
                               color: Colors.black,
                               fontFamily: 'Poppins',
@@ -185,7 +187,6 @@ class _homepageState extends State<homepage> {
                   color: Color(0xFFE5737D),
                 ),
                 onPressed: () {
-                  print(context.read<user>().tipe_user);
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => inputPage()));
                 }),
@@ -235,14 +236,14 @@ class tampilanfood extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {
-          print(context.read<user>().tipe_user);
+        onTap: () async {
           if (context.read<user>().tipe_user == "Cooker") {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return melihatResep(iniresep: iniresep);
             }));
           } else {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
+            String status = await Navigator.push(context,
+                MaterialPageRoute(builder: (context) {
               return melihatResepSenior(iniresep: iniresep);
             }));
           }

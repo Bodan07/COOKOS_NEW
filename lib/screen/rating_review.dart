@@ -46,7 +46,6 @@ class _RatingPageState extends State<RatingPage> {
       listrating =
           List.from(data.docs.map((doc) => RatingUser.fromSnapshot(doc)));
     });
-    print(data);
   }
 
   void handleRatingChange(int newRating) {
