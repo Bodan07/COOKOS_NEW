@@ -45,6 +45,7 @@ class _inputPageState extends State<inputPage> {
   }
 
   void _unggah(File? file) async {
+    print(context.read<user>().tipe_user);
     String judul = judulController.text;
     int harga = int.parse(hargaController.text);
     String bahan = bahanController.text;
@@ -67,7 +68,6 @@ class _inputPageState extends State<inputPage> {
         uid: context.read<Profile>().nama,
         image: imageurl);
 
-    print(context.read<user>().tipe_user);
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => homepage()));
   }

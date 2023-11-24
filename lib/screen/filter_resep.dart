@@ -25,84 +25,15 @@ class _filterResepState extends State<filterResep> {
   TextEditingController harga7Controller = TextEditingController();
   TextEditingController harga8Controller = TextEditingController();
 
-  static List<FilterModel> main_filter_list = [
-    FilterModel(
-        poster_resep: "assets/images/udang.png",
-        nama_resep: "Udang",
-        nama_uploader: "Kamil",
-        rating: 9.3),
-    FilterModel(
-        poster_resep: "assets/images/udang.png",
-        nama_resep: "Baso",
-        nama_uploader: "Kamil",
-        rating: 9.3),
-    FilterModel(
-        poster_resep: "assets/images/udang.png",
-        nama_resep: "Nasi Goreng",
-        nama_uploader: "Kamil",
-        rating: 9.3),
-    FilterModel(
-        poster_resep: "assets/images/udang.png",
-        nama_resep: "Nasi Telor",
-        nama_uploader: "Kamil",
-        rating: 9.3),
-    FilterModel(
-        poster_resep: "assets/images/udang.png",
-        nama_resep: "Telor Hongkong",
-        nama_uploader: "Kamil",
-        rating: 9.3),
-    FilterModel(
-        poster_resep: "assets/images/udang.png",
-        nama_resep: "Udang",
-        nama_uploader: "Kamil",
-        rating: 9.3),
-    FilterModel(
-        poster_resep: "assets/images/udang.png",
-        nama_resep: "Baso",
-        nama_uploader: "Kamil",
-        rating: 9.3),
-    FilterModel(
-        poster_resep: "assets/images/udang.png",
-        nama_resep: "Nasi Goreng",
-        nama_uploader: "Kamil",
-        rating: 9.3),
-    FilterModel(
-        poster_resep: "assets/images/udang.png",
-        nama_resep: "Nasi Telor",
-        nama_uploader: "Kamil",
-        rating: 9.3),
-    FilterModel(
-        poster_resep: "assets/images/udang.png",
-        nama_resep: "Telor Hongkong",
-        nama_uploader: "Kamil",
-        rating: 9.3),
-  ];
-
-  List<FilterModel> display_list = List.from(main_filter_list);
-
-  // @override
-  // void initState() {
-  //   search();
-  //   super.initState();
-  // }
-
-  void updateList(String value) {
-    setState(() {
-      display_list = main_filter_list
-          .where((element) =>
-              element.nama_resep!.toLowerCase().contains(value.toLowerCase()))
-          .toList();
-    });
-  }
-
   void search(String value) async {
-    var data = await FirebaseFirestore.instance
-        .collection('resep')
-        .where('judul', isGreaterThanOrEqualTo: value.toUpperCase())
-        .where('judul', isLessThan: value.toUpperCase() + '\uf8ff')
-        .get();
+    var data = await FirebaseFirestore.instance.collection('resep').get();
     setState(() {
-      result = List.from(data.docs.map((doc) => Resep.fromSnapshot(doc)));
+      List<Resep> resep =
+          List.from(data.docs.map((doc) => Resep.fromSnapshot(doc)));
+      result = resep
+          .where((element) =>
+              element.Nama_Masakan!.toLowerCase().contains(value.toLowerCase()))
+          .toList();
     });
   }
 
