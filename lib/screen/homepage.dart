@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dev/model/Resep.dart';
+import 'package:flutter_dev/model/ratinguser.dart';
 import 'package:flutter_dev/model/user.dart';
 import 'package:flutter_dev/screen/Melihat_profile.dart';
 import 'package:flutter_dev/screen/filter_resep.dart';
@@ -24,19 +25,48 @@ class homepage extends StatefulWidget {
 class _homepageState extends State<homepage> {
   TextEditingController profileController = TextEditingController();
   List<Resep> listresep = [];
+  List<RatingUser> listrating = [];
+  String tipe = "";
   @override
-  void initState() {
-    super.initState();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     fetchresep();
+    fetchrating();
+    print(context.watch<user>().tipe_user);
   }
 
-  Future fetchresep() async {
-    final collectionresep = FirebaseFirestore.instance.collection('resep');
-    var data = await collectionresep.where("verifikasi", isEqualTo: true).get();
+  void fetchrating() async {
+    final ratingreviewcollection =
+        FirebaseFirestore.instance.collection('ratingreview');
+    var data = await ratingreviewcollection.get();
     setState(() {
-      listresep = List.from(data.docs.map((doc) => Resep.fromSnapshot(doc)));
-      print(listresep);
+      listrating =
+          List.from(data.docs.map((doc) => RatingUser.fromSnapshot(doc)));
     });
+  }
+
+  void fetchresep() async {
+    final collectionresep = FirebaseFirestore.instance.collection('resep');
+    //tipe = await context.read<user>().getTipe();
+    if (context.watch<user>().tipe_user == "Cooker") {
+      var data =
+          await collectionresep.where("verifikasi", isEqualTo: true).get();
+      if (mounted) {
+        setState(() {
+          listresep =
+              List.from(data.docs.map((doc) => Resep.fromSnapshot(doc)));
+        });
+      }
+    } else {
+      var data =
+          await collectionresep.where("verifikasi", isEqualTo: false).get();
+      if (mounted) {
+        setState(() {
+          listresep =
+              List.from(data.docs.map((doc) => Resep.fromSnapshot(doc)));
+        });
+      }
+    }
   }
 
   void _profile() {
@@ -93,7 +123,7 @@ class _homepageState extends State<homepage> {
                         Container(
                           margin: EdgeInsets.only(left: 24),
                           child: Text(
-                            "Welcome Ririn",
+                            "Welcome " + context.watch<user>().username,
                             style: TextStyle(
                               color: Colors.black,
                               fontFamily: 'Poppins',
@@ -143,8 +173,15 @@ class _homepageState extends State<homepage> {
                   itemCount: listresep.length,
                   itemBuilder: (context, index) {
                     if (index <= listresep.length) {
+                      final totalrating = listrating
+                          .where((element) =>
+                              element.id_resep.contains(listresep[index].id))
+                          .length;
                       final iniresep = listresep[index];
-                      return tampilanfood(iniresep: iniresep);
+                      return tampilanfood(
+                        iniresep: iniresep,
+                        totalrating: totalrating,
+                      );
                     }
                   }),
             ),
@@ -217,17 +254,16 @@ class _homepageState extends State<homepage> {
 }
 
 class tampilanfood extends StatelessWidget {
+  final int totalrating;
   final Resep iniresep;
-  const tampilanfood({
-    Key? key,
-    required this.iniresep,
-  }) : super(key: key);
+  const tampilanfood(
+      {Key? key, required this.iniresep, required this.totalrating})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          print(context.read<user>().tipe_user);
           if (context.read<user>().tipe_user == "Cooker") {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return melihatResep(iniresep: iniresep);
@@ -314,7 +350,10 @@ class tampilanfood extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          iniresep.bintang.toString(),
+                          (iniresep.bintang / totalrating).isNaN
+                              ? "0"
+                              : (iniresep.bintang / totalrating)
+                                  .toStringAsFixed(1),
                           style: TextStyle(
                               fontFamily: "Poppins",
                               fontSize: 14.38,

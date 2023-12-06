@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dev/model/Resep.dart';
+import 'package:flutter_dev/screen/homepage.dart';
 
 class melihatResepSenior extends StatefulWidget {
   Resep iniresep;
@@ -12,16 +14,12 @@ class melihatResepSenior extends StatefulWidget {
 class _melihatResepSeniorState extends State<melihatResepSenior> {
   bool isBookmarked = false;
 
-  void toggleBookmark() {
-    setState(() {
-      isBookmarked = !isBookmarked;
-      if (isBookmarked) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("Resep berhasil di verificate"),
-          behavior: SnackBarBehavior.floating,
-        ));
-      }
-    });
+  void _verificate() async {
+    final ResepCollection =
+        FirebaseFirestore.instance.collection('resep').doc(widget.iniresep.id);
+    ResepCollection.update({'verifikasi': true});
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => homepage()));
   }
 
   @override
@@ -50,7 +48,8 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
                                 Container(
                                     margin: EdgeInsets.only(left: 20),
                                     child: Text(
-                                      "Udang Goreng Asam", //diisi nama resep
+                                      widget.iniresep
+                                          .Nama_Masakan, //diisi nama resep
                                       style: TextStyle(
                                           fontFamily: 'Poppins',
                                           fontWeight: FontWeight.bold,
@@ -60,7 +59,8 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
                                 Container(
                                   margin: EdgeInsets.only(left: 20, bottom: 20),
                                   child: Text(
-                                    'Rinrin Marinka', //disi nama uploader
+                                    widget.iniresep
+                                        .Deskripsi_Masakan, //disi nama uploader
                                     style: TextStyle(
                                         fontFamily: 'Poppins',
                                         fontSize: 15,
@@ -77,7 +77,7 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
                                   'Verificate',
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
-                                onPressed: () {},
+                                onPressed: _verificate,
                                 style: ElevatedButton.styleFrom(
                                   primary: const Color.fromARGB(255, 255, 255,
                                       255), // Ubah warna latar belakang
@@ -111,8 +111,8 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
                   ),
                   Container(
                       height: 260,
-                      child: Image.asset(
-                        'assets/images/udang.png',
+                      child: Image.network(
+                        widget.iniresep.image,
                         fit: BoxFit.cover,
                       ) //Diisi gambar resep database
                       ),
@@ -125,7 +125,9 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
                         Icons.arrow_back_ios,
                         color: Colors.white,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context, "");
+                      },
                       iconSize: 30,
                     ),
                   ),
@@ -158,7 +160,9 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
                                       color: Color.fromARGB(50, 0, 0, 0),
                                       width: 2))),
                         ),
-                        Container(child: Text('isi')) //isi dari database
+                        Container(
+                            child:
+                                Text(widget.iniresep.Bahan)) //isi dari database
                       ],
                     ),
                     decoration: BoxDecoration(
@@ -190,7 +194,9 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
                                       color: Color.fromARGB(50, 0, 0, 0),
                                       width: 2))),
                         ),
-                        Container(child: Text('isi')) //isi dari database
+                        Container(
+                            child: Text(widget
+                                .iniresep.Cara_Membuat)) //isi dari database
                       ],
                     ),
                     decoration: BoxDecoration(
@@ -226,7 +232,7 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
                         Container(
                             margin: EdgeInsets.only(right: 20),
                             child: Text(
-                              'Rp 60.000,-',
+                              'Rp ' + widget.iniresep.Budget.toString() + ',-',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ))
                       ],
