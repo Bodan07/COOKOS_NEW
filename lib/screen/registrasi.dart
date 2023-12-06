@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_dev/model/Profile.dart';
+import 'package:flutter_dev/screen/Main_Page.dart';
 import 'package:flutter_dev/screen/login.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dev/widget/loginForm.dart';
@@ -30,7 +31,6 @@ class _RegistrasiPageState extends State<Registrasi> {
               email: emailController.text, password: passwordController.text);
       FirebaseAuth auth = FirebaseAuth.instance;
       String uid = auth.currentUser!.uid;
-      print(uid);
       final data = {
         'username': usernameController.text,
         'email': emailController.text,
@@ -41,12 +41,13 @@ class _RegistrasiPageState extends State<Registrasi> {
       context.read<Profile>().createprofile(uid);
       FirebaseAuth.instance.signOut();
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => LoginPage()));
+          context, MaterialPageRoute(builder: (context) => MainPage()));
     } on FirebaseAuthException catch (err) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(err.toString()),
         behavior: SnackBarBehavior.floating,
       ));
+      print(err.code);
     }
   }
 
@@ -166,53 +167,6 @@ class _RegistrasiPageState extends State<Registrasi> {
                       ),
                     ),
                     SizedBox(height: 10),
-                    Container(
-                      width: double.infinity,
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'or register with',
-                        style: TextStyle(
-                            color: Colors.white,
-                            letterSpacing: 1,
-                            fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    Container(
-                      alignment: Alignment.center,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: Container(
-                          width: 140,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                "assets/images/google_logo.png",
-                                width: 20,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text("Google")
-                            ],
-                          ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          primary: const Color.fromARGB(
-                              255, 255, 255, 255), // Ubah warna latar belakang
-                          onPrimary: const Color.fromARGB(
-                              255, 0, 0, 0), // Ubah warna teks
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          minimumSize: Size(170, 40),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

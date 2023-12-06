@@ -30,7 +30,8 @@ class Resep extends ChangeNotifier {
       this.Cara_Membuat = "",
       this.Deskripsi_Masakan = "",
       this.Bahan = "",
-      this.image = "",
+      this.image =
+          "https://firebasestorage.googleapis.com/v0/b/cookos.appspot.com/o/resep%2Fdefault-resep.jpg?alt=media&token=be1c1d9b-c96a-4614-8809-9b42ea9d38cd",
       this.Verifikasi = false,
       this.bintang = 0,
       this.enak = 0,
@@ -79,7 +80,7 @@ class Resep extends ChangeNotifier {
         'harga': harga,
         'cara_membuat': cara,
         'pembuat': uid,
-        'judul': judul,
+        'judul': judul.toUpperCase(),
         'verifikasi': false,
         'bintang': 0.0,
         'enak': 0,
@@ -128,10 +129,10 @@ class Resep extends ChangeNotifier {
     }
   }
 
-  void fetchresep() async {
+  void fetchresep(String id_resep) async {
     try {
       final docprofile = FirebaseFirestore.instance.collection('resep');
-      var doc = await docprofile.doc(id).get();
+      var doc = await docprofile.doc(id_resep).get();
 
       if (doc.exists) {
         Map<String, dynamic> data = doc.data()!;

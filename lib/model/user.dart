@@ -83,10 +83,10 @@ class user extends ChangeNotifier {
 
       if (doc.exists) {
         Map<String, dynamic> data = doc.data()!;
-        this.id_user = id;
-        this.username = data['username'];
-        this.email = data['email'];
-        this.tipe_user = data['tipe_user'];
+        id_user = id;
+        username = data['username'];
+        email = data['email'];
+        tipe_user = data['tipe_user'];
         notifyListeners();
       }
     } catch (error) {

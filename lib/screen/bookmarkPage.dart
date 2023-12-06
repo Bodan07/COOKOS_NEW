@@ -23,7 +23,7 @@ class _bookmarkPage extends State<bookmarkPage> {
   void initState() {
     super.initState();
     setState(() {
-      //getbookmark();
+      context.read<user>().fetchbookmark(context.read<user>().id_user);
     });
   }
 
