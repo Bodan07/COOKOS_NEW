@@ -74,6 +74,8 @@ class Profile extends ChangeNotifier {
         this.tanggal_lahir = data['tanggal_lahir'];
         this.image = data['image'];
         notifyListeners();
+        print("imageee");
+        print(this.image);
       }
     } catch (error) {
       print(error);
@@ -84,11 +86,12 @@ class Profile extends ChangeNotifier {
     try {
       final docprofile = FirebaseFirestore.instance.collection('profile');
       final data = {
-        'nama': this.nama,
-        'usia': this.usia,
-        'jenis_Kelamin': this.jenis_Kelamin,
-        'tanggal_lahir': this.tanggal_lahir,
-        'image': this.image,
+        'nama': "",
+        'usia': 0,
+        'jenis_Kelamin': "",
+        'tanggal_lahir': "",
+        'image':
+            "https://firebasestorage.googleapis.com/v0/b/cookos.appspot.com/o/profile%2Fprofile-default.jpg?alt=media&token=38acbbcf-98f5-4530-af90-3a16d1be875e",
       };
       await docprofile.doc(uid).set(data);
     } on FirebaseException catch (error) {
