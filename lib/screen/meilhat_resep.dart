@@ -39,7 +39,6 @@ class _melihatResepState extends State<melihatResep> {
   }
 
   void menujuRating() {
-    context.read<Resep>().fetchresep(widget.iniresep.id);
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return RatingPage(iniresep: widget.iniresep);
     }));
@@ -303,7 +302,7 @@ class _melihatResepState extends State<melihatResep> {
                       Container(
                           margin: EdgeInsets.only(right: 20),
                           child: Text(
-                            'Rp ' + widget.iniresep.Budget.toString() + ',-',
+                            'Rp 60.000,-',
                             style: TextStyle(fontWeight: FontWeight.bold),
                           ))
                     ],

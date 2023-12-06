@@ -32,11 +32,12 @@ class _RatingPageState extends State<RatingPage> {
   @override
   void initState() {
     super.initState();
-    context.read<Resep>().fetchresep(widget.iniresep.id);
+    widget.iniresep.fetchresep();
     fetchrating();
   }
 
   void fetchrating() async {
+    widget.iniresep.fetchresep();
     final ratingreviewcollection =
         FirebaseFirestore.instance.collection('ratingreview');
     var data = await ratingreviewcollection
@@ -46,6 +47,7 @@ class _RatingPageState extends State<RatingPage> {
       listrating =
           List.from(data.docs.map((doc) => RatingUser.fromSnapshot(doc)));
     });
+    print(data);
   }
 
   void handleRatingChange(int newRating) {
@@ -146,7 +148,7 @@ class _RatingPageState extends State<RatingPage> {
                           child: Column(
                             children: [
                               Text(
-                                ((context.watch<Resep>().bintang /
+                                ((widget.iniresep.bintang /
                                             listrating.length.toDouble())
                                         .toStringAsFixed(1))
                                     .toString(),
@@ -167,7 +169,7 @@ class _RatingPageState extends State<RatingPage> {
                         Container(
                           margin: EdgeInsets.only(right: 20),
                           child: ShowRatingStars(
-                              rating: context.watch<Resep>().bintang /
+                              rating: widget.iniresep.bintang /
                                   listrating.length
                                       .toDouble()), //angka diubah dari database
                         ),
@@ -201,7 +203,7 @@ class _RatingPageState extends State<RatingPage> {
                                       fontFamily: 'Nuito Sans',
                                       fontWeight: FontWeight.bold),
                                 ),
-                                Text(context.watch<Resep>().enak.toString() +
+                                Text(widget.iniresep.enak.toString() +
                                     ' rating') // diisi dari databasse
                               ]),
                           decoration: BoxDecoration(
@@ -233,7 +235,7 @@ class _RatingPageState extends State<RatingPage> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              Text(context.watch<Resep>().murah.toString() +
+                              Text(widget.iniresep.murah.toString() +
                                   ' rating'), //diisi database
                             ],
                           ),
@@ -265,7 +267,7 @@ class _RatingPageState extends State<RatingPage> {
                                     fontFamily: 'Nuito Sans',
                                     fontWeight: FontWeight.bold),
                               ),
-                              Text(context.watch<Resep>().praktis.toString() +
+                              Text(widget.iniresep.praktis.toString() +
                                   ' rating'), //diisi database
                             ],
                           ),

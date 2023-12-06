@@ -1,13 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dev/model/Resep.dart';
 import 'package:flutter_dev/model/filter_resep.dart';
-import 'package:flutter_dev/model/user.dart';
 import 'package:flutter_dev/screen/edit_profile.dart';
 import 'package:flutter_dev/screen/homepage.dart';
-import 'package:flutter_dev/screen/meilhat_resep.dart';
-import 'package:flutter_dev/screen/meilhat_resep_senior.dart';
-import 'package:provider/provider.dart';
 
 class filterResep extends StatefulWidget {
   const filterResep({super.key});
@@ -17,8 +11,6 @@ class filterResep extends StatefulWidget {
 }
 
 class _filterResepState extends State<filterResep> {
-  List<Resep> result = [];
-
   TextEditingController cariresepController = TextEditingController();
   TextEditingController harga1Controller = TextEditingController();
   TextEditingController harga2Controller = TextEditingController();
@@ -29,38 +21,68 @@ class _filterResepState extends State<filterResep> {
   TextEditingController harga7Controller = TextEditingController();
   TextEditingController harga8Controller = TextEditingController();
 
-  void search(String value, String tipe) async {
-    if (tipe == "Cooker") {
-      var data = await FirebaseFirestore.instance
-          .collection('resep')
-          .where('verifikasi', isEqualTo: true)
-          .get();
+  static List<FilterModel> main_filter_list = [
+    FilterModel(
+        poster_resep: "assets/images/udang.png",
+        nama_resep: "Udang",
+        nama_uploader: "Kamil",
+        rating: 9.3),
+    FilterModel(
+        poster_resep: "assets/images/udang.png",
+        nama_resep: "Baso",
+        nama_uploader: "Kamil",
+        rating: 9.3),
+    FilterModel(
+        poster_resep: "assets/images/udang.png",
+        nama_resep: "Nasi Goreng",
+        nama_uploader: "Kamil",
+        rating: 9.3),
+    FilterModel(
+        poster_resep: "assets/images/udang.png",
+        nama_resep: "Nasi Telor",
+        nama_uploader: "Kamil",
+        rating: 9.3),
+    FilterModel(
+        poster_resep: "assets/images/udang.png",
+        nama_resep: "Telor Hongkong",
+        nama_uploader: "Kamil",
+        rating: 9.3),
+    FilterModel(
+        poster_resep: "assets/images/udang.png",
+        nama_resep: "Udang",
+        nama_uploader: "Kamil",
+        rating: 9.3),
+    FilterModel(
+        poster_resep: "assets/images/udang.png",
+        nama_resep: "Baso",
+        nama_uploader: "Kamil",
+        rating: 9.3),
+    FilterModel(
+        poster_resep: "assets/images/udang.png",
+        nama_resep: "Nasi Goreng",
+        nama_uploader: "Kamil",
+        rating: 9.3),
+    FilterModel(
+        poster_resep: "assets/images/udang.png",
+        nama_resep: "Nasi Telor",
+        nama_uploader: "Kamil",
+        rating: 9.3),
+    FilterModel(
+        poster_resep: "assets/images/udang.png",
+        nama_resep: "Telor Hongkong",
+        nama_uploader: "Kamil",
+        rating: 9.3),
+  ];
 
-      setState(() {
-        List<Resep> resep =
-            List.from(data.docs.map((doc) => Resep.fromSnapshot(doc)));
-        result = resep
-            .where((element) => element.Nama_Masakan!
-                .toLowerCase()
-                .contains(value.toLowerCase()))
-            .toList();
-      });
-    } else {
-      var data = await FirebaseFirestore.instance
-          .collection('resep')
-          .where('verifikasi', isEqualTo: false)
-          .get();
+  List<FilterModel> display_list = List.from(main_filter_list);
 
-      setState(() {
-        List<Resep> resep =
-            List.from(data.docs.map((doc) => Resep.fromSnapshot(doc)));
-        result = resep
-            .where((element) => element.Nama_Masakan!
-                .toLowerCase()
-                .contains(value.toLowerCase()))
-            .toList();
-      });
-    }
+  void updateList(String value) {
+    setState(() {
+      display_list = main_filter_list
+          .where((element) =>
+              element.nama_resep!.toLowerCase().contains(value.toLowerCase()))
+          .toList();
+    });
   }
 
   void _harga1() {
@@ -147,8 +169,7 @@ class _filterResepState extends State<filterResep> {
                             width: 250,
                             height: 50,
                             child: TextFormField(
-                              onChanged: (value) =>
-                                  search(value, context.read<user>().tipe_user),
+                              onChanged: (value) => updateList(value),
                               decoration: InputDecoration(
                                 hintText: 'eg : Baso Ikan',
                                 hintStyle: TextStyle(
@@ -623,7 +644,7 @@ class _filterResepState extends State<filterResep> {
           )),
           //buat list view builder filter resep
           Expanded(
-            child: result.length == 0
+            child: display_list.length == 0
                 ? Center(
                     child: Text(
                       "Resep Tidak Ada",
@@ -635,28 +656,15 @@ class _filterResepState extends State<filterResep> {
                     ),
                   )
                 : ListView.builder(
-                    itemCount: result.length,
+                    itemCount: display_list.length,
                     itemBuilder: (context, index) => InkWell(
                           onTap: () {
-                            if (index <= result.length) {
-                              final iniresep = result[index];
-                              if (context.read<user>().tipe_user == "Cooker") {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return melihatResep(iniresep: iniresep);
-                                }));
-                              } else {
-                                Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
-                                  return melihatResepSenior(iniresep: iniresep);
-                                }));
-                              }
-                            }
+                            Navigator.pop(context);
                           },
                           child: ListTile(
                             contentPadding: EdgeInsets.only(top: 3.0, left: 10),
                             title: Text(
-                              result[index].Nama_Masakan,
+                              display_list[index].nama_resep!,
                               style: TextStyle(
                                   fontFamily: 'Poppins',
                                   fontSize: 14,
@@ -664,7 +672,7 @@ class _filterResepState extends State<filterResep> {
                                   color: Color(0xff393939)),
                             ),
                             subtitle: Text(
-                              result[index].Deskripsi_Masakan,
+                              display_list[index].nama_uploader!,
                               style: TextStyle(
                                   fontFamily: 'Poppins',
                                   fontSize: 12,
@@ -674,7 +682,7 @@ class _filterResepState extends State<filterResep> {
                             trailing: Padding(
                               padding: EdgeInsets.only(right: 10),
                               child: Text(
-                                result[index].bintang.toString(),
+                                display_list[index].rating.toString(),
                                 style: TextStyle(
                                     fontFamily: 'Poppins',
                                     fontSize: 12,
@@ -688,7 +696,8 @@ class _filterResepState extends State<filterResep> {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   image: DecorationImage(
-                                      image: NetworkImage(result[index].image),
+                                      image: AssetImage(
+                                          display_list[index].poster_resep!),
                                       fit: BoxFit.cover)),
                             ),
                           ),

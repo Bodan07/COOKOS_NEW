@@ -53,11 +53,10 @@ class _LoginPageState extends State<LoginPage> {
     double padding = 16.0; // Example padding value
     double devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           SizedBox(
-            height: 50,
+            height: 63,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -94,39 +93,25 @@ class _LoginPageState extends State<LoginPage> {
                 margin: EdgeInsets.all(15),
                 child: Column(
                   crossAxisAlignment:
-                      CrossAxisAlignment.start, // Ubah ini menjadi 'start'
+                      CrossAxisAlignment.center, // Ubah ini menjadi 'start'
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
                       alignment: Alignment.centerLeft,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Welcome",
-                                  style: TextStyle(
-                                      fontSize: 45,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                                Text(
-                                  "Back",
-                                  style: TextStyle(
-                                      fontSize: 45,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w700),
-                                ),
-                              ],
+                      child: Text(
+                        "Welcome Back",
+                        style: TextStyle(
+                            color: const Color.fromARGB(
+                                255, 255, 255, 255), // Ubah warna teks
+                            fontSize: 60,
+                            fontWeight: FontWeight.bold
+                            // Sesuaikan ukuran teks
                             ),
-                          ),
-                        ],
                       ),
+                    ),
+                    SizedBox(height: 20),
+                    SizedBox(
+                      height: 20,
                     ),
                     Container(
                       margin: EdgeInsets.only(left: 29),
@@ -141,12 +126,19 @@ class _LoginPageState extends State<LoginPage> {
                     passwordForm(
                         hintText: "Passsword", controller: passwordController),
                     SizedBox(height: 20),
+                    SizedBox(height: 50),
                     //container button
                     Container(
                       alignment: Alignment.center,
                       child: ElevatedButton(
                         child: Text(
                           'Sign In',
+                          style: TextStyle(
+                            color: Colors.black, // Ubah warna teks
+                            fontSize: 17,
+                            fontWeight:
+                                FontWeight.w700, // Sesuaikan ukuran teks
+                          ),
                         ),
                         onPressed: () {
                           if (emailController.text == "" &&
@@ -168,40 +160,42 @@ class _LoginPageState extends State<LoginPage> {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
                           ),
-                          minimumSize: Size(170, 40),
+                          minimumSize: Size(300, 50),
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Already have an account?",
+                    SizedBox(height: 20),
+                    Container(
+                      alignment: Alignment.center,
+                      child: ElevatedButton(
+                        child: Text(
+                          'Create Account',
                           style: TextStyle(
-                              color: Colors.white,
-                              letterSpacing: 1,
-                              fontWeight: FontWeight.w700),
-                        ),
-                        const SizedBox(
-                          width: 4,
-                        ),
-                        InkWell(
-                          child: const Text(
-                            'Register',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                letterSpacing: 0.5),
+                            color: Colors.black, // Ubah warna teks
+                            fontSize: 17,
+                            fontWeight:
+                                FontWeight.w700, // Sesuaikan ukuran teks
                           ),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Registrasi()));
-                          },
-                        )
-                      ],
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Registrasi()));
+                        },
+                        style: ElevatedButton.styleFrom(
+                          primary: const Color.fromARGB(
+                              255, 255, 255, 255), // Ubah warna latar belakang
+                          onPrimary: const Color.fromARGB(
+                              255, 0, 0, 0), // Ubah warna teks
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          minimumSize: Size(300, 50),
+                        ),
+                      ),
                     ),
+                    SizedBox(height: 30),
                   ],
                 ),
               ),

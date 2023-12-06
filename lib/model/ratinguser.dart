@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 
@@ -9,12 +8,11 @@ class RatingUser extends ChangeNotifier {
   String nama;
   String komentar;
 
-  RatingUser({
-    this.id_resep = "",
-    this.bintang = 0,
-    this.komentar = "",
-    this.nama = "",
-  });
+  RatingUser(
+      {this.id_resep = "",
+      this.bintang = 0,
+      this.komentar = "",
+      this.nama = ""});
 
   Map<String, dynamic> toJson() => {
         'id_resep': id_resep,
@@ -44,7 +42,7 @@ class RatingUser extends ChangeNotifier {
         'id_resep': id,
         'bintang': bintang,
         'nama': nama,
-        'komentar': komentar,
+        'komentar': komentar
       };
       await docrating.add(data);
     } catch (error) {}
