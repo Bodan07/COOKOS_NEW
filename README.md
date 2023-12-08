@@ -1,2 +1,2 @@
 # COOKOS_NEW
-Cookos lastest update
+Cookos latest update
