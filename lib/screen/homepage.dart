@@ -39,10 +39,12 @@ class _homepageState extends State<homepage> {
     final ratingreviewcollection =
         FirebaseFirestore.instance.collection('ratingreview');
     var data = await ratingreviewcollection.get();
-    setState(() {
-      listrating =
-          List.from(data.docs.map((doc) => RatingUser.fromSnapshot(doc)));
-    });
+    if (mounted) {
+      setState(() {
+        listrating =
+            List.from(data.docs.map((doc) => RatingUser.fromSnapshot(doc)));
+      });
+    }
   }
 
   void fetchresep() async {
