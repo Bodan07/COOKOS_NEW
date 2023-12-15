@@ -7,6 +7,7 @@ import 'package:flutter_dev/screen/edit_profile.dart';
 import 'package:flutter_dev/screen/homepage.dart';
 import 'package:flutter_dev/screen/meilhat_resep.dart';
 import 'package:flutter_dev/screen/meilhat_resep_senior.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class filterResep extends StatefulWidget {
@@ -65,34 +66,72 @@ class _filterResepState extends State<filterResep> {
 
   void _harga1() {
     String harga1 = harga1Controller.text;
+    setState(() {
+      result = result
+          .where((element) => element.Budget >= 8000 && element.Budget < 15000)
+          .toList();
+    });
   }
 
   void _harga2() {
     String harga2 = harga2Controller.text;
+    setState(() {
+      result = result
+          .where((element) => element.Budget >= 15000 && element.Budget < 30000)
+          .toList();
+    });
   }
 
   void _harga3() {
     String harga3 = harga3Controller.text;
+    setState(() {
+      result = result
+          .where((element) => element.Budget >= 30000 && element.Budget < 40000)
+          .toList();
+    });
   }
 
   void _harga4() {
     String harga4 = harga4Controller.text;
+    setState(() {
+      result = result
+          .where((element) => element.Budget >= 40000 && element.Budget < 50000)
+          .toList();
+    });
   }
 
   void _harga5() {
     String harga5 = harga5Controller.text;
+    setState(() {
+      result = result
+          .where((element) => element.Budget >= 50000 && element.Budget < 60000)
+          .toList();
+    });
   }
 
   void _harga6() {
     String harga6 = harga6Controller.text;
+    setState(() {
+      result = result
+          .where((element) => element.Budget >= 60000 && element.Budget < 70000)
+          .toList();
+    });
   }
 
   void _harga7() {
     String harga7 = harga7Controller.text;
+    setState(() {
+      result = result
+          .where((element) => element.Budget >= 70000 && element.Budget < 80000)
+          .toList();
+    });
   }
 
   void _harga8() {
     String harga8 = harga8Controller.text;
+    setState(() {
+      result = result.where((element) => element.Budget > 80000).toList();
+    });
   }
 
   @override
