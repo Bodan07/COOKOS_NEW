@@ -19,6 +19,14 @@ class filterResep extends StatefulWidget {
 
 class _filterResepState extends State<filterResep> {
   List<Resep> result = [];
+  bool isButton1Pressed = false;
+  bool isButton2Pressed = false;
+  bool isButton3Pressed = false;
+  bool isButton4Pressed = false;
+  bool isButton5Pressed = false;
+  bool isButton6Pressed = false;
+  bool isButton7Pressed = false;
+  bool isButton8Pressed = false;
 
   TextEditingController cariresepController = TextEditingController();
   TextEditingController harga1Controller = TextEditingController();
@@ -67,6 +75,14 @@ class _filterResepState extends State<filterResep> {
   void _harga1() {
     String harga1 = harga1Controller.text;
     setState(() {
+      isButton1Pressed = !isButton1Pressed;
+      isButton2Pressed = false;
+      isButton3Pressed = false;
+      isButton4Pressed = false;
+      isButton5Pressed = false;
+      isButton6Pressed = false;
+      isButton7Pressed = false;
+      isButton8Pressed = false;
       result = result
           .where((element) => element.Budget >= 8000 && element.Budget < 15000)
           .toList();
@@ -76,6 +92,14 @@ class _filterResepState extends State<filterResep> {
   void _harga2() {
     String harga2 = harga2Controller.text;
     setState(() {
+      isButton1Pressed = false;
+      isButton2Pressed = !isButton2Pressed;
+      isButton3Pressed = false;
+      isButton4Pressed = false;
+      isButton5Pressed = false;
+      isButton6Pressed = false;
+      isButton7Pressed = false;
+      isButton8Pressed = false;
       result = result
           .where((element) => element.Budget >= 15000 && element.Budget < 30000)
           .toList();
@@ -85,6 +109,14 @@ class _filterResepState extends State<filterResep> {
   void _harga3() {
     String harga3 = harga3Controller.text;
     setState(() {
+      isButton1Pressed = false;
+      isButton2Pressed = false;
+      isButton3Pressed = !isButton3Pressed;
+      isButton4Pressed = false;
+      isButton5Pressed = false;
+      isButton6Pressed = false;
+      isButton7Pressed = false;
+      isButton8Pressed = false;
       result = result
           .where((element) => element.Budget >= 30000 && element.Budget < 40000)
           .toList();
@@ -94,6 +126,14 @@ class _filterResepState extends State<filterResep> {
   void _harga4() {
     String harga4 = harga4Controller.text;
     setState(() {
+      isButton1Pressed = false;
+      isButton2Pressed = false;
+      isButton3Pressed = false;
+      isButton4Pressed = !isButton4Pressed;
+      isButton5Pressed = false;
+      isButton6Pressed = false;
+      isButton7Pressed = false;
+      isButton8Pressed = false;
       result = result
           .where((element) => element.Budget >= 40000 && element.Budget < 50000)
           .toList();
@@ -103,6 +143,14 @@ class _filterResepState extends State<filterResep> {
   void _harga5() {
     String harga5 = harga5Controller.text;
     setState(() {
+      isButton1Pressed = false;
+      isButton2Pressed = false;
+      isButton3Pressed = false;
+      isButton4Pressed = false;
+      isButton5Pressed = !isButton5Pressed;
+      isButton6Pressed = false;
+      isButton7Pressed = false;
+      isButton8Pressed = false;
       result = result
           .where((element) => element.Budget >= 50000 && element.Budget < 60000)
           .toList();
@@ -112,6 +160,14 @@ class _filterResepState extends State<filterResep> {
   void _harga6() {
     String harga6 = harga6Controller.text;
     setState(() {
+      isButton1Pressed = false;
+      isButton2Pressed = false;
+      isButton3Pressed = false;
+      isButton4Pressed = false;
+      isButton5Pressed = false;
+      isButton6Pressed = !isButton6Pressed;
+      isButton7Pressed = false;
+      isButton8Pressed = false;
       result = result
           .where((element) => element.Budget >= 60000 && element.Budget < 70000)
           .toList();
@@ -121,6 +177,14 @@ class _filterResepState extends State<filterResep> {
   void _harga7() {
     String harga7 = harga7Controller.text;
     setState(() {
+      isButton1Pressed = false;
+      isButton2Pressed = false;
+      isButton3Pressed = false;
+      isButton4Pressed = false;
+      isButton5Pressed = false;
+      isButton6Pressed = false;
+      isButton7Pressed = !isButton7Pressed;
+      isButton8Pressed = false;
       result = result
           .where((element) => element.Budget >= 70000 && element.Budget < 80000)
           .toList();
@@ -130,6 +194,14 @@ class _filterResepState extends State<filterResep> {
   void _harga8() {
     String harga8 = harga8Controller.text;
     setState(() {
+      isButton1Pressed = false;
+      isButton2Pressed = false;
+      isButton3Pressed = false;
+      isButton4Pressed = false;
+      isButton5Pressed = false;
+      isButton6Pressed = false;
+      isButton7Pressed = false;
+      isButton8Pressed = !isButton8Pressed;
       result = result.where((element) => element.Budget > 80000).toList();
     });
   }
@@ -281,8 +353,11 @@ class _filterResepState extends State<filterResep> {
                                                                         'Poppins',
                                                                     fontSize:
                                                                         13,
-                                                                    color: Color(
-                                                                        0xff393939)),
+                                                                    color: isButton1Pressed
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Color(
+                                                                            0xff393939)),
                                                               ),
                                                             ),
                                                             style:
@@ -290,8 +365,11 @@ class _filterResepState extends State<filterResep> {
                                                                     .styleFrom(
                                                               shadowColor:
                                                                   Colors.black,
-                                                              primary: Color(
-                                                                  0xffFDFDFD), // Set the shadow color
+                                                              primary: isButton1Pressed
+                                                                  ? Color(
+                                                                      0xffe5737d)
+                                                                  : Colors
+                                                                      .white, // Set the shadow color
                                                               elevation:
                                                                   5, // Adjust the elevation to control the shadow intensity
                                                               shape:
@@ -326,8 +404,11 @@ class _filterResepState extends State<filterResep> {
                                                                         'Poppins',
                                                                     fontSize:
                                                                         13,
-                                                                    color: Color(
-                                                                        0xff393939)),
+                                                                    color: isButton3Pressed
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Color(
+                                                                            0xff393939)),
                                                               ),
                                                             ),
                                                             style:
@@ -335,8 +416,11 @@ class _filterResepState extends State<filterResep> {
                                                                     .styleFrom(
                                                               shadowColor:
                                                                   Colors.black,
-                                                              primary: Color(
-                                                                  0xffFDFDFD), // Set the shadow color
+                                                              primary: isButton3Pressed
+                                                                  ? Color(
+                                                                      0xffe5737d)
+                                                                  : Colors
+                                                                      .white, // Set the shadow color
                                                               elevation:
                                                                   5, // Adjust the elevation to control the shadow intensity
                                                               shape:
@@ -370,8 +454,11 @@ class _filterResepState extends State<filterResep> {
                                                                         'Poppins',
                                                                     fontSize:
                                                                         13,
-                                                                    color: Color(
-                                                                        0xff393939)),
+                                                                    color: isButton5Pressed
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Color(
+                                                                            0xff393939)),
                                                               ),
                                                             ),
                                                             style:
@@ -379,8 +466,11 @@ class _filterResepState extends State<filterResep> {
                                                                     .styleFrom(
                                                               shadowColor:
                                                                   Colors.black,
-                                                              primary: Color(
-                                                                  0xffFDFDFD), // Set the shadow color
+                                                              primary: isButton5Pressed
+                                                                  ? Color(
+                                                                      0xffe5737d)
+                                                                  : Colors
+                                                                      .white, // Set the shadow color
                                                               elevation:
                                                                   5, // Adjust the elevation to control the shadow intensity
                                                               shape:
@@ -414,8 +504,11 @@ class _filterResepState extends State<filterResep> {
                                                                         'Poppins',
                                                                     fontSize:
                                                                         13,
-                                                                    color: Color(
-                                                                        0xff393939)),
+                                                                    color: isButton7Pressed
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Color(
+                                                                            0xff393939)),
                                                               ),
                                                             ),
                                                             style:
@@ -423,8 +516,11 @@ class _filterResepState extends State<filterResep> {
                                                                     .styleFrom(
                                                               shadowColor:
                                                                   Colors.black,
-                                                              primary: Color(
-                                                                  0xffFDFDFD), // Set the shadow color
+                                                              primary: isButton7Pressed
+                                                                  ? Color(
+                                                                      0xffe5737d)
+                                                                  : Colors
+                                                                      .white, // Set the shadow color
                                                               elevation:
                                                                   5, // Adjust the elevation to control the shadow intensity
                                                               shape:
@@ -468,8 +564,11 @@ class _filterResepState extends State<filterResep> {
                                                                         'Poppins',
                                                                     fontSize:
                                                                         13,
-                                                                    color: Color(
-                                                                        0xff393939)),
+                                                                    color: isButton2Pressed
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Color(
+                                                                            0xff393939)),
                                                               ),
                                                             ),
                                                             style:
@@ -477,8 +576,11 @@ class _filterResepState extends State<filterResep> {
                                                                     .styleFrom(
                                                               shadowColor:
                                                                   Colors.black,
-                                                              primary: Color(
-                                                                  0xffFDFDFD), // Set the shadow color
+                                                              primary: isButton2Pressed
+                                                                  ? Color(
+                                                                      0xffe5737d)
+                                                                  : Colors
+                                                                      .white, // Set the shadow color
                                                               elevation:
                                                                   5, // Adjust the elevation to control the shadow intensity
                                                               shape:
@@ -516,8 +618,11 @@ class _filterResepState extends State<filterResep> {
                                                                         'Poppins',
                                                                     fontSize:
                                                                         13,
-                                                                    color: Color(
-                                                                        0xff393939)),
+                                                                    color: isButton4Pressed
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Color(
+                                                                            0xff393939)),
                                                               ),
                                                             ),
                                                             style:
@@ -525,8 +630,11 @@ class _filterResepState extends State<filterResep> {
                                                                     .styleFrom(
                                                               shadowColor:
                                                                   Colors.black,
-                                                              primary: Color(
-                                                                  0xffFDFDFD), // Set the shadow color
+                                                              primary: isButton4Pressed
+                                                                  ? Color(
+                                                                      0xffe5737d)
+                                                                  : Colors
+                                                                      .white, // Set the shadow color
                                                               elevation:
                                                                   5, // Adjust the elevation to control the shadow intensity
                                                               shape:
@@ -564,8 +672,11 @@ class _filterResepState extends State<filterResep> {
                                                                         'Poppins',
                                                                     fontSize:
                                                                         13,
-                                                                    color: Color(
-                                                                        0xff393939)),
+                                                                    color: isButton6Pressed
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Color(
+                                                                            0xff393939)),
                                                               ),
                                                             ),
                                                             style:
@@ -573,8 +684,11 @@ class _filterResepState extends State<filterResep> {
                                                                     .styleFrom(
                                                               shadowColor:
                                                                   Colors.black,
-                                                              primary: Color(
-                                                                  0xffFDFDFD), // Set the shadow color
+                                                              primary: isButton6Pressed
+                                                                  ? Color(
+                                                                      0xffe5737d)
+                                                                  : Colors
+                                                                      .white, // Set the shadow color
                                                               elevation:
                                                                   5, // Adjust the elevation to control the shadow intensity
                                                               shape:
@@ -612,8 +726,11 @@ class _filterResepState extends State<filterResep> {
                                                                         'Poppins',
                                                                     fontSize:
                                                                         13,
-                                                                    color: Color(
-                                                                        0xff393939)),
+                                                                    color: isButton8Pressed
+                                                                        ? Colors
+                                                                            .white
+                                                                        : Color(
+                                                                            0xff393939)),
                                                               ),
                                                             ),
                                                             style:
@@ -621,8 +738,11 @@ class _filterResepState extends State<filterResep> {
                                                                     .styleFrom(
                                                               shadowColor:
                                                                   Colors.black,
-                                                              primary: Color(
-                                                                  0xffFDFDFD), // Set the shadow color
+                                                              primary: isButton8Pressed
+                                                                  ? Color(
+                                                                      0xffe5737d)
+                                                                  : Colors
+                                                                      .white, // Set the shadow color
                                                               elevation:
                                                                   5, // Adjust the elevation to control the shadow intensity
                                                               shape:
