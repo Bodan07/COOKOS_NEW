@@ -27,7 +27,37 @@ class _homepageState extends State<homepage> {
   List<Resep> listresep = [];
   List<RatingUser> listrating = [];
   String tipe = "";
+  String greeting = "";
+
   @override
+  void initState() {
+    super.initState();
+    updateGreeting();
+  }
+
+  void updateGreeting() {
+    DateTime now = DateTime.now();
+    int hour = now.hour;
+
+    if (hour < 11) {
+      setState(() {
+        greeting = 'Good Morning';
+      });
+    } else if (hour < 15) {
+      setState(() {
+        greeting = 'Good Afternoon';
+      });
+    } else if (hour < 20) {
+      setState(() {
+        greeting = 'Good Evening';
+      });
+    } else {
+      setState(() {
+        greeting = 'Good Night';
+      });
+    }
+  }
+
   void didChangeDependencies() {
     super.didChangeDependencies();
     fetchresep();
@@ -111,7 +141,7 @@ class _homepageState extends State<homepage> {
                               ),
                               Container(
                                 child: Text(
-                                  "Good Morning",
+                                  greeting,
                                   style: TextStyle(
                                       color: Color(0xFFFFFFFF),
                                       fontFamily: 'Rubik',
