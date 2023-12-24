@@ -830,17 +830,6 @@ class _filterResepState extends State<filterResep> {
                                   fontWeight: FontWeight.w400,
                                   color: Color(0xff393939)),
                             ),
-                            trailing: Padding(
-                              padding: EdgeInsets.only(right: 10),
-                              child: Text(
-                                result[index].bintang.toString(),
-                                style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color(0xff393939)),
-                              ),
-                            ),
                             leading: Container(
                               width: 130,
                               height: 200,
