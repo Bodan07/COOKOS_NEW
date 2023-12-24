@@ -31,8 +31,8 @@ class _homepageState extends State<homepage> {
 
   @override
   void initState() {
-    super.initState();
     updateGreeting();
+    super.initState();
   }
 
   void updateGreeting() {

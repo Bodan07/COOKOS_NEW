@@ -29,7 +29,7 @@ class Profile extends ChangeNotifier {
       this.image =
           "https://firebasestorage.googleapis.com/v0/b/cookos.appspot.com/o/profile%2Fprofile-default.jpg?alt=media&token=38acbbcf-98f5-4530-af90-3a16d1be875e"});
 
-  void changeProfile(
+  Future<void> changeProfile(
       {required String n,
       required int u,
       required String jk,
@@ -60,7 +60,7 @@ class Profile extends ChangeNotifier {
     return nama;
   }
 
-  void fetchprofile(String id) async {
+  Future<void> fetchprofile(String id) async {
     try {
       final docprofile = FirebaseFirestore.instance.collection('profile');
       var doc = await docprofile.doc(id).get();
@@ -82,7 +82,7 @@ class Profile extends ChangeNotifier {
     }
   }
 
-  void createprofile(String uid) async {
+  Future<void> createprofile(String uid) async {
     try {
       final docprofile = FirebaseFirestore.instance.collection('profile');
       final data = {

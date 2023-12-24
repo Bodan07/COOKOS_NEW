@@ -23,10 +23,6 @@ class user extends ChangeNotifier {
     this.tipe_user = "",
   });
 
-  String getid() {
-    return id_user;
-  }
-
   List<Resep> getbookmark() {
     return bookmark;
   }
