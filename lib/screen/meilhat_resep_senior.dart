@@ -111,9 +111,10 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
                   ),
                   Container(
                       height: 260,
+                      width: double.infinity,
                       child: Image.network(
                         widget.iniresep.image,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fill,
                       ) //Diisi gambar resep database
                       ),
                   Container(
