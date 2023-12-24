@@ -9,8 +9,10 @@ import 'package:provider/provider.dart';
 
 class melihatResep extends StatefulWidget {
   Resep iniresep;
+  int totalrating;
 
-  melihatResep({Key? key, required this.iniresep}) : super(key: key);
+  melihatResep({Key? key, required this.iniresep, required this.totalrating})
+      : super(key: key);
 
   @override
   State<melihatResep> createState() => _melihatResepState();
@@ -22,7 +24,6 @@ class _melihatResepState extends State<melihatResep> {
 
   @override
   void initState() {
-    super.initState();
     context.read<user>().fetchbookmark(context.read<user>().id_user);
     setState(() {
       bookmark = context
@@ -32,6 +33,7 @@ class _melihatResepState extends State<melihatResep> {
           .toList();
       isBookmarked = cekbookmark(bookmark);
     });
+    super.initState();
   }
 
   bool cekbookmark(List<Resep> book) {
@@ -126,7 +128,13 @@ class _melihatResepState extends State<melihatResep> {
                                           color: Colors.amber,
                                         ),
                                         Text(
-                                          widget.iniresep.bintang.toString(),
+                                          (widget.iniresep.bintang /
+                                                      widget.totalrating)
+                                                  .isNaN
+                                              ? "0"
+                                              : (widget.iniresep.bintang /
+                                                      widget.totalrating)
+                                                  .toStringAsFixed(1),
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold),
                                         ),

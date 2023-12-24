@@ -8,10 +8,9 @@ import 'package:provider/provider.dart';
 
 class thumbnailResep extends StatefulWidget {
   final Resep iniresep;
-  const thumbnailResep({
-    Key? key,
-    required this.iniresep,
-  }) : super(key: key);
+  final int rating;
+  const thumbnailResep({Key? key, required this.iniresep, required this.rating})
+      : super(key: key);
 
   @override
   State<thumbnailResep> createState() => _thumbnailResepState();
@@ -24,7 +23,10 @@ class _thumbnailResepState extends State<thumbnailResep> {
         onTap: () async {
           String status = await Navigator.push(context,
               MaterialPageRoute(builder: (context) {
-            return melihatResep(iniresep: widget.iniresep);
+            return melihatResep(
+              iniresep: widget.iniresep,
+              totalrating: widget.rating,
+            );
           }));
           if (status == "bookmark") {
             context.read<user>().fetchbookmark(context.read<user>().id_user);
@@ -100,7 +102,10 @@ class _thumbnailResepState extends State<thumbnailResep> {
                           ),
                         ),
                         Text(
-                          "4.0",
+                          (widget.iniresep.bintang / widget.rating).isNaN
+                              ? "0"
+                              : (widget.iniresep.bintang / widget.rating)
+                                  .toStringAsFixed(1),
                           style: TextStyle(
                               fontFamily: "Poppins",
                               fontSize: 14.38,

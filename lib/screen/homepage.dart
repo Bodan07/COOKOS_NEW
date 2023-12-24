@@ -298,7 +298,10 @@ class tampilanfood extends StatelessWidget {
         onTap: () {
           if (context.read<user>().tipe_user == "Cooker") {
             Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return melihatResep(iniresep: iniresep);
+              return melihatResep(
+                iniresep: iniresep,
+                totalrating: totalrating,
+              );
             }));
           } else {
             Navigator.push(context, MaterialPageRoute(builder: (context) {

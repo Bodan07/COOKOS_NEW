@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dev/model/Resep.dart';
 import 'package:flutter_dev/model/filter_resep.dart';
+import 'package:flutter_dev/model/ratinguser.dart';
 import 'package:flutter_dev/model/user.dart';
 import 'package:flutter_dev/screen/edit_profile.dart';
 import 'package:flutter_dev/screen/homepage.dart';
@@ -19,6 +20,9 @@ class filterResep extends StatefulWidget {
 
 class _filterResepState extends State<filterResep> {
   List<Resep> result = [];
+  List<Resep> filtered = [];
+  List<Resep> resep = [];
+  List<RatingUser> listrating = [];
   bool isButton1Pressed = false;
   bool isButton2Pressed = false;
   bool isButton3Pressed = false;
@@ -27,6 +31,7 @@ class _filterResepState extends State<filterResep> {
   bool isButton6Pressed = false;
   bool isButton7Pressed = false;
   bool isButton8Pressed = false;
+  bool filter = false;
 
   TextEditingController cariresepController = TextEditingController();
   TextEditingController harga1Controller = TextEditingController();
@@ -38,6 +43,45 @@ class _filterResepState extends State<filterResep> {
   TextEditingController harga7Controller = TextEditingController();
   TextEditingController harga8Controller = TextEditingController();
 
+  @override
+  void initState() {
+    initresep();
+    fetchrating();
+    super.initState();
+  }
+
+  void fetchrating() async {
+    final ratingreviewcollection =
+        FirebaseFirestore.instance.collection('ratingreview');
+    var data = await ratingreviewcollection.get();
+    if (mounted) {
+      setState(() {
+        listrating =
+            List.from(data.docs.map((doc) => RatingUser.fromSnapshot(doc)));
+      });
+    }
+  }
+
+  void initresep() async {
+    if (context.read<user>().tipe_user == "Cooker") {
+      var data = await FirebaseFirestore.instance
+          .collection('resep')
+          .where('verifikasi', isEqualTo: true)
+          .get();
+      setState(() {
+        resep = List.from(data.docs.map((doc) => Resep.fromSnapshot(doc)));
+      });
+    } else {
+      var data = await FirebaseFirestore.instance
+          .collection('resep')
+          .where('verifikasi', isEqualTo: false)
+          .get();
+      setState(() {
+        resep = List.from(data.docs.map((doc) => Resep.fromSnapshot(doc)));
+      });
+    }
+  }
+
   void search(String value, String tipe) async {
     if (tipe == "Cooker") {
       var data = await FirebaseFirestore.instance
@@ -46,24 +90,21 @@ class _filterResepState extends State<filterResep> {
           .get();
 
       setState(() {
-        List<Resep> resep =
-            List.from(data.docs.map((doc) => Resep.fromSnapshot(doc)));
-        result = resep
+        if (filter == false) {
+          filtered = resep;
+        }
+        result = filtered
             .where((element) => element.Nama_Masakan!
                 .toLowerCase()
                 .contains(value.toLowerCase()))
             .toList();
       });
     } else {
-      var data = await FirebaseFirestore.instance
-          .collection('resep')
-          .where('verifikasi', isEqualTo: false)
-          .get();
-
       setState(() {
-        List<Resep> resep =
-            List.from(data.docs.map((doc) => Resep.fromSnapshot(doc)));
-        result = resep
+        if (filter == false) {
+          filtered = resep;
+        }
+        result = filtered
             .where((element) => element.Nama_Masakan!
                 .toLowerCase()
                 .contains(value.toLowerCase()))
@@ -83,9 +124,20 @@ class _filterResepState extends State<filterResep> {
       isButton6Pressed = false;
       isButton7Pressed = false;
       isButton8Pressed = false;
-      result = result
-          .where((element) => element.Budget >= 8000 && element.Budget < 15000)
-          .toList();
+
+      if (isButton1Pressed == true) {
+        filtered = resep
+            .where(
+                (element) => element.Budget >= 8000 && element.Budget < 15000)
+            .toList();
+        result = filtered;
+        filter = true;
+        print(resep);
+      } else {
+        filter = false;
+        filtered = resep;
+        result = resep;
+      }
     });
   }
 
@@ -100,9 +152,19 @@ class _filterResepState extends State<filterResep> {
       isButton6Pressed = false;
       isButton7Pressed = false;
       isButton8Pressed = false;
-      result = result
-          .where((element) => element.Budget >= 15000 && element.Budget < 30000)
-          .toList();
+
+      if (isButton2Pressed == true) {
+        filtered = resep
+            .where(
+                (element) => element.Budget >= 15000 && element.Budget < 30000)
+            .toList();
+        result = filtered;
+        filter = true;
+      } else {
+        filter = false;
+        filtered = resep;
+        result = resep;
+      }
     });
   }
 
@@ -117,9 +179,19 @@ class _filterResepState extends State<filterResep> {
       isButton6Pressed = false;
       isButton7Pressed = false;
       isButton8Pressed = false;
-      result = result
-          .where((element) => element.Budget >= 30000 && element.Budget < 40000)
-          .toList();
+
+      if (isButton3Pressed == true) {
+        filtered = resep
+            .where(
+                (element) => element.Budget >= 30000 && element.Budget < 40000)
+            .toList();
+        result = filtered;
+        filter = true;
+      } else {
+        filter = false;
+        filtered = resep;
+        result = resep;
+      }
     });
   }
 
@@ -134,9 +206,19 @@ class _filterResepState extends State<filterResep> {
       isButton6Pressed = false;
       isButton7Pressed = false;
       isButton8Pressed = false;
-      result = result
-          .where((element) => element.Budget >= 40000 && element.Budget < 50000)
-          .toList();
+
+      if (isButton4Pressed == true) {
+        filtered = resep
+            .where(
+                (element) => element.Budget >= 40000 && element.Budget < 50000)
+            .toList();
+        result = filtered;
+        filter = true;
+      } else {
+        filter = false;
+        filtered = resep;
+        result = resep;
+      }
     });
   }
 
@@ -151,9 +233,19 @@ class _filterResepState extends State<filterResep> {
       isButton6Pressed = false;
       isButton7Pressed = false;
       isButton8Pressed = false;
-      result = result
-          .where((element) => element.Budget >= 50000 && element.Budget < 60000)
-          .toList();
+
+      if (isButton5Pressed == true) {
+        filtered = resep
+            .where(
+                (element) => element.Budget >= 50000 && element.Budget < 60000)
+            .toList();
+        result = filtered;
+        filter = true;
+      } else {
+        filter = false;
+        filtered = resep;
+        result = resep;
+      }
     });
   }
 
@@ -168,9 +260,19 @@ class _filterResepState extends State<filterResep> {
       isButton6Pressed = !isButton6Pressed;
       isButton7Pressed = false;
       isButton8Pressed = false;
-      result = result
-          .where((element) => element.Budget >= 60000 && element.Budget < 70000)
-          .toList();
+
+      if (isButton6Pressed == true) {
+        filtered = resep
+            .where(
+                (element) => element.Budget >= 60000 && element.Budget < 70000)
+            .toList();
+        result = filtered;
+        filter = true;
+      } else {
+        filter = false;
+        filtered = resep;
+        result = resep;
+      }
     });
   }
 
@@ -185,9 +287,19 @@ class _filterResepState extends State<filterResep> {
       isButton6Pressed = false;
       isButton7Pressed = !isButton7Pressed;
       isButton8Pressed = false;
-      result = result
-          .where((element) => element.Budget >= 70000 && element.Budget < 80000)
-          .toList();
+
+      if (isButton7Pressed == true) {
+        filtered = resep
+            .where(
+                (element) => element.Budget >= 70000 && element.Budget < 80000)
+            .toList();
+        result = filtered;
+        filter = true;
+      } else {
+        filter = false;
+        filtered = resep;
+        result = resep;
+      }
     });
   }
 
@@ -202,7 +314,17 @@ class _filterResepState extends State<filterResep> {
       isButton6Pressed = false;
       isButton7Pressed = false;
       isButton8Pressed = !isButton8Pressed;
-      result = result.where((element) => element.Budget > 80000).toList();
+
+      if (isButton8Pressed == true) {
+        filtered = resep.where((element) => element.Budget > 80000).toList();
+        result = filtered;
+        filter = true;
+        print(resep);
+      } else {
+        filter = false;
+        filtered = resep;
+        result = resep;
+      }
     });
   }
 
@@ -797,12 +919,19 @@ class _filterResepState extends State<filterResep> {
                     itemCount: result.length,
                     itemBuilder: (context, index) => InkWell(
                           onTap: () {
-                            if (index <= result.length) {
-                              final iniresep = result[index];
-                              if (context.read<user>().tipe_user == "Cooker") {
+                            final iniresep = result[index];
+                            if (context.read<user>().tipe_user == "Cooker") {
+                              if (index <= result.length) {
+                                final totalrating = listrating
+                                    .where((element) => element.id_resep
+                                        .contains(result[index].id))
+                                    .length;
                                 Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return melihatResep(iniresep: iniresep);
+                                  return melihatResep(
+                                    iniresep: iniresep,
+                                    totalrating: totalrating,
+                                  );
                                 }));
                               } else {
                                 Navigator.push(context,
