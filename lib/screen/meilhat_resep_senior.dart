@@ -25,7 +25,7 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
@@ -142,6 +142,7 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
                     constraints: BoxConstraints(maxHeight: double.infinity),
                     margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
                           height: 40,
@@ -161,6 +162,7 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
                                       width: 2))),
                         ),
                         Container(
+                            padding: EdgeInsets.all(15),
                             child:
                                 Text(widget.iniresep.Bahan)) //isi dari database
                       ],
@@ -176,6 +178,7 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
                     constraints: BoxConstraints(maxHeight: double.infinity),
                     margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
                           height: 40,
@@ -195,6 +198,7 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
                                       width: 2))),
                         ),
                         Container(
+                            padding: EdgeInsets.all(15),
                             child: Text(widget
                                 .iniresep.Cara_Membuat)) //isi dari database
                       ],
