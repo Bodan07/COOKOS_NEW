@@ -188,9 +188,10 @@ class _melihatResepState extends State<melihatResep> {
                   ),
                   Container(
                       height: 260,
+                      width: double.infinity,
                       child: Image.network(
                         widget.iniresep.image,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.fill,
                       ) //Diisi gambar resep database
                       ),
                   Container(
@@ -199,8 +200,8 @@ class _melihatResepState extends State<melihatResep> {
                     height: 100,
                     child: IconButton(
                       icon: Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.white,
+                        Icons.arrow_back_ios_outlined,
+                        color: Color(0xffe5737d),
                       ),
                       onPressed: () {
                         Navigator.pop(context, "bookmark");
