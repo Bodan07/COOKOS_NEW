@@ -33,6 +33,7 @@ dependencies:
   get: ^4.6.5
   google_fonts: ^2.1.0
   flutter_rating_bar: ^4.0.1
+  
 
 
 
@@ -57,6 +58,9 @@ dev_dependencies:
 
   equatable: ^2.0.0
   shared_preferences: ^2.0.12
+  lints: ^2.1.1
+  #dart_code_metrics: ^5.0.0
+  #pedantic: ^1.11.1
 
 
 
