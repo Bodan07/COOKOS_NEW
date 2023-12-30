@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_dev/model/Profile.dart';
 import 'package:flutter_dev/screen/Main_Page.dart';
@@ -41,7 +39,7 @@ class _RegistrasiPageState extends State<Registrasi> {
       context.read<Profile>().createprofile(uid);
       FirebaseAuth.instance.signOut();
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => MainPage()));
+          context, MaterialPageRoute(builder: (context) => const MainPage()));
     } on FirebaseAuthException catch (err) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(err.toString()),
@@ -57,10 +55,10 @@ class _RegistrasiPageState extends State<Registrasi> {
       resizeToAvoidBottomInset: false,
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 63,
           ),
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
@@ -81,25 +79,25 @@ class _RegistrasiPageState extends State<Registrasi> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 42,
           ),
           Expanded(
             child: Container(
               width: double.infinity,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(154)),
                 color: Color(0xffe5737d),
               ),
               child: Container(
-                margin: EdgeInsets.all(15),
+                margin: const EdgeInsets.all(15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
                       alignment: Alignment.centerLeft,
-                      child: Column(
+                      child: const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
@@ -119,24 +117,24 @@ class _RegistrasiPageState extends State<Registrasi> {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 29),
+                      margin: const EdgeInsets.only(left: 29),
                     ),
                     loginForm(
                         hintText: "Username", controller: usernameController),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     loginForm(hintText: "Email", controller: emailController),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     passwordForm(
                         hintText: "Passsword", controller: passwordController),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Container(
                       alignment: Alignment.center,
                       child: ElevatedButton(
@@ -144,7 +142,7 @@ class _RegistrasiPageState extends State<Registrasi> {
                           if (emailController.text == "" &&
                               usernameController.text == "" &&
                               passwordController.text == "") {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                               content: Text(
                                   "Username, Email dan Passowrd tidak boleh kosong"),
                               behavior: SnackBarBehavior.floating,
@@ -153,20 +151,19 @@ class _RegistrasiPageState extends State<Registrasi> {
                             _register();
                           }
                         },
-                        child: Text('Sign Up'),
                         style: ElevatedButton.styleFrom(
-                          primary: const Color.fromARGB(
-                              255, 255, 255, 255), // Ubah warna latar belakang
-                          onPrimary: const Color.fromARGB(
-                              255, 0, 0, 0), // Ubah warna teks
+                          foregroundColor: const Color.fromARGB(
+                              255, 0, 0, 0), backgroundColor: const Color.fromARGB(
+                              255, 255, 255, 255), // Ubah warna teks
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
                           ),
-                          minimumSize: Size(170, 40),
+                          minimumSize: const Size(170, 40),
                         ),
+                        child: const Text('Sign Up'),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -191,7 +188,7 @@ class _RegistrasiPageState extends State<Registrasi> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => LoginPage()));
+                                    builder: (context) => const LoginPage()));
                           },
                         )
                       ],
@@ -225,13 +222,13 @@ class customTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 29),
+      margin: const EdgeInsets.symmetric(horizontal: 29),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black, // Ubah warna teks
               height: 3,
               fontWeight: FontWeight.bold,
@@ -251,7 +248,7 @@ class customTextField extends StatelessWidget {
                   filled: true,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0xffA9A9A9),
                       )),
                   hintText: hintText),

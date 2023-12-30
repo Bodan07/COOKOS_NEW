@@ -19,7 +19,7 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
         FirebaseFirestore.instance.collection('resep').doc(widget.iniresep.id);
     ResepCollection.update({'verifikasi': true});
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => homepage()));
+        context, MaterialPageRoute(builder: (context) => const homepage()));
   }
 
   @override
@@ -35,6 +35,20 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
                   Container(
                     height: 330,
                     width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: const Color(0xffe5737d),
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.grey,
+                          offset: Offset(0,
+                              4), // Horizontal and vertical offset of the shadow
+                          blurRadius: 6, // Spread of the shadow
+                          spreadRadius:
+                              0, // Positive value will expand the shadow, negative value will shrink it
+                        ),
+                      ],
+                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,22 +60,22 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
-                                    margin: EdgeInsets.only(left: 20),
+                                    margin: const EdgeInsets.only(left: 20),
                                     child: Text(
                                       widget.iniresep
                                           .Nama_Masakan, //diisi nama resep
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontFamily: 'Poppins',
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20,
                                           color: Colors.white),
                                     )),
                                 Container(
-                                  margin: EdgeInsets.only(left: 20, bottom: 20),
+                                  margin: const EdgeInsets.only(left: 20, bottom: 20),
                                   child: Text(
                                     widget.iniresep
                                         .Deskripsi_Masakan, //disi nama uploader
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontFamily: 'Poppins',
                                         fontSize: 15,
                                         color: Colors.white),
@@ -70,23 +84,21 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
                               ],
                             ),
                             Container(
-                              margin: EdgeInsets.only(right: 20),
+                              margin: const EdgeInsets.only(right: 20),
                               alignment: Alignment.center,
                               child: ElevatedButton(
-                                child: Text(
-                                  'Verificate',
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
                                 onPressed: _verificate,
                                 style: ElevatedButton.styleFrom(
-                                  primary: const Color.fromARGB(255, 255, 255,
-                                      255), // Ubah warna latar belakang
-                                  onPrimary:
-                                      Color(0xffe5737d), // Ubah warna teks
+                                  foregroundColor: const Color(0xffe5737d), backgroundColor: const Color.fromARGB(255, 255, 255,
+                                      255), // Ubah warna teks
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20),
                                   ),
-                                  minimumSize: Size(100, 40),
+                                  minimumSize: const Size(100, 40),
+                                ),
+                                child: const Text(
+                                  'Verificate',
+                                  style: TextStyle(fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ),
@@ -94,22 +106,8 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
                         ),
                       ],
                     ),
-                    decoration: BoxDecoration(
-                      color: Color(0xffe5737d),
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          offset: Offset(0,
-                              4), // Horizontal and vertical offset of the shadow
-                          blurRadius: 6, // Spread of the shadow
-                          spreadRadius:
-                              0, // Positive value will expand the shadow, negative value will shrink it
-                        ),
-                      ],
-                    ),
                   ),
-                  Container(
+                  SizedBox(
                       height: 260,
                       width: double.infinity,
                       child: Image.network(
@@ -119,10 +117,10 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
                       ),
                   Container(
                     alignment: Alignment.topLeft,
-                    margin: EdgeInsets.only(left: 10, top: 20),
+                    margin: const EdgeInsets.only(left: 10, top: 20),
                     height: 100,
                     child: IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back_ios,
                         color: Colors.white,
                       ),
@@ -140,93 +138,98 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
                 children: [
                   Container(
                     width: 350,
-                    constraints: BoxConstraints(maxHeight: double.infinity),
-                    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                    constraints: const BoxConstraints(maxHeight: double.infinity),
+                    margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(
+                            color: const Color.fromARGB(70, 0, 0, 0), width: 2),
+                        borderRadius: BorderRadius.circular(20)),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
                           height: 40,
                           width: 350,
+                          decoration: const BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(
+                                      color: Color.fromARGB(50, 0, 0, 0),
+                                      width: 2))),
                           child: Container(
-                              padding: EdgeInsets.only(left: 20, top: 10),
-                              child: Text(
+                              padding: const EdgeInsets.only(left: 20, top: 10),
+                              child: const Text(
                                 'Bahan - bahan',
                                 style: TextStyle(
                                     fontFamily: 'Nuito Sans',
                                     fontWeight: FontWeight.bold),
                               )),
-                          decoration: BoxDecoration(
-                              border: Border(
-                                  bottom: BorderSide(
-                                      color: Color.fromARGB(50, 0, 0, 0),
-                                      width: 2))),
                         ),
                         Container(
-                            padding: EdgeInsets.all(15),
+                            padding: const EdgeInsets.all(15),
                             child:
                                 Text(widget.iniresep.Bahan)) //isi dari database
                       ],
                     ),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(
-                            color: Color.fromARGB(70, 0, 0, 0), width: 2),
-                        borderRadius: BorderRadius.circular(20)),
                   ),
                   Container(
                     width: 350,
-                    constraints: BoxConstraints(maxHeight: double.infinity),
-                    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                    constraints: const BoxConstraints(maxHeight: double.infinity),
+                    margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(
+                            color: const Color.fromARGB(70, 0, 0, 0), width: 2),
+                        borderRadius: BorderRadius.circular(20)),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
                           height: 40,
                           width: 350,
+                          decoration: const BoxDecoration(
+                              border: Border(
+                                  bottom: BorderSide(
+                                      color: Color.fromARGB(50, 0, 0, 0),
+                                      width: 2))),
                           child: Container(
-                              padding: EdgeInsets.only(left: 20, top: 10),
-                              child: Text(
+                              padding: const EdgeInsets.only(left: 20, top: 10),
+                              child: const Text(
                                 'Cara Memasak',
                                 style: TextStyle(
                                     fontFamily: 'Nuito Sans',
                                     fontWeight: FontWeight.bold),
                               )),
-                          decoration: BoxDecoration(
-                              border: Border(
-                                  bottom: BorderSide(
-                                      color: Color.fromARGB(50, 0, 0, 0),
-                                      width: 2))),
                         ),
                         Container(
-                            padding: EdgeInsets.all(15),
+                            padding: const EdgeInsets.all(15),
                             child: Text(widget
                                 .iniresep.Cara_Membuat)) //isi dari database
                       ],
                     ),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(
-                            color: Color.fromARGB(70, 0, 0, 0), width: 2),
-                        borderRadius: BorderRadius.circular(20)),
                   ),
                   Container(
                     height: 50,
                     width: 350,
-                    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                    margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(
+                            color: const Color.fromARGB(70, 0, 0, 0), width: 2),
+                        borderRadius: BorderRadius.circular(20)),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          margin: EdgeInsets.only(left: 20),
+                          margin: const EdgeInsets.only(left: 20),
                           child: Row(
                             children: [
                               Container(
                                 child: Image.asset('assets/images/money.png'),
                               ),
                               Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 20),
-                                  child: Text(
+                                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                                  child: const Text(
                                     'Estimasi Harga',
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold),
@@ -235,18 +238,13 @@ class _melihatResepSeniorState extends State<melihatResepSenior> {
                           ),
                         ),
                         Container(
-                            margin: EdgeInsets.only(right: 20),
+                            margin: const EdgeInsets.only(right: 20),
                             child: Text(
-                              'Rp ' + widget.iniresep.Budget.toString() + ',-',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              'Rp ${widget.iniresep.Budget},-',
+                              style: const TextStyle(fontWeight: FontWeight.bold),
                             ))
                       ],
                     ),
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(
-                            color: Color.fromARGB(70, 0, 0, 0), width: 2),
-                        borderRadius: BorderRadius.circular(20)),
                   ),
                 ],
               ),

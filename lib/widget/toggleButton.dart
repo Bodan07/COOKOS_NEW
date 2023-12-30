@@ -5,7 +5,7 @@ class ToggleButtonExample extends StatefulWidget {
   final String text2;
   final Function(int) onSavedValueChanged;
 
-  ToggleButtonExample({
+  const ToggleButtonExample({super.key, 
     required this.text1,
     required this.text2,
     required this.onSavedValueChanged,
@@ -41,8 +41,8 @@ class _ToggleButtonExampleState extends State<ToggleButtonExample> {
             onPressed: toggleButton,
             style: isToggled
                 ? ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 179, 91, 98))
-                : ElevatedButton.styleFrom(primary: const Color(0xffe5737d)),
+                    backgroundColor: const Color.fromARGB(255, 179, 91, 98))
+                : ElevatedButton.styleFrom(backgroundColor: const Color(0xffe5737d)),
             child: Text(isToggled ? widget.text1 : widget.text2),
           ),
         ],

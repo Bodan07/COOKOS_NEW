@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dev/model/Resep.dart';
 import 'package:flutter_dev/model/ratinguser.dart';
@@ -7,12 +6,9 @@ import 'package:flutter_dev/model/user.dart';
 import 'package:flutter_dev/screen/Melihat_profile.dart';
 import 'package:flutter_dev/screen/filter_resep.dart';
 import 'package:flutter_dev/screen/input_resep.dart';
-import 'package:flutter_dev/screen/logout.dart';
 import 'package:flutter_dev/screen/meilhat_resep.dart';
 import 'package:flutter_dev/screen/meilhat_resep_senior.dart';
-import 'package:flutter_dev/widget/thumbnail_resep.dart';
 import 'package:flutter_dev/screen/alertLogout.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 
 class homepage extends StatefulWidget {
@@ -58,6 +54,7 @@ class _homepageState extends State<homepage> {
     }
   }
 
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     fetchresep();
@@ -102,9 +99,8 @@ class _homepageState extends State<homepage> {
   }
 
   void _profile() {
-    String profile = profileController.text;
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => seeProfile()));
+        context, MaterialPageRoute(builder: (context) => const seeProfile()));
   }
 
   @override
@@ -118,7 +114,7 @@ class _homepageState extends State<homepage> {
             Container(
               height: 130,
               width: 420,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                   color: Color(0xFFE5737D),
                   borderRadius: BorderRadius.all(Radius.circular(14))),
               child: Row(
@@ -133,8 +129,8 @@ class _homepageState extends State<homepage> {
                           child: Row(
                             children: [
                               Container(
-                                margin: EdgeInsets.only(right: 10, left: 20),
-                                child: Icon(
+                                margin: const EdgeInsets.only(right: 10, left: 20),
+                                child: const Icon(
                                   color: Color(0xFFFFFFFF),
                                   Icons.sunny_snowing,
                                 ),
@@ -142,7 +138,7 @@ class _homepageState extends State<homepage> {
                               Container(
                                 child: Text(
                                   greeting,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Color(0xFFFFFFFF),
                                       fontFamily: 'Rubik',
                                       fontSize: 16,
@@ -153,10 +149,10 @@ class _homepageState extends State<homepage> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.only(left: 24),
+                          margin: const EdgeInsets.only(left: 24),
                           child: Text(
-                            "Welcome " + context.watch<user>().username,
-                            style: TextStyle(
+                            "Welcome ${context.watch<user>().username}",
+                            style: const TextStyle(
                               color: Colors.black,
                               fontFamily: 'Poppins',
                               fontSize: 24,
@@ -168,13 +164,13 @@ class _homepageState extends State<homepage> {
                     ),
                   ),
                   Container(
-                      margin: EdgeInsets.only(right: 30),
+                      margin: const EdgeInsets.only(right: 30),
                       child: GestureDetector(
                         onTap: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: ((context) => seeProfile())));
+                                  builder: ((context) => const seeProfile())));
                         },
                         child: Image.asset(
                           "assets/images/people.png",
@@ -190,7 +186,7 @@ class _homepageState extends State<homepage> {
         toolbarHeight: 140,
         backgroundColor: const Color(0xffe5737d),
         centerTitle: true,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
           bottom: Radius.circular(20.0),
         )),
@@ -215,6 +211,7 @@ class _homepageState extends State<homepage> {
                         totalrating: totalrating,
                       );
                     }
+                    return null;
                   }),
             ),
           ],
@@ -222,7 +219,7 @@ class _homepageState extends State<homepage> {
       ),
       bottomNavigationBar: Container(
         height: 70,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Color(0xFFFFFFFF), // Warna latar belakang
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(20.0), // Radius untuk membuat ujung atas bulat
@@ -240,33 +237,33 @@ class _homepageState extends State<homepage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.add_circle_outline,
                   size: 40,
                   color: Color(0xFFE5737D),
                 ),
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => inputPage()));
+                      MaterialPageRoute(builder: (context) => const inputPage()));
                 }),
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Color(0xFFE5737D),
                 shape: BoxShape.circle,
               ),
               child: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.search_outlined,
                     size: 40,
                     color: Color.fromARGB(255, 255, 255, 255),
                   ),
                   onPressed: () {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => filterResep()));
+                        MaterialPageRoute(builder: (context) => const filterResep()));
                   }),
             ),
             IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.exit_to_app,
                   size: 40,
                   color: Color(0xFFE5737D),
@@ -310,7 +307,7 @@ class tampilanfood extends StatelessWidget {
           }
         },
         child: Container(
-          margin: EdgeInsets.only(top: 20, right: 20, left: 20),
+          margin: const EdgeInsets.only(top: 20, right: 20, left: 20),
           width: 350,
           height: 174,
           decoration: BoxDecoration(
@@ -331,11 +328,11 @@ class tampilanfood extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(left: 20),
+                      margin: const EdgeInsets.only(left: 20),
                       width: 200,
                       child: Text(
                         iniresep.Nama_Masakan,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontFamily: "Popins",
                           fontSize: 19.78,
@@ -344,11 +341,11 @@ class tampilanfood extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 20, bottom: 20),
+                      margin: const EdgeInsets.only(left: 20, bottom: 20),
                       child: Text(
                         iniresep.Deskripsi_Masakan,
-                        style: TextStyle(
-                          color: const Color(0xFFA9A9A9),
+                        style: const TextStyle(
+                          color: Color(0xFFA9A9A9),
                           fontFamily: "Popins",
                           fontSize: 14,
                           fontWeight: FontWeight.w700,
@@ -361,24 +358,24 @@ class tampilanfood extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 20, right: 20),
+                    margin: const EdgeInsets.only(top: 20, right: 20),
                     width: 68,
                     height: 28,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(18.39),
-                      color: Color.fromARGB(255, 255, 255, 255),
+                      color: const Color.fromARGB(255, 255, 255, 255),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          margin: EdgeInsets.only(right: 8),
-                          child: Icon(
+                          margin: const EdgeInsets.only(right: 8),
+                          child: const Icon(
                             Icons.star,
                             color: Colors.amber,
                             size: 20,
@@ -389,7 +386,7 @@ class tampilanfood extends StatelessWidget {
                               ? "0"
                               : (iniresep.bintang / totalrating)
                                   .toStringAsFixed(1),
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontFamily: "Poppins",
                               fontSize: 14.38,
                               color: Colors.black,

@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dev/model/Resep.dart';
 import 'package:flutter_dev/model/ratinguser.dart';
@@ -22,6 +21,7 @@ class _bookmarkPage extends State<bookmarkPage> {
   List<RatingUser> listrating = [];
   File? image;
 
+  @override
   void initState() {
     super.initState();
     setState(() {
@@ -75,14 +75,14 @@ class _bookmarkPage extends State<bookmarkPage> {
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               Navigator.pop(context);
             },
           ),
-          backgroundColor: Color(0xffe5737d),
+          backgroundColor: const Color(0xffe5737d),
           centerTitle: true,
-          title: Text(
+          title: const Text(
             'Bookmark',
             style: TextStyle(
                 color: Colors.white,
@@ -99,15 +99,15 @@ class _bookmarkPage extends State<bookmarkPage> {
                   Container(
                     height: 250,
                     width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: const Color(0xffe5737d),
+                    decoration: const BoxDecoration(
+                      color: Color(0xffe5737d),
                       borderRadius:
                           BorderRadius.vertical(bottom: Radius.circular(14)),
                     ),
                     child: (Column(
                       children: [
                         Container(
-                            margin: EdgeInsets.only(top: 50),
+                            margin: const EdgeInsets.only(top: 50),
                             width: 150,
                             height: 150,
                             decoration: BoxDecoration(
@@ -140,6 +140,7 @@ class _bookmarkPage extends State<bookmarkPage> {
                             rating: totalrating,
                           );
                         }
+                        return null;
                       }),
                 ),
               )

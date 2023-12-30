@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dev/model/Resep.dart';
 import 'package:flutter_dev/model/user.dart';
@@ -33,7 +31,7 @@ class _thumbnailResepState extends State<thumbnailResep> {
           }
         },
         child: Container(
-            margin: EdgeInsets.only(top: 20, right: 20, left: 20),
+            margin: const EdgeInsets.only(top: 20, right: 20, left: 20),
             width: 350,
             height: 174,
             decoration: BoxDecoration(
@@ -54,11 +52,11 @@ class _thumbnailResepState extends State<thumbnailResep> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        margin: EdgeInsets.only(left: 20),
+                        margin: const EdgeInsets.only(left: 20),
                         width: 200,
                         child: Text(
                           widget.iniresep.Nama_Masakan,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontFamily: "Popins",
                             fontSize: 19.78,
@@ -67,11 +65,11 @@ class _thumbnailResepState extends State<thumbnailResep> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(left: 20, bottom: 20),
+                        margin: const EdgeInsets.only(left: 20, bottom: 20),
                         child: Text(
                           widget.iniresep.Deskripsi_Masakan,
-                          style: TextStyle(
-                            color: const Color(0xFFA9A9A9),
+                          style: const TextStyle(
+                            color: Color(0xFFA9A9A9),
                             fontFamily: "Popins",
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
@@ -82,20 +80,20 @@ class _thumbnailResepState extends State<thumbnailResep> {
                   ),
                 ),
                 Container(
-                    margin: EdgeInsets.only(top: 10, left: 270),
+                    margin: const EdgeInsets.only(top: 10, left: 270),
                     width: 68,
                     height: 28,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(18.39),
-                      color: Color.fromARGB(255, 255, 255, 255),
+                      color: const Color.fromARGB(255, 255, 255, 255),
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          margin: EdgeInsets.only(right: 8),
-                          child: Icon(
+                          margin: const EdgeInsets.only(right: 8),
+                          child: const Icon(
                             Icons.star,
                             color: Colors.amber,
                             size: 20,
@@ -106,7 +104,7 @@ class _thumbnailResepState extends State<thumbnailResep> {
                               ? "0"
                               : (widget.iniresep.bintang / widget.rating)
                                   .toStringAsFixed(1),
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontFamily: "Poppins",
                               fontSize: 14.38,
                               color: Colors.black,

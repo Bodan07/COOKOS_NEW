@@ -30,14 +30,14 @@ class _passwordFormState extends State<passwordForm> {
         // isDense: true,
 
         filled: true,
-        fillColor: Color.fromARGB(255, 254, 254, 254),
+        fillColor: const Color.fromARGB(255, 254, 254, 254),
         hintText: widget.hintText,
         hintStyle: const TextStyle(
           fontSize: 16,
         ),
         prefixIconConstraints: const BoxConstraints(minWidth: 70),
         prefixIcon: const Icon(Icons.lock_outline_rounded),
-        prefixIconColor: Color.fromARGB(137, 191, 187, 187),
+        prefixIconColor: const Color.fromARGB(137, 191, 187, 187),
         suffixIcon: InkWell(
           onTap: () {
             setState(() {
@@ -49,7 +49,7 @@ class _passwordFormState extends State<passwordForm> {
           ),
         ),
         suffixIconConstraints: const BoxConstraints(minWidth: 70),
-        suffixIconColor: Color.fromARGB(137, 191, 187, 187),
+        suffixIconColor: const Color.fromARGB(137, 191, 187, 187),
         enabledBorder: const OutlineInputBorder(
           borderSide:
               BorderSide(color: Color.fromARGB(131, 138, 124, 124), width: 1),

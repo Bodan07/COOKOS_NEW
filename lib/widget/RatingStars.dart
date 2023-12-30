@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class RatingStars extends StatefulWidget {
   final Function(int) onRatingChanged; // Callback function
 
-  RatingStars({required this.onRatingChanged});
+  const RatingStars({super.key, required this.onRatingChanged});
   
   @override
   _RatingStarsState createState() => _RatingStarsState();

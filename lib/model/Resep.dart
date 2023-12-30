@@ -1,13 +1,7 @@
-import 'package:provider/provider.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'user.dart';
-import 'package:provider/provider.dart';
 
 class Resep extends ChangeNotifier {
   String id;
@@ -98,14 +92,14 @@ class Resep extends ChangeNotifier {
   }
 
   void updaterating(
-      String id_resep, int bintang, int enak, int praktis, int murah) async {
+      String idResep, int bintang, int enak, int praktis, int murah) async {
     final collectionresep = FirebaseFirestore.instance.collection('resep');
     double dbbintang;
     int dbenak;
     int dbmurah;
     int dbpraktis;
 
-    var doc = await collectionresep.doc(id_resep).get();
+    var doc = await collectionresep.doc(idResep).get();
 
     if (doc.exists) {
       Map<String, dynamic> data = doc.data()!;
@@ -120,7 +114,7 @@ class Resep extends ChangeNotifier {
         'praktis': praktis + dbpraktis,
         'murah': murah + dbmurah,
       };
-      await collectionresep.doc(id_resep).update(updata);
+      await collectionresep.doc(idResep).update(updata);
       this.bintang = bintang.toDouble() + dbbintang;
       this.enak = enak + dbenak;
       this.praktis = praktis + dbpraktis;
@@ -129,23 +123,23 @@ class Resep extends ChangeNotifier {
     }
   }
 
-  void fetchresep(String id_resep) async {
+  void fetchresep(String idResep) async {
     try {
       final docprofile = FirebaseFirestore.instance.collection('resep');
-      var doc = await docprofile.doc(id_resep).get();
+      var doc = await docprofile.doc(idResep).get();
 
       if (doc.exists) {
         Map<String, dynamic> data = doc.data()!;
-        this.Nama_Masakan = data['judul'];
-        this.Cara_Membuat = data['cara_membuat'];
-        this.Deskripsi_Masakan = data['pembuat'];
-        this.Bahan = data['bahan'];
-        this.image = data['image'];
-        this.Verifikasi = data['verifikasi'];
-        this.bintang = data['bintang'].toDouble();
-        this.enak = data['enak'];
-        this.murah = data['murah'];
-        this.praktis = data['praktis'];
+        Nama_Masakan = data['judul'];
+        Cara_Membuat = data['cara_membuat'];
+        Deskripsi_Masakan = data['pembuat'];
+        Bahan = data['bahan'];
+        image = data['image'];
+        Verifikasi = data['verifikasi'];
+        bintang = data['bintang'].toDouble();
+        enak = data['enak'];
+        murah = data['murah'];
+        praktis = data['praktis'];
         notifyListeners();
       }
     } catch (error) {

@@ -4,15 +4,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_dev/screen/Melihat_profile.dart';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import '../model/Profile.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_dev/model/Profile.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_dev/model/Profile.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({Key? key}) : super(key: key);
@@ -55,10 +51,10 @@ class _EditProfile extends State<EditProfile> {
   }
 
   Future getImage() async {
-    final ImagePicker _picker = ImagePicker();
+    final ImagePicker picker = ImagePicker();
     try {
       final XFile? imagePicked =
-          await _picker.pickImage(source: ImageSource.gallery);
+          await picker.pickImage(source: ImageSource.gallery);
 
       if (imagePicked != null) {
         image = File(imagePicked.path);
@@ -66,7 +62,7 @@ class _EditProfile extends State<EditProfile> {
         setState(() {});
       } else {
         // Handle the case where the user canceled the image picking.
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text("Image Picking canceled"),
           behavior: SnackBarBehavior.floating,
         ));
@@ -121,14 +117,14 @@ class _EditProfile extends State<EditProfile> {
           );
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => seeProfile()),
+        MaterialPageRoute(builder: (context) => const seeProfile()),
       );
     } catch (e) {
       // Handle the exception
       print('Error updating profile: $e');
       // You can show a SnackBar or display an error message to the user
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('Required fields cannot be empty'),
           behavior: SnackBarBehavior.floating,
         ),
@@ -141,7 +137,7 @@ class _EditProfile extends State<EditProfile> {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-            title: Text(
+            title: const Text(
               "Edit Profile",
               style: TextStyle(
                   color: Colors.white,
@@ -160,8 +156,8 @@ class _EditProfile extends State<EditProfile> {
                     Container(
                       height: 250,
                       width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: const Color(0xffe5737d),
+                      decoration: const BoxDecoration(
+                        color: Color(0xffe5737d),
                         borderRadius:
                             BorderRadius.vertical(bottom: Radius.circular(14)),
                       ),
@@ -170,7 +166,7 @@ class _EditProfile extends State<EditProfile> {
                           image != null
                               ? Container(
                                   //tindakan 1
-                                  margin: EdgeInsets.only(top: 50, left: 130),
+                                  margin: const EdgeInsets.only(top: 50, left: 130),
                                   child: ClipOval(
                                     child: Image.file(
                                       image!,
@@ -181,7 +177,7 @@ class _EditProfile extends State<EditProfile> {
                                   ),
                                 )
                               : Container(
-                                  margin: EdgeInsets.only(top: 50, left: 130),
+                                  margin: const EdgeInsets.only(top: 50, left: 130),
                                   width: 150,
                                   height: 150,
                                   decoration: BoxDecoration(
@@ -203,8 +199,8 @@ class _EditProfile extends State<EditProfile> {
                                       borderRadius: BorderRadius.circular(100),
                                       color: Colors.white),
                                   child: IconButton(
-                                    icon: Icon(Icons.photo_camera),
-                                    color: Color(0xffe5737d),
+                                    icon: const Icon(Icons.photo_camera),
+                                    color: const Color(0xffe5737d),
                                     iconSize: 20,
                                     onPressed: () async {
                                       await getImage();
@@ -237,14 +233,14 @@ class _EditProfile extends State<EditProfile> {
                       : "masukan jenis kelamin",
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 29),
+                  margin: const EdgeInsets.symmetric(horizontal: 29),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
-                      Text(
+                      const Text(
                         'Tanggal Lahir',
                         style: TextStyle(
                           fontSize: 16,
@@ -254,14 +250,14 @@ class _EditProfile extends State<EditProfile> {
                       GestureDetector(
                           onTap: _showDatePicker,
                           child: Container(
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                   horizontal: 10, vertical: 7),
-                              margin: EdgeInsets.only(top: 5),
+                              margin: const EdgeInsets.only(top: 5),
                               height: 35,
                               width: double.infinity,
                               decoration: BoxDecoration(
                                 border: Border.all(
-                                    color: Color.fromRGBO(0, 0, 0, 0.6)),
+                                    color: const Color.fromRGBO(0, 0, 0, 0.6)),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Text(
@@ -273,14 +269,14 @@ class _EditProfile extends State<EditProfile> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 40),
+                  margin: const EdgeInsets.only(top: 40),
                   alignment: Alignment.center,
                   child: ElevatedButton(
                     onPressed: () {
                       UpDatabase(image);
                     },
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Color.fromARGB(255, 255, 255, 255),
+                      foregroundColor: const Color.fromARGB(255, 255, 255, 255),
                       backgroundColor:
                           const Color(0xffe5737d), // Ubah warna teks
                       shape: RoundedRectangleBorder(
@@ -316,13 +312,13 @@ class customTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 29),
+      margin: const EdgeInsets.symmetric(horizontal: 29),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black, // Ubah warna teks
               height: 3,
               fontWeight: FontWeight.bold,
@@ -342,7 +338,7 @@ class customTextField extends StatelessWidget {
                   filled: true,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0xffA9A9A9),
                       )),
                   hintText: hintText),

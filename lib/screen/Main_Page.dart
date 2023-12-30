@@ -20,9 +20,9 @@ class MainPage extends StatelessWidget {
               context.read<Profile>().fetchprofile(snapshot.data!.uid);
               context.read<user>().fetchuser(snapshot.data!.uid);
               context.read<user>().fetchbookmark(snapshot.data!.uid);
-              return homepage();
+              return const homepage();
             } else {
-              return LoginPage();
+              return const LoginPage();
             }
           }),
     );

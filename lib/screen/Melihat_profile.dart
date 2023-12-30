@@ -13,19 +13,15 @@ class seeProfile extends StatefulWidget {
 }
 
 class _seeProfile extends State<seeProfile> {
-  TextEditingController editController = TextEditingController();
-  TextEditingController bookmarkController = TextEditingController();
 
   void _edit() {
-    String edit = editController.text;
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => EditProfile()));
+        context, MaterialPageRoute(builder: (context) => const EditProfile()));
   }
 
   void _bookmark() {
-    String bookmark = bookmarkController.text;
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => bookmarkPage()));
+        context, MaterialPageRoute(builder: (context) => const bookmarkPage()));
   }
 
   @override
@@ -33,15 +29,15 @@ class _seeProfile extends State<seeProfile> {
     return Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => homepage()));
+                  context, MaterialPageRoute(builder: (context) => const homepage()));
             },
           ),
-          backgroundColor: Color(0xffe5737d),
+          backgroundColor: const Color(0xffe5737d),
           centerTitle: true,
-          title: Text(
+          title: const Text(
             'My Profile',
             style: TextStyle(
                 color: Colors.white,
@@ -58,15 +54,15 @@ class _seeProfile extends State<seeProfile> {
                   Container(
                     height: 250,
                     width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: const Color(0xffe5737d),
+                    decoration: const BoxDecoration(
+                      color: Color(0xffe5737d),
                       borderRadius:
                           BorderRadius.vertical(bottom: Radius.circular(14)),
                     ),
                     child: (Column(
                       children: [
                         Container(
-                            margin: EdgeInsets.only(top: 50),
+                            margin: const EdgeInsets.only(top: 50),
                             width: 150,
                             height: 150,
                             decoration: BoxDecoration(
@@ -86,7 +82,7 @@ class _seeProfile extends State<seeProfile> {
                 margin: const EdgeInsets.only(top: 40),
                 child: Text(
                   context.watch<Profile>().nama,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w700,
                     fontSize: 15,
@@ -94,12 +90,12 @@ class _seeProfile extends State<seeProfile> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 10),
+                margin: const EdgeInsets.only(top: 10),
                 alignment: Alignment.center,
                 child: ElevatedButton(
                   onPressed: _edit,
                   style: ElevatedButton.styleFrom(
-                    foregroundColor: Color.fromARGB(255, 255, 255, 255),
+                    foregroundColor: const Color.fromARGB(255, 255, 255, 255),
                     backgroundColor: const Color(0xffe5737d), // Ubah warna teks
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(24),
@@ -113,12 +109,12 @@ class _seeProfile extends State<seeProfile> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 10),
+                margin: const EdgeInsets.only(top: 10),
                 alignment: Alignment.center,
                 child: ElevatedButton(
                   onPressed: _bookmark,
                   style: ElevatedButton.styleFrom(
-                    foregroundColor: Color.fromARGB(255, 255, 255, 255),
+                    foregroundColor: const Color.fromARGB(255, 255, 255, 255),
                     backgroundColor: const Color(0xffe5737d), // Ubah warna teks
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(24),

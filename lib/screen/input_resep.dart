@@ -1,13 +1,10 @@
 import 'dart:io';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_dev/model/Profile.dart';
 import 'package:flutter_dev/model/user.dart';
 import 'package:flutter_dev/screen/homepage.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter_dev/model/Resep.dart';
 import 'package:provider/provider.dart';
 
@@ -34,9 +31,9 @@ class _inputPageState extends State<inputPage> {
 
   Future getImage() async {
     try {
-      final ImagePicker _picker = ImagePicker();
+      final ImagePicker picker = ImagePicker();
       final XFile? imagePicked =
-          await _picker.pickImage(source: ImageSource.gallery);
+          await picker.pickImage(source: ImageSource.gallery);
       image = File(imagePicked!.path);
       setState(() {});
     } catch (e) {
@@ -69,7 +66,7 @@ class _inputPageState extends State<inputPage> {
         image: imageurl);
 
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => homepage()));
+        context, MaterialPageRoute(builder: (context) => const homepage()));
   }
 
   @override
@@ -78,14 +75,14 @@ class _inputPageState extends State<inputPage> {
         appBar: AppBar(
             leading: IconButton(
               color: Colors.white,
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
-            backgroundColor: Color(0xffe5737d),
+            backgroundColor: const Color(0xffe5737d),
             centerTitle: true,
-            title: Text(
+            title: const Text(
               'Input Resep',
               style: TextStyle(
                   color: Colors.white,
@@ -99,20 +96,20 @@ class _inputPageState extends State<inputPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                margin: EdgeInsets.only(top: 10),
+                margin: const EdgeInsets.only(top: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 10),
+                      margin: const EdgeInsets.symmetric(vertical: 10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Container(
-                              margin: EdgeInsets.only(bottom: 10),
-                              child: Text(
+                              margin: const EdgeInsets.only(bottom: 10),
+                              child: const Text(
                                 'Foto',
                                 style: TextStyle(
                                     fontSize: 16,
@@ -134,8 +131,14 @@ class _inputPageState extends State<inputPage> {
                               : Container(
                                   height: 110,
                                   width: 120,
+                                  decoration: BoxDecoration(
+                                      color: const Color.fromARGB(10, 0, 0, 0),
+                                      border: Border.all(
+                                          color: const Color.fromARGB(15, 0, 0, 0),
+                                          width: 2.0),
+                                      borderRadius: BorderRadius.circular(15)),
                                   child: IconButton(
-                                    icon: Icon(
+                                    icon: const Icon(
                                       Icons.image_outlined,
                                       color: Color(0xffe5737d),
                                     ),
@@ -144,25 +147,19 @@ class _inputPageState extends State<inputPage> {
                                     },
                                     iconSize: 90,
                                   ),
-                                  decoration: BoxDecoration(
-                                      color: Color.fromARGB(10, 0, 0, 0),
-                                      border: Border.all(
-                                          color: Color.fromARGB(15, 0, 0, 0),
-                                          width: 2.0),
-                                      borderRadius: BorderRadius.circular(15)),
                                 )
                         ],
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 10, left: 10),
+                      margin: const EdgeInsets.only(top: 10, left: 10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(bottom: 10),
-                            child: Text(
+                            margin: const EdgeInsets.only(bottom: 10),
+                            child: const Text(
                               'Judul',
                               style: TextStyle(
                                   fontSize: 16,
@@ -174,8 +171,8 @@ class _inputPageState extends State<inputPage> {
                               controller: judulController,
                               hintText: 'Masukkan Judul Makanan'),
                           Container(
-                            margin: EdgeInsets.symmetric(vertical: 10),
-                            child: Text(
+                            margin: const EdgeInsets.symmetric(vertical: 10),
+                            child: const Text(
                               'Harga',
                               style: TextStyle(
                                   fontSize: 16,
@@ -193,8 +190,8 @@ class _inputPageState extends State<inputPage> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 10, top: 20),
-                child: (Text(
+                margin: const EdgeInsets.only(bottom: 10, top: 20),
+                child: (const Text(
                   'Bahan - bahan',
                   style: TextStyle(
                     fontFamily: 'Nuito Sans',
@@ -211,7 +208,7 @@ class _inputPageState extends State<inputPage> {
                   controller: bahanController,
                   maxLines: 10,
                   decoration: InputDecoration(
-                      fillColor: Color.fromARGB(20, 0, 0, 0),
+                      fillColor: const Color.fromARGB(20, 0, 0, 0),
                       filled: true,
                       hintText: 'Masukkan alat dan bahan makanan',
                       border: OutlineInputBorder(
@@ -219,8 +216,8 @@ class _inputPageState extends State<inputPage> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 10, top: 20),
-                child: (Text(
+                margin: const EdgeInsets.only(bottom: 10, top: 20),
+                child: (const Text(
                   'Cara Memasak',
                   style: TextStyle(
                     fontFamily: 'Nuito Sans',
@@ -237,7 +234,7 @@ class _inputPageState extends State<inputPage> {
                   controller: caraController,
                   maxLines: 10,
                   decoration: InputDecoration(
-                      fillColor: Color.fromARGB(20, 0, 0, 0),
+                      fillColor: const Color.fromARGB(20, 0, 0, 0),
                       filled: true,
                       hintText: 'Masukkan langkah-langkah membuat makanan',
                       border: OutlineInputBorder(
@@ -245,24 +242,21 @@ class _inputPageState extends State<inputPage> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 10),
+                margin: const EdgeInsets.only(top: 10),
                 width: 90,
                 child: ElevatedButton(
                   onPressed: () {
                     _unggah(image);
                   },
-                  child: Container(
-                    child: Text('Unggah'),
-                  ),
                   style: ElevatedButton.styleFrom(
-                    primary:
-                        const Color(0xffe5737d), // Ubah warna latar belakang
-                    onPrimary:
-                        Color.fromARGB(255, 255, 255, 255), // Ubah warna teks
+                    foregroundColor: const Color.fromARGB(255, 255, 255, 255), backgroundColor: const Color(0xffe5737d), // Ubah warna teks
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25),
                     ),
-                    minimumSize: Size(150, 40),
+                    minimumSize: const Size(150, 40),
+                  ),
+                  child: Container(
+                    child: const Text('Unggah'),
                   ),
                 ),
               ),
@@ -301,7 +295,7 @@ class customTextField extends StatelessWidget {
                   filled: true,
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Color(0xffA9A9A9),
                       )),
                   hintText: hintText),

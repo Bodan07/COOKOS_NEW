@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dev/screen/Main_Page.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class logout extends StatefulWidget {
   const logout({super.key});
@@ -22,15 +21,15 @@ class _logoutState extends State<logout> {
                 Container(
                   height: 250,
                   width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: const Color(0xffe5737d),
+                  decoration: const BoxDecoration(
+                    color: Color(0xffe5737d),
                     borderRadius:
                         BorderRadius.vertical(bottom: Radius.circular(14)),
                   ),
                   child: Column(
                     children: [
                       Container(
-                        margin: EdgeInsets.only(top: 50),
+                        margin: const EdgeInsets.only(top: 50),
                         width: 150,
                         height: 150,
                         decoration: const BoxDecoration(
@@ -45,8 +44,8 @@ class _logoutState extends State<logout> {
             ),
             // Text Ririn Marinka
             Container(
-              margin: EdgeInsets.only(top: 50),
-              child: Text(
+              margin: const EdgeInsets.only(top: 50),
+              child: const Text(
                 "Rinrin Marinka",
                 style: TextStyle(
                   fontSize: 20,
@@ -59,8 +58,8 @@ class _logoutState extends State<logout> {
             Column(
               children: [
                 Container(
-                  margin: EdgeInsets.only(top: 200),
-                  child: Text(
+                  margin: const EdgeInsets.only(top: 200),
+                  child: const Text(
                     "Anda Telah ",
                     style: TextStyle(
                       shadows: [
@@ -78,8 +77,8 @@ class _logoutState extends State<logout> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 100),
-                  child: Text(
+                  margin: const EdgeInsets.only(bottom: 100),
+                  child: const Text(
                     "Logout",
                     style: TextStyle(
                       shadows: [
@@ -100,22 +99,22 @@ class _logoutState extends State<logout> {
             ),
             // BOX OK
             Container(
-              margin: EdgeInsets.only(bottom: 20),
+              margin: const EdgeInsets.only(bottom: 20),
               child: ElevatedButton(
                 onPressed: () {
                   FirebaseAuth.instance.signOut();
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MainPage()));
+                      MaterialPageRoute(builder: (context) => const MainPage()));
                 },
-                child: Text('OK'),
                 style: ElevatedButton.styleFrom(
-                  foregroundColor: Color.fromARGB(255, 255, 255, 255),
+                  foregroundColor: const Color.fromARGB(255, 255, 255, 255),
                   backgroundColor: const Color(0xffe5737d), // Ubah warna teks
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(24.84),
                   ),
                   minimumSize: const Size(260, 57.96),
                 ),
+                child: const Text('OK'),
               ),
             )
           ],

@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_dev/model/user.dart';
 import 'package:flutter_dev/screen/homepage.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_dev/screen/registrasi.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_dev/model/Profile.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_dev/widget/loginForm.dart';
 import 'package:flutter_dev/widget/passwordForm.dart';
 
@@ -39,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
       context.read<Profile>().fetchprofile(uid);
       context.read<user>().fetchuser(uid);
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => homepage()));
+          context, MaterialPageRoute(builder: (context) => const homepage()));
     } on FirebaseAuthException catch (err) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(err.toString()),
@@ -56,10 +53,10 @@ class _LoginPageState extends State<LoginPage> {
       resizeToAvoidBottomInset: false,
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 50,
           ),
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
@@ -80,18 +77,18 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 42,
           ),
           Expanded(
             child: Container(
               width: double.infinity,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(154)),
                 color: Color(0xffe5737d),
               ),
               child: Container(
-                margin: EdgeInsets.all(15),
+                margin: const EdgeInsets.all(15),
                 child: Column(
                   crossAxisAlignment:
                       CrossAxisAlignment.start, // Ubah ini menjadi 'start'
@@ -105,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           Container(
                             alignment: Alignment.centerLeft,
-                            child: Column(
+                            child: const Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
@@ -129,29 +126,26 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(left: 29),
+                      margin: const EdgeInsets.only(left: 29),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     loginForm(hintText: "Email", controller: emailController),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     passwordForm(
                         hintText: "Passsword", controller: passwordController),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     //container button
                     Container(
                       alignment: Alignment.center,
                       child: ElevatedButton(
-                        child: Text(
-                          'Sign In',
-                        ),
                         onPressed: () {
                           if (emailController.text == "" &&
                               passwordController.text == "") {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                               content:
                                   Text("Email dan password tidak boleh kosong"),
                               behavior: SnackBarBehavior.floating,
@@ -161,18 +155,20 @@ class _LoginPageState extends State<LoginPage> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: const Color.fromARGB(
-                              255, 255, 255, 255), // Ubah warna latar belakang
-                          onPrimary: const Color.fromARGB(
-                              255, 0, 0, 0), // Ubah warna teks
+                          foregroundColor: const Color.fromARGB(
+                              255, 0, 0, 0), backgroundColor: const Color.fromARGB(
+                              255, 255, 255, 255), // Ubah warna teks
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
                           ),
-                          minimumSize: Size(170, 40),
+                          minimumSize: const Size(170, 40),
+                        ),
+                        child: const Text(
+                          'Sign In',
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -197,7 +193,7 @@ class _LoginPageState extends State<LoginPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Registrasi()));
+                                    builder: (context) => const Registrasi()));
                           },
                         )
                       ],

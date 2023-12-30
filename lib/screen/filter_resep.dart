@@ -1,14 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dev/model/Resep.dart';
-import 'package:flutter_dev/model/filter_resep.dart';
 import 'package:flutter_dev/model/ratinguser.dart';
 import 'package:flutter_dev/model/user.dart';
-import 'package:flutter_dev/screen/edit_profile.dart';
 import 'package:flutter_dev/screen/homepage.dart';
 import 'package:flutter_dev/screen/meilhat_resep.dart';
 import 'package:flutter_dev/screen/meilhat_resep_senior.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class filterResep extends StatefulWidget {
@@ -94,7 +91,7 @@ class _filterResepState extends State<filterResep> {
           filtered = resep;
         }
         result = filtered
-            .where((element) => element.Nama_Masakan!
+            .where((element) => element.Nama_Masakan
                 .toLowerCase()
                 .contains(value.toLowerCase()))
             .toList();
@@ -105,7 +102,7 @@ class _filterResepState extends State<filterResep> {
           filtered = resep;
         }
         result = filtered
-            .where((element) => element.Nama_Masakan!
+            .where((element) => element.Nama_Masakan
                 .toLowerCase()
                 .contains(value.toLowerCase()))
             .toList();
@@ -114,7 +111,6 @@ class _filterResepState extends State<filterResep> {
   }
 
   void _harga1() {
-    String harga1 = harga1Controller.text;
     setState(() {
       isButton1Pressed = !isButton1Pressed;
       isButton2Pressed = false;
@@ -142,7 +138,6 @@ class _filterResepState extends State<filterResep> {
   }
 
   void _harga2() {
-    String harga2 = harga2Controller.text;
     setState(() {
       isButton1Pressed = false;
       isButton2Pressed = !isButton2Pressed;
@@ -169,7 +164,6 @@ class _filterResepState extends State<filterResep> {
   }
 
   void _harga3() {
-    String harga3 = harga3Controller.text;
     setState(() {
       isButton1Pressed = false;
       isButton2Pressed = false;
@@ -196,7 +190,6 @@ class _filterResepState extends State<filterResep> {
   }
 
   void _harga4() {
-    String harga4 = harga4Controller.text;
     setState(() {
       isButton1Pressed = false;
       isButton2Pressed = false;
@@ -223,7 +216,6 @@ class _filterResepState extends State<filterResep> {
   }
 
   void _harga5() {
-    String harga5 = harga5Controller.text;
     setState(() {
       isButton1Pressed = false;
       isButton2Pressed = false;
@@ -250,7 +242,6 @@ class _filterResepState extends State<filterResep> {
   }
 
   void _harga6() {
-    String harga6 = harga6Controller.text;
     setState(() {
       isButton1Pressed = false;
       isButton2Pressed = false;
@@ -277,7 +268,6 @@ class _filterResepState extends State<filterResep> {
   }
 
   void _harga7() {
-    String harga7 = harga7Controller.text;
     setState(() {
       isButton1Pressed = false;
       isButton2Pressed = false;
@@ -304,7 +294,6 @@ class _filterResepState extends State<filterResep> {
   }
 
   void _harga8() {
-    String harga8 = harga8Controller.text;
     setState(() {
       isButton1Pressed = false;
       isButton2Pressed = false;
@@ -334,16 +323,16 @@ class _filterResepState extends State<filterResep> {
         child: Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          color: Color.fromARGB(255, 255, 255, 255),
-          icon: Icon(Icons.arrow_back),
+          color: const Color.fromARGB(255, 255, 255, 255),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => homepage()));
+                context, MaterialPageRoute(builder: (context) => const homepage()));
           },
         ),
-        backgroundColor: Color(0xffe5737d),
+        backgroundColor: const Color(0xffe5737d),
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Mencari Resep',
           style: TextStyle(
               color: Color.fromRGBO(236, 236, 236, 1),
@@ -360,29 +349,29 @@ class _filterResepState extends State<filterResep> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 30, horizontal: 8),
+                    margin: const EdgeInsets.symmetric(vertical: 30, horizontal: 8),
                     height: 50,
                     width: 300,
                     decoration: BoxDecoration(
                         border: Border.all(
-                            color: Color.fromARGB(50, 0, 0, 0), width: 2.0),
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                            color: const Color.fromARGB(50, 0, 0, 0), width: 2.0),
+                        borderRadius: const BorderRadius.all(Radius.circular(10))),
                     child: Row(
                       children: [
                         Container(
-                          margin: EdgeInsets.only(left: 10, right: 6),
-                          child: Icon(
+                          margin: const EdgeInsets.only(left: 10, right: 6),
+                          child: const Icon(
                             Icons.search,
                             color: Color(0xFFD9D9D9),
                           ),
                         ),
-                        Container(
+                        SizedBox(
                             width: 250,
                             height: 50,
                             child: TextFormField(
                               onChanged: (value) =>
                                   search(value, context.read<user>().tipe_user),
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 hintText: 'eg : Baso Ikan',
                                 hintStyle: TextStyle(
                                   color: Color(0xFFD9D9D9),
@@ -397,7 +386,7 @@ class _filterResepState extends State<filterResep> {
                     ),
                   ),
                   //========container logo filter resep (pink)
-                  Container(
+                  SizedBox(
                     height: 50,
                     width: 50,
                     child: ElevatedButton(
@@ -405,18 +394,18 @@ class _filterResepState extends State<filterResep> {
                           showModalBottomSheet(
                               context: context,
                               isScrollControlled: true,
-                              shape: RoundedRectangleBorder(
+                              shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(25),
                                 topRight: Radius.circular(25),
                               )),
                               builder: (BuildContext context) {
                                 return Container(
-                                  margin: EdgeInsets.symmetric(
+                                  margin: const EdgeInsets.symmetric(
                                       vertical: 30, horizontal: 8),
                                   height: 250,
                                   width: 350,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     borderRadius: BorderRadius.all(
                                       Radius.circular(25.0),
                                     ),
@@ -427,11 +416,11 @@ class _filterResepState extends State<filterResep> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Container(
-                                        margin: EdgeInsets.symmetric(
+                                        margin: const EdgeInsets.symmetric(
                                             vertical: 12, horizontal: 10),
                                         child: Column(
                                           children: [
-                                            Align(
+                                            const Align(
                                               alignment: Alignment.centerLeft,
                                               child: Padding(
                                                 padding:
@@ -457,7 +446,7 @@ class _filterResepState extends State<filterResep> {
                                                     Container(
                                                         width: 141,
                                                         height: 30,
-                                                        margin: EdgeInsets
+                                                        margin: const EdgeInsets
                                                             .symmetric(
                                                                 horizontal: 25,
                                                                 vertical: 10),
@@ -467,6 +456,27 @@ class _filterResepState extends State<filterResep> {
                                                               Navigator.pop(
                                                                   context);
                                                             },
+                                                            style:
+                                                                ElevatedButton
+                                                                    .styleFrom(
+                                                              shadowColor:
+                                                                  Colors.black, backgroundColor: isButton1Pressed
+                                                                  ? const Color(
+                                                                      0xffe5737d)
+                                                                  : Colors
+                                                                      .white, // Set the shadow color
+                                                              elevation:
+                                                                  5, // Adjust the elevation to control the shadow intensity
+                                                              shape:
+                                                                  RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            20),
+                                                              ),
+                                                              minimumSize:
+                                                                  const Size(150, 40),
+                                                            ),
                                                             child: Container(
                                                               child: Text(
                                                                 'Rp.8000 - Rp15.Rb',
@@ -478,17 +488,30 @@ class _filterResepState extends State<filterResep> {
                                                                     color: isButton1Pressed
                                                                         ? Colors
                                                                             .white
-                                                                        : Color(
+                                                                        : const Color(
                                                                             0xff393939)),
                                                               ),
-                                                            ),
+                                                            ))),
+                                                    //container harga 3
+                                                    Container(
+                                                        width: 141,
+                                                        height: 30,
+                                                        margin: const EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 5,
+                                                                vertical: 10),
+                                                        child: ElevatedButton(
+                                                            onPressed: () {
+                                                              _harga3();
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
                                                             style:
                                                                 ElevatedButton
                                                                     .styleFrom(
                                                               shadowColor:
-                                                                  Colors.black,
-                                                              primary: isButton1Pressed
-                                                                  ? Color(
+                                                                  Colors.black, backgroundColor: isButton3Pressed
+                                                                  ? const Color(
                                                                       0xffe5737d)
                                                                   : Colors
                                                                       .white, // Set the shadow color
@@ -502,22 +525,8 @@ class _filterResepState extends State<filterResep> {
                                                                             20),
                                                               ),
                                                               minimumSize:
-                                                                  Size(150, 40),
-                                                            ))),
-                                                    //container harga 3
-                                                    Container(
-                                                        width: 141,
-                                                        height: 30,
-                                                        margin: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal: 5,
-                                                                vertical: 10),
-                                                        child: ElevatedButton(
-                                                            onPressed: () {
-                                                              _harga3();
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
+                                                                  const Size(150, 40),
+                                                            ),
                                                             child: Container(
                                                               child: Text(
                                                                 'Rp.30rb - Rp15Rb',
@@ -529,17 +538,29 @@ class _filterResepState extends State<filterResep> {
                                                                     color: isButton3Pressed
                                                                         ? Colors
                                                                             .white
-                                                                        : Color(
+                                                                        : const Color(
                                                                             0xff393939)),
                                                               ),
-                                                            ),
+                                                            ))),
+                                                    Container(
+                                                        width: 141,
+                                                        height: 30,
+                                                        margin: const EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 5,
+                                                                vertical: 10),
+                                                        child: ElevatedButton(
+                                                            onPressed: () {
+                                                              _harga5();
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
                                                             style:
                                                                 ElevatedButton
                                                                     .styleFrom(
                                                               shadowColor:
-                                                                  Colors.black,
-                                                              primary: isButton3Pressed
-                                                                  ? Color(
+                                                                  Colors.black, backgroundColor: isButton5Pressed
+                                                                  ? const Color(
                                                                       0xffe5737d)
                                                                   : Colors
                                                                       .white, // Set the shadow color
@@ -553,21 +574,8 @@ class _filterResepState extends State<filterResep> {
                                                                             20),
                                                               ),
                                                               minimumSize:
-                                                                  Size(150, 40),
-                                                            ))),
-                                                    Container(
-                                                        width: 141,
-                                                        height: 30,
-                                                        margin: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal: 5,
-                                                                vertical: 10),
-                                                        child: ElevatedButton(
-                                                            onPressed: () {
-                                                              _harga5();
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
+                                                                  const Size(150, 40),
+                                                            ),
                                                             child: Container(
                                                               child: Text(
                                                                 'Rp.50rb - Rp59Rb',
@@ -579,17 +587,29 @@ class _filterResepState extends State<filterResep> {
                                                                     color: isButton5Pressed
                                                                         ? Colors
                                                                             .white
-                                                                        : Color(
+                                                                        : const Color(
                                                                             0xff393939)),
                                                               ),
-                                                            ),
+                                                            ))),
+                                                    Container(
+                                                        width: 141,
+                                                        height: 30,
+                                                        margin: const EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 5,
+                                                                vertical: 10),
+                                                        child: ElevatedButton(
+                                                            onPressed: () {
+                                                              _harga7();
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
                                                             style:
                                                                 ElevatedButton
                                                                     .styleFrom(
                                                               shadowColor:
-                                                                  Colors.black,
-                                                              primary: isButton5Pressed
-                                                                  ? Color(
+                                                                  Colors.black, backgroundColor: isButton7Pressed
+                                                                  ? const Color(
                                                                       0xffe5737d)
                                                                   : Colors
                                                                       .white, // Set the shadow color
@@ -603,21 +623,8 @@ class _filterResepState extends State<filterResep> {
                                                                             20),
                                                               ),
                                                               minimumSize:
-                                                                  Size(150, 40),
-                                                            ))),
-                                                    Container(
-                                                        width: 141,
-                                                        height: 30,
-                                                        margin: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal: 5,
-                                                                vertical: 10),
-                                                        child: ElevatedButton(
-                                                            onPressed: () {
-                                                              _harga7();
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
+                                                                  const Size(150, 40),
+                                                            ),
                                                             child: Container(
                                                               child: Text(
                                                                 'Rp.70rb - Rp79Rb',
@@ -629,17 +636,35 @@ class _filterResepState extends State<filterResep> {
                                                                     color: isButton7Pressed
                                                                         ? Colors
                                                                             .white
-                                                                        : Color(
+                                                                        : const Color(
                                                                             0xff393939)),
                                                               ),
-                                                            ),
+                                                            ))),
+                                                  ],
+                                                ),
+                                                // ROW 2
+                                                Column(
+                                                  children: [
+                                                    // container harga 2
+                                                    Container(
+                                                        width: 141,
+                                                        height: 30,
+                                                        margin: const EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 19,
+                                                                vertical: 10),
+                                                        child: ElevatedButton(
+                                                            onPressed: () {
+                                                              _harga2();
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
                                                             style:
                                                                 ElevatedButton
                                                                     .styleFrom(
                                                               shadowColor:
-                                                                  Colors.black,
-                                                              primary: isButton7Pressed
-                                                                  ? Color(
+                                                                  Colors.black, backgroundColor: isButton2Pressed
+                                                                  ? const Color(
                                                                       0xffe5737d)
                                                                   : Colors
                                                                       .white, // Set the shadow color
@@ -653,29 +678,10 @@ class _filterResepState extends State<filterResep> {
                                                                             20),
                                                               ),
                                                               minimumSize:
-                                                                  Size(150, 40),
-                                                            ))),
-                                                  ],
-                                                ),
-                                                // ROW 2
-                                                Column(
-                                                  children: [
-                                                    // container harga 2
-                                                    Container(
-                                                        width: 141,
-                                                        height: 30,
-                                                        margin: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal: 19,
-                                                                vertical: 10),
-                                                        child: ElevatedButton(
-                                                            onPressed: () {
-                                                              _harga2();
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
+                                                                  const Size(150, 40),
+                                                            ),
                                                             child: Container(
-                                                              margin: EdgeInsets
+                                                              margin: const EdgeInsets
                                                                   .symmetric(
                                                                       vertical:
                                                                           6),
@@ -689,17 +695,29 @@ class _filterResepState extends State<filterResep> {
                                                                     color: isButton2Pressed
                                                                         ? Colors
                                                                             .white
-                                                                        : Color(
+                                                                        : const Color(
                                                                             0xff393939)),
                                                               ),
-                                                            ),
+                                                            ))),
+                                                    Container(
+                                                        width: 141,
+                                                        height: 30,
+                                                        margin: const EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 19,
+                                                                vertical: 10),
+                                                        child: ElevatedButton(
+                                                            onPressed: () {
+                                                              _harga4();
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
                                                             style:
                                                                 ElevatedButton
                                                                     .styleFrom(
                                                               shadowColor:
-                                                                  Colors.black,
-                                                              primary: isButton2Pressed
-                                                                  ? Color(
+                                                                  Colors.black, backgroundColor: isButton4Pressed
+                                                                  ? const Color(
                                                                       0xffe5737d)
                                                                   : Colors
                                                                       .white, // Set the shadow color
@@ -713,23 +731,10 @@ class _filterResepState extends State<filterResep> {
                                                                             20),
                                                               ),
                                                               minimumSize:
-                                                                  Size(150, 40),
-                                                            ))),
-                                                    Container(
-                                                        width: 141,
-                                                        height: 30,
-                                                        margin: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal: 19,
-                                                                vertical: 10),
-                                                        child: ElevatedButton(
-                                                            onPressed: () {
-                                                              _harga4();
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
+                                                                  const Size(150, 40),
+                                                            ),
                                                             child: Container(
-                                                              margin: EdgeInsets
+                                                              margin: const EdgeInsets
                                                                   .symmetric(
                                                                       vertical:
                                                                           6),
@@ -743,17 +748,29 @@ class _filterResepState extends State<filterResep> {
                                                                     color: isButton4Pressed
                                                                         ? Colors
                                                                             .white
-                                                                        : Color(
+                                                                        : const Color(
                                                                             0xff393939)),
                                                               ),
-                                                            ),
+                                                            ))),
+                                                    Container(
+                                                        width: 141,
+                                                        height: 30,
+                                                        margin: const EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 19,
+                                                                vertical: 10),
+                                                        child: ElevatedButton(
+                                                            onPressed: () {
+                                                              _harga6();
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
                                                             style:
                                                                 ElevatedButton
                                                                     .styleFrom(
                                                               shadowColor:
-                                                                  Colors.black,
-                                                              primary: isButton4Pressed
-                                                                  ? Color(
+                                                                  Colors.black, backgroundColor: isButton6Pressed
+                                                                  ? const Color(
                                                                       0xffe5737d)
                                                                   : Colors
                                                                       .white, // Set the shadow color
@@ -767,23 +784,10 @@ class _filterResepState extends State<filterResep> {
                                                                             20),
                                                               ),
                                                               minimumSize:
-                                                                  Size(150, 40),
-                                                            ))),
-                                                    Container(
-                                                        width: 141,
-                                                        height: 30,
-                                                        margin: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal: 19,
-                                                                vertical: 10),
-                                                        child: ElevatedButton(
-                                                            onPressed: () {
-                                                              _harga6();
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
+                                                                  const Size(150, 40),
+                                                            ),
                                                             child: Container(
-                                                              margin: EdgeInsets
+                                                              margin: const EdgeInsets
                                                                   .symmetric(
                                                                       vertical:
                                                                           6),
@@ -797,17 +801,29 @@ class _filterResepState extends State<filterResep> {
                                                                     color: isButton6Pressed
                                                                         ? Colors
                                                                             .white
-                                                                        : Color(
+                                                                        : const Color(
                                                                             0xff393939)),
                                                               ),
-                                                            ),
+                                                            ))),
+                                                    Container(
+                                                        width: 141,
+                                                        height: 30,
+                                                        margin: const EdgeInsets
+                                                            .symmetric(
+                                                                horizontal: 19,
+                                                                vertical: 10),
+                                                        child: ElevatedButton(
+                                                            onPressed: () {
+                                                              _harga8();
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
                                                             style:
                                                                 ElevatedButton
                                                                     .styleFrom(
                                                               shadowColor:
-                                                                  Colors.black,
-                                                              primary: isButton6Pressed
-                                                                  ? Color(
+                                                                  Colors.black, backgroundColor: isButton8Pressed
+                                                                  ? const Color(
                                                                       0xffe5737d)
                                                                   : Colors
                                                                       .white, // Set the shadow color
@@ -821,23 +837,10 @@ class _filterResepState extends State<filterResep> {
                                                                             20),
                                                               ),
                                                               minimumSize:
-                                                                  Size(150, 40),
-                                                            ))),
-                                                    Container(
-                                                        width: 141,
-                                                        height: 30,
-                                                        margin: EdgeInsets
-                                                            .symmetric(
-                                                                horizontal: 19,
-                                                                vertical: 10),
-                                                        child: ElevatedButton(
-                                                            onPressed: () {
-                                                              _harga8();
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
+                                                                  const Size(150, 40),
+                                                            ),
                                                             child: Container(
-                                                              margin: EdgeInsets
+                                                              margin: const EdgeInsets
                                                                   .symmetric(
                                                                       vertical:
                                                                           6),
@@ -851,31 +854,9 @@ class _filterResepState extends State<filterResep> {
                                                                     color: isButton8Pressed
                                                                         ? Colors
                                                                             .white
-                                                                        : Color(
+                                                                        : const Color(
                                                                             0xff393939)),
                                                               ),
-                                                            ),
-                                                            style:
-                                                                ElevatedButton
-                                                                    .styleFrom(
-                                                              shadowColor:
-                                                                  Colors.black,
-                                                              primary: isButton8Pressed
-                                                                  ? Color(
-                                                                      0xffe5737d)
-                                                                  : Colors
-                                                                      .white, // Set the shadow color
-                                                              elevation:
-                                                                  5, // Adjust the elevation to control the shadow intensity
-                                                              shape:
-                                                                  RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            20),
-                                                              ),
-                                                              minimumSize:
-                                                                  Size(150, 40),
                                                             ))),
                                                   ],
                                                 )
@@ -890,7 +871,7 @@ class _filterResepState extends State<filterResep> {
                               });
                         },
                         style: ElevatedButton.styleFrom(
-                          primary: const Color(0xffe5737d),
+                          backgroundColor: const Color(0xffe5737d),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
                         ),
@@ -904,8 +885,8 @@ class _filterResepState extends State<filterResep> {
           )),
           //buat list view builder filter resep
           Expanded(
-            child: result.length == 0
-                ? Center(
+            child: result.isEmpty
+                ? const Center(
                     child: Text(
                       "Resep Tidak Ada",
                       style: TextStyle(
@@ -942,10 +923,10 @@ class _filterResepState extends State<filterResep> {
                             }
                           },
                           child: ListTile(
-                            contentPadding: EdgeInsets.only(top: 3.0, left: 10),
+                            contentPadding: const EdgeInsets.only(top: 3.0, left: 10),
                             title: Text(
                               result[index].Nama_Masakan,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontFamily: 'Poppins',
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
@@ -953,7 +934,7 @@ class _filterResepState extends State<filterResep> {
                             ),
                             subtitle: Text(
                               result[index].Deskripsi_Masakan,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontFamily: 'Poppins',
                                   fontSize: 12,
                                   fontWeight: FontWeight.w400,

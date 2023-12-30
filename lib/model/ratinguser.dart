@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:flutter/foundation.dart';
-import 'package:provider/provider.dart';
 
 class RatingUser extends ChangeNotifier {
   String id_resep;

@@ -1,8 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dev/model/Resep.dart';
-import 'package:flutter_dev/model/RatingUser.dart';
 import 'package:flutter_dev/model/user.dart';
 import 'package:flutter_dev/screen/rating_review.dart';
 import 'package:provider/provider.dart';
@@ -54,14 +51,14 @@ class _melihatResepState extends State<melihatResep> {
       if (isBookmarked) {
         context.read<user>().addbookmark(widget.iniresep);
 
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text("Resep berhasil di tambahkan ke bookmark"),
           behavior: SnackBarBehavior.floating,
         ));
       } else {
         context.read<user>().removebookmark(widget.iniresep);
 
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text("Resep berhasil di hapus dari bookmark"),
           behavior: SnackBarBehavior.floating,
         ));
@@ -82,6 +79,20 @@ class _melihatResepState extends State<melihatResep> {
                   Container(
                     height: 370,
                     width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: const Color(0xffe5737d),
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.grey,
+                          offset: Offset(0,
+                              4), // Horizontal and vertical offset of the shadow
+                          blurRadius: 6, // Spread of the shadow
+                          spreadRadius:
+                              0, // Positive value will expand the shadow, negative value will shrink it
+                        ),
+                      ],
+                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,37 +104,43 @@ class _melihatResepState extends State<melihatResep> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
-                                    margin: EdgeInsets.only(left: 20),
+                                    margin: const EdgeInsets.only(left: 20),
                                     child: Text(
                                       widget.iniresep
                                           .Nama_Masakan, //diisi nama resep
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontFamily: 'Poppins',
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20,
                                           color: Colors.white),
                                     )),
                                 Container(
-                                  margin: EdgeInsets.only(
+                                  margin: const EdgeInsets.only(
                                       left: 20, top: 5, bottom: 5),
                                   child: Text(
                                     widget.iniresep
                                         .Deskripsi_Masakan, //disi nama uploader
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontFamily: 'Poppins',
                                         fontSize: 15,
                                         color: Colors.white),
                                   ),
                                 ),
                                 Container(
-                                  margin: EdgeInsets.only(left: 20, bottom: 20),
+                                  margin: const EdgeInsets.only(left: 20, bottom: 20),
                                   height: 30,
                                   width: 60,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border.all(
+                                          color: const Color.fromARGB(10, 0, 0, 0),
+                                          width: 2),
+                                      borderRadius: BorderRadius.circular(15)),
                                   child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Icon(
+                                        const Icon(
                                           Icons.star,
                                           color: Colors.amber,
                                         ),
@@ -135,16 +152,10 @@ class _melihatResepState extends State<melihatResep> {
                                               : (widget.iniresep.bintang /
                                                       widget.totalrating)
                                                   .toStringAsFixed(1),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.bold),
                                         ),
                                       ]),
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          color: Color.fromARGB(10, 0, 0, 0),
-                                          width: 2),
-                                      borderRadius: BorderRadius.circular(15)),
                                 )
                               ],
                             ),
@@ -154,12 +165,12 @@ class _melihatResepState extends State<melihatResep> {
                               children: [
                                 Container(
                                   margin:
-                                      EdgeInsets.only(right: 20, bottom: 10),
+                                      const EdgeInsets.only(right: 20, bottom: 10),
                                   alignment: Alignment.bottomRight,
                                   child: IconButton(
                                     icon: isBookmarked
-                                        ? Icon(Icons.bookmark_outlined)
-                                        : Icon(Icons.bookmark_border_rounded),
+                                        ? const Icon(Icons.bookmark_outlined)
+                                        : const Icon(Icons.bookmark_border_rounded),
                                     color: Colors.white,
                                     iconSize: 40,
                                     onPressed: toggleBookmark,
@@ -171,22 +182,8 @@ class _melihatResepState extends State<melihatResep> {
                         ),
                       ],
                     ),
-                    decoration: BoxDecoration(
-                      color: Color(0xffe5737d),
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey,
-                          offset: Offset(0,
-                              4), // Horizontal and vertical offset of the shadow
-                          blurRadius: 6, // Spread of the shadow
-                          spreadRadius:
-                              0, // Positive value will expand the shadow, negative value will shrink it
-                        ),
-                      ],
-                    ),
                   ),
-                  Container(
+                  SizedBox(
                       height: 260,
                       width: double.infinity,
                       child: Image.network(
@@ -196,10 +193,10 @@ class _melihatResepState extends State<melihatResep> {
                       ),
                   Container(
                     alignment: Alignment.topLeft,
-                    margin: EdgeInsets.only(left: 10, top: 20),
+                    margin: const EdgeInsets.only(left: 10, top: 20),
                     height: 100,
                     child: IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back_ios_outlined,
                         color: Color(0xffe5737d),
                       ),
@@ -216,93 +213,98 @@ class _melihatResepState extends State<melihatResep> {
               children: [
                 Container(
                   width: 350,
-                  constraints: BoxConstraints(maxHeight: double.infinity),
-                  margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                  constraints: const BoxConstraints(maxHeight: double.infinity),
+                  margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                          color: const Color.fromARGB(70, 0, 0, 0), width: 2),
+                      borderRadius: BorderRadius.circular(20)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                         height: 40,
                         width: 350,
+                        decoration: const BoxDecoration(
+                            border: Border(
+                                bottom: BorderSide(
+                                    color: Color.fromARGB(50, 0, 0, 0),
+                                    width: 2))),
                         child: Container(
-                            padding: EdgeInsets.only(left: 20, top: 10),
-                            child: Text(
+                            padding: const EdgeInsets.only(left: 20, top: 10),
+                            child: const Text(
                               'Bahan - bahan',
                               style: TextStyle(
                                   fontFamily: 'Nuito Sans',
                                   fontWeight: FontWeight.bold),
                             )),
-                        decoration: BoxDecoration(
-                            border: Border(
-                                bottom: BorderSide(
-                                    color: Color.fromARGB(50, 0, 0, 0),
-                                    width: 2))),
                       ),
                       Container(
-                          padding: EdgeInsets.all(15),
+                          padding: const EdgeInsets.all(15),
                           child:
                               Text(widget.iniresep.Bahan)) //isi dari database
                     ],
                   ),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                          color: Color.fromARGB(70, 0, 0, 0), width: 2),
-                      borderRadius: BorderRadius.circular(20)),
                 ),
                 Container(
                   width: 350,
-                  constraints: BoxConstraints(maxHeight: double.infinity),
-                  margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                  constraints: const BoxConstraints(maxHeight: double.infinity),
+                  margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                          color: const Color.fromARGB(70, 0, 0, 0), width: 2),
+                      borderRadius: BorderRadius.circular(20)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                         height: 40,
                         width: 350,
+                        decoration: const BoxDecoration(
+                            border: Border(
+                                bottom: BorderSide(
+                                    color: Color.fromARGB(50, 0, 0, 0),
+                                    width: 2))),
                         child: Container(
-                            padding: EdgeInsets.only(left: 20, top: 10),
-                            child: Text(
+                            padding: const EdgeInsets.only(left: 20, top: 10),
+                            child: const Text(
                               'Cara Memasak',
                               style: TextStyle(
                                   fontFamily: 'Nuito Sans',
                                   fontWeight: FontWeight.bold),
                             )),
-                        decoration: BoxDecoration(
-                            border: Border(
-                                bottom: BorderSide(
-                                    color: Color.fromARGB(50, 0, 0, 0),
-                                    width: 2))),
                       ),
                       Container(
-                          padding: EdgeInsets.all(15),
+                          padding: const EdgeInsets.all(15),
                           child: Text(
                               widget.iniresep.Cara_Membuat)) //isi dari database
                     ],
                   ),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                          color: Color.fromARGB(70, 0, 0, 0), width: 2),
-                      borderRadius: BorderRadius.circular(20)),
                 ),
                 Container(
                   height: 50,
                   width: 350,
-                  margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                  margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                          color: const Color.fromARGB(70, 0, 0, 0), width: 2),
+                      borderRadius: BorderRadius.circular(20)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
-                        margin: EdgeInsets.only(left: 20),
+                        margin: const EdgeInsets.only(left: 20),
                         child: Row(
                           children: [
                             Container(
                               child: Image.asset('assets/images/money.png'),
                             ),
                             Container(
-                                margin: EdgeInsets.symmetric(horizontal: 20),
-                                child: Text(
+                                margin: const EdgeInsets.symmetric(horizontal: 20),
+                                child: const Text(
                                   'Estimasi Harga',
                                   style: TextStyle(fontWeight: FontWeight.bold),
                                 ))
@@ -310,42 +312,36 @@ class _melihatResepState extends State<melihatResep> {
                         ),
                       ),
                       Container(
-                          margin: EdgeInsets.only(right: 20),
+                          margin: const EdgeInsets.only(right: 20),
                           child: Text(
-                            'Rp ' + widget.iniresep.Budget.toString() + ',-',
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            'Rp ${widget.iniresep.Budget},-',
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ))
                     ],
                   ),
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                          color: Color.fromARGB(70, 0, 0, 0), width: 2),
-                      borderRadius: BorderRadius.circular(20)),
                 ),
                 Container(
                   height: 50,
                   width: 350,
-                  margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                  margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
                   child: ElevatedButton(
                       onPressed: menujuRating,
                       style: ElevatedButton.styleFrom(
-                          primary: Colors.white,
-                          onPrimary: Colors.black,
+                          foregroundColor: Colors.black, backgroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(25))),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(left: 20),
-                            child: Text('Tambahkan Rating'),
+                            margin: const EdgeInsets.only(left: 20),
+                            child: const Text('Tambahkan Rating'),
                           ),
                           Container(
-                              margin: EdgeInsets.only(right: 20),
+                              margin: const EdgeInsets.only(right: 20),
                               child: Row(
                                 children: List.generate(5, (index) {
-                                  return Icon(Icons.star_border_outlined,
+                                  return const Icon(Icons.star_border_outlined,
                                       color: Colors.amber);
                                 }),
                               ))
