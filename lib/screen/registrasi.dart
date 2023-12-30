@@ -142,7 +142,8 @@ class _RegistrasiPageState extends State<Registrasi> {
                           if (emailController.text == "" &&
                               usernameController.text == "" &&
                               passwordController.text == "") {
-                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
                               content: Text(
                                   "Username, Email dan Passowrd tidak boleh kosong"),
                               behavior: SnackBarBehavior.floating,
@@ -152,8 +153,8 @@ class _RegistrasiPageState extends State<Registrasi> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          foregroundColor: const Color.fromARGB(
-                              255, 0, 0, 0), backgroundColor: const Color.fromARGB(
+                          foregroundColor: const Color.fromARGB(255, 0, 0, 0),
+                          backgroundColor: const Color.fromARGB(
                               255, 255, 255, 255), // Ubah warna teks
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),

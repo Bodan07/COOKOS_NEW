@@ -91,6 +91,7 @@ class _inputPageState extends State<inputPage> {
                   fontWeight: FontWeight.bold),
             )),
         body: SingleChildScrollView(
+          padding: EdgeInsets.all(10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -134,7 +135,8 @@ class _inputPageState extends State<inputPage> {
                                   decoration: BoxDecoration(
                                       color: const Color.fromARGB(10, 0, 0, 0),
                                       border: Border.all(
-                                          color: const Color.fromARGB(15, 0, 0, 0),
+                                          color:
+                                              const Color.fromARGB(15, 0, 0, 0),
                                           width: 2.0),
                                       borderRadius: BorderRadius.circular(15)),
                                   child: IconButton(
@@ -249,7 +251,8 @@ class _inputPageState extends State<inputPage> {
                     _unggah(image);
                   },
                   style: ElevatedButton.styleFrom(
-                    foregroundColor: const Color.fromARGB(255, 255, 255, 255), backgroundColor: const Color(0xffe5737d), // Ubah warna teks
+                    foregroundColor: const Color.fromARGB(255, 255, 255, 255),
+                    backgroundColor: const Color(0xffe5737d), // Ubah warna teks
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25),
                     ),

@@ -162,50 +162,48 @@ class _EditProfile extends State<EditProfile> {
                             BorderRadius.vertical(bottom: Radius.circular(14)),
                       ),
                       child: Stack(
+                        alignment: Alignment.center,
                         children: [
-                          image != null
-                              ? Container(
-                                  //tindakan 1
-                                  margin: const EdgeInsets.only(top: 50, left: 130),
-                                  child: ClipOval(
-                                    child: Image.file(
-                                      image!,
-                                      width: 150,
-                                      height: 150,
-                                      fit: BoxFit.cover,
+                          Center(
+                            child: image != null
+                                ? Container(
+                                    //tindakan 1
+                                    child: ClipOval(
+                                      child: Image.file(
+                                        image!,
+                                        width: 150,
+                                        height: 150,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
-                                  ),
-                                )
-                              : Container(
-                                  margin: const EdgeInsets.only(top: 50, left: 130),
-                                  width: 150,
-                                  height: 150,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.white,
-                                    image: DecorationImage(
-                                        image: NetworkImage(
-                                            context.watch<Profile>().image),
-                                        fit: BoxFit.cover),
-                                  )),
-                          Positioned(
-                              bottom: 50,
-                              right: 140,
-                              child: Container(
-                                  //margin: EdgeInsets.only(top: 170, left: 220),
-                                  width: 35,
-                                  height: 35,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(100),
-                                      color: Colors.white),
-                                  child: IconButton(
-                                    icon: const Icon(Icons.photo_camera),
-                                    color: const Color(0xffe5737d),
-                                    iconSize: 20,
-                                    onPressed: () async {
-                                      await getImage();
-                                    },
-                                  )))
+                                  )
+                                : Container(
+                                    width: 150,
+                                    height: 150,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.white,
+                                      image: DecorationImage(
+                                          image: NetworkImage(
+                                              context.watch<Profile>().image),
+                                          fit: BoxFit.cover),
+                                    )),
+                          ),
+                          Container(
+                              margin: EdgeInsets.only(left: 75, top: 110),
+                              width: 35,
+                              height: 35,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  color: Colors.white),
+                              child: IconButton(
+                                icon: const Icon(Icons.photo_camera),
+                                color: const Color(0xffe5737d),
+                                iconSize: 20,
+                                onPressed: () async {
+                                  await getImage();
+                                },
+                              ))
                         ],
                       ),
                     ),

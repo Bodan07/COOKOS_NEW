@@ -9,6 +9,7 @@ import 'package:flutter_dev/screen/input_resep.dart';
 import 'package:flutter_dev/screen/meilhat_resep.dart';
 import 'package:flutter_dev/screen/meilhat_resep_senior.dart';
 import 'package:flutter_dev/screen/alertLogout.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class homepage extends StatefulWidget {
@@ -129,7 +130,8 @@ class _homepageState extends State<homepage> {
                           child: Row(
                             children: [
                               Container(
-                                margin: const EdgeInsets.only(right: 10, left: 20),
+                                margin:
+                                    const EdgeInsets.only(right: 10, left: 20),
                                 child: const Icon(
                                   color: Color(0xFFFFFFFF),
                                   Icons.sunny_snowing,
@@ -192,7 +194,12 @@ class _homepageState extends State<homepage> {
         )),
       ),
       //===============================body==================================
-      body: Container(
+      body: RefreshIndicator(
+        onRefresh: () async {
+          Navigator.pop(context);
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const homepage()));
+        },
         child: Column(
           children: [
             //=====================================================food1================================================
@@ -243,8 +250,10 @@ class _homepageState extends State<homepage> {
                   color: Color(0xFFE5737D),
                 ),
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const inputPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const inputPage()));
                 }),
             Container(
               decoration: const BoxDecoration(
@@ -258,8 +267,10 @@ class _homepageState extends State<homepage> {
                     color: Color.fromARGB(255, 255, 255, 255),
                   ),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const filterResep()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const filterResep()));
                   }),
             ),
             IconButton(

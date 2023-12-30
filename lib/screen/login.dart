@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
     double padding = 16.0; // Example padding value
     double devicePixelRatio = MediaQuery.of(context).devicePixelRatio;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      // resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           const SizedBox(
@@ -145,7 +145,8 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () {
                           if (emailController.text == "" &&
                               passwordController.text == "") {
-                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
                               content:
                                   Text("Email dan password tidak boleh kosong"),
                               behavior: SnackBarBehavior.floating,
@@ -155,8 +156,8 @@ class _LoginPageState extends State<LoginPage> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          foregroundColor: const Color.fromARGB(
-                              255, 0, 0, 0), backgroundColor: const Color.fromARGB(
+                          foregroundColor: const Color.fromARGB(255, 0, 0, 0),
+                          backgroundColor: const Color.fromARGB(
                               255, 255, 255, 255), // Ubah warna teks
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16),
